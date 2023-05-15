@@ -1,26 +1,23 @@
 <?php
 //require_once('header.php');
 require_once('../classes/User.php');
+require_once('../classes/Adresse.php');
 require_once('../includes/config.php');
 ob_start('ob_gzhandler');
 
-
 function submit($bdd)
 {
+    var_dump($_SESSION);
     if (isset($_POST["Envoyer"])) {
-        $email = htmlspecialchars($_POST['email']);
-        $prenom = '';
-        $nom = '';
-        $password = $_POST['password'];
-
-            $user = new User($email, $password, $prenom, $nom);
-            $user->connect($bdd);
-            if ($user->isConnected()){
-                header("Location: inscriptionAdresse.php");
-            }
-            // else {
-            //     echo "l'email et mot de passe ne correspondent pas.";
-            // }
+        $numero = htmlspecialchars($_POST['numero']);
+        $id_user = $_SESSION['user']['id'] ;
+        $rue = htmlspecialchars($_POST['rue']);
+        $postal = htmlspecialchars($_POST['postal']);
+        $ville = htmlspecialchars($_POST['ville']);
+        
+            $adresse = new Adresse ($id_user,$numero, $rue, $postal, $ville);
+            $adresse->register($bdd);
+            //header("Location: connexion.php");
         
     }
 }
@@ -47,18 +44,23 @@ submit($bdd);
 <body>
 
     <main>
-        <h1>Connexion</h1>
+        <h1>Adresse</h1>
 
         <form method="post" id="signup">
 
-            <label for="email">Email</label><br>
-            <input type="email" id="email" name="email" /><br>
+            <label for="numero">Numero de voie</label><br>
+            <input type="text" id="numero" name="numero" /><br>
 
+            <label for="rue">Nom de la voie</label><br>
+            <input type="text" id="rue" name="rue" /><br>
 
-            <label for="password">Mot de passe</label><br>
-            <input type="password" id="password" name="password" /><br>
+            <label for="postal">Code Postal</label><br>
+            <input type="text" id="postal" name="postal" /><br>
 
-            <input type="submit" name="Envoyer">
+            <label for="password2">Ville</label><br>
+            <input type="text" id="ville" name="ville" /><br>
+
+            <input type="submit" name="Envoyer" id="button">
 
         </form>
     </main>
