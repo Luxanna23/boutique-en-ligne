@@ -114,3 +114,5 @@ class Article
 }
 
 $article = new Article("boucle", "verte", "1", "2023-02-02", "1", "1", "1");
+
+
