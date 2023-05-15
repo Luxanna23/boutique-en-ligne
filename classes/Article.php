@@ -7,6 +7,7 @@ class Article
     public $id;
     public $titre;
     public $description;
+    public $prix;
     public $date;
     public $id_categorie;
     public $quantite;
@@ -15,27 +16,26 @@ class Article
 
 
     // methodes
-    public function __construct($titre, $description, $date, $id_categorie, $quantite, $image)
+    public function __construct($titre, $description, $prix, $date, $id_categorie, $quantite, $image)
     {
         $this->titre = $titre;
         $this->description = $description;
+        $this->prix =  $prix;
         $this->date = $date;
         $this->id_categorie = $id_categorie;
         $this->quantite = $quantite;
         $this->image = $image;
+        
     }
     public function addArticle($bdd)
     {
-        $addArticle = $bdd->prepare("INSERT INTO articles(titre,description,date,id_categorie, quantite, image)VALUES(?,?,?,?,?,?)");
-        $addArticle->execute([$this->titre, $this->description, $this->date, $this->id_categorie, $this->quantite, $this->image]);
-        $result = $addArticle->fetchAll(PDO::FETCH_ASSOC);
-        // var_dump($result);
-        return $result;
+        $addArticle = $bdd->prepare('INSERT INTO `articles`(`titre`, `description`, `prix`, `date`, `id_categorie`, `quantite`, `image`) VALUES(?,?,?,?,?,?,?)');
+        $addArticle->execute([$this->titre, $this->description, $this->prix, $this->date, $this->id_categorie, $this->quantite, $this->image]);
     }
 
     public function delete($bdd)
     {
-        $req = $bdd->prepare("delete from articles where id=?");
+        $req = $bdd->prepare("DELETE FROM articles where id=?");
         $req->execute([$this->id]);
         exit;
     }
@@ -43,8 +43,8 @@ class Article
       
         $bdd
     ) {
-        $req = $bdd->prepare("UPDATE articles SET titre=?, description=?, image=? WHERE id = ?");
-        $req->execute([$this->titre, $this->description, $this->image, $this->id]);
+        $req = $bdd->prepare("UPDATE articles SET titre=?, description=?, prix=?,image=? WHERE id = ?");
+        $req->execute([$this->titre, $this->description, $this->prix, $this->image, $this->id]);
     }
 
     public function getId()
@@ -58,6 +58,10 @@ class Article
     public function getDescription()
     {
         return $this->description;
+    }
+    public function getPrix()
+    {
+        return $this->prix;
     }
     public function getDate()
     {
@@ -87,6 +91,10 @@ class Article
     {
         $this->description = $description;
     }
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+    }
     public function setDate($date)
     {
         $this->date = $date;
@@ -105,6 +113,4 @@ class Article
     }
 }
 
-$article = new Article("boucle d'oreille", "bl bl", "2023-02-02", "1", "3", "");
-$article->addArticle("boucle d'oreille", "bl bl", "2023-02-02", "1", "3", "");
-// $article-> addArticle($id, $titre, $description, $date, $id_categorie, $quantite, $image);
+$article = new Article("boucle", "verte", "1", "2023-02-02", "1", "1", "1");
