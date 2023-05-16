@@ -20,7 +20,7 @@ class Article
     {
         $this->titre = $titre;
         $this->description = $description;
-        $this->prix =  $prix;
+        $this->prix = $prix;
         $this->date = $date;
         $this->id_categorie = $id_categorie;
         $this->quantite = $quantite;
@@ -35,7 +35,7 @@ class Article
 
     public function delete($bdd)
     {
-        $req = $bdd->prepare("DELETE FROM articles where id=?");
+        $req = $bdd->prepare('DELETE FROM `articles` WHERE id=?');
         $req->execute([$this->id]);
         exit;
     }
@@ -43,8 +43,8 @@ class Article
       
         $bdd
     ) {
-        $req = $bdd->prepare("UPDATE articles SET titre=?, description=?, prix=?,image=? WHERE id = ?");
-        $req->execute([$this->titre, $this->description, $this->prix, $this->image, $this->id]);
+        $req = $bdd->prepare("UPDATE `articles` SET titre=?, description=?, image=? WHERE id = ?");
+        $req->execute([$this->titre, $this->description, $this->image, $this->id]);
     }
 
     public function getId()
@@ -113,6 +113,5 @@ class Article
     }
 }
 
-$article = new Article("boucle", "verte", "1", "2023-02-02", "1", "1", "1");
-
-
+$article = new Article("boucle d'oreille", "bl bl", "4", "2023-02-02", "1", "3", "");
+$article->addArticle($bdd);
