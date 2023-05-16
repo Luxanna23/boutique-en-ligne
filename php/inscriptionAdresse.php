@@ -7,7 +7,6 @@ ob_start('ob_gzhandler');
 
 function submit($bdd)
 {
-    var_dump($_SESSION);
     if (isset($_POST["Envoyer"])) {
         $numero = htmlspecialchars($_POST['numero']);
         $id_user = $_SESSION['user']['id'] ;
@@ -34,7 +33,6 @@ submit($bdd);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="inscription.js" defer></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -42,7 +40,7 @@ submit($bdd);
 </head>
 
 <body>
-
+<?php require_once('../includes/header.php'); ?>
     <main>
         <h1>Adresse</h1>
 
