@@ -6,17 +6,6 @@ require_once('../includes/config.php');
 ob_start('ob_gzhandler');
 
 
-if (isset($_FILES['photo']['tmp_name'])) {
-    $retour = copy($_FILES['photo']['tmp_name'], $_FILES['photo']['name']);
-    if ($retour) {
-        $avatar = $_FILES['photo']['name'];
-        $user = new User($_SESSION['user']['id'],'','', '', '', $avatar);
-        $user->addAvatar($bdd);
-        echo '<p>La photo a bien été enregistré.</p>';
-        //echo '<img src="' . $_FILES['photo']['name'] . '">';
-        move_uploaded_file($_FILES["photo"]["tmp_name"],'./avatars/'.$_SESSION['user']['id'].'.'.pathinfo($_FILES["photo"]["name"],PATHINFO_EXTENSION));
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
@@ -37,13 +26,27 @@ if (isset($_FILES['photo']['tmp_name'])) {
     <?php require_once('../includes/header.php'); ?>
     <main>
         <h1>Profil</h1>
-        <?php $user = new User($_SESSION['user']['id'],'','', '', '', ''); ?>
+        <?php $user = new User($_SESSION['user']['id'],$_SESSION['user']['email'],$_SESSION['user']['password'], $_SESSION['user']['firstname'], $_SESSION['user']['lastname'], ''); ?>
         <img id="imageProfil" src="<?= $user->selectAvatar($bdd) ?>" >
 
-        <form method="post" enctype="multipart/form-data">
-            <input type="file" name="photo">
-            <input type="submit" name="submitAvatar">
-        </form>
+        <h3><?= $user->getFirstname() . " " . $user->getLastname()?></h3>
+        <p><?= $user->getEmail() ?></p>
+
+        <div class="editprofil">
+            <a href="profiledit.php"><button class="button">Editer mon profil</button></a>
+            <a href="deconnexion.php"><button class="button">Se déconnecter</button></a>
+        </div>
+
+        <div>
+            <h3>Adresse de livraison : </h3>
+            <?php $adresse = new Adresse($_SESSION['user']['id'],'','','',''); 
+            echo $adresse->isExisting($bdd); ?>
+        </div>
+
+        <div>
+            <h3>Liste de souhaits : </h3>
+        </div>
+        
     </main>
 
 </body>
