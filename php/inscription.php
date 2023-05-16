@@ -6,7 +6,7 @@ ob_start('ob_gzhandler');
 
 function submit($bdd)
 {
-    if (isset($_POST["Envoyer"])) {
+        if (isset($_POST["Envoyer"])) {
         $email = htmlspecialchars($_POST['email']);
         $prenom = htmlspecialchars($_POST['firstName']);
         $nom = htmlspecialchars($_POST['lastName']);
@@ -14,7 +14,7 @@ function submit($bdd)
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
         
         if (isCompatible($bdd)) {
-            $user = new User($email, $passwordHash, $prenom, $nom);
+            $user = new User('',$email, $passwordHash, $prenom, $nom, 'avatars/default.png');
             $user->register($bdd);
             //$adresse = new Adresse($user);
             header("Location: connexion.php");

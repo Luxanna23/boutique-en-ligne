@@ -7,6 +7,7 @@ class User
     public $password;
     public $firstname;
     public $lastname;
+    public $avatar;
 
     /* GETTERS */
 
@@ -36,6 +37,11 @@ class User
         return $this->lastname;
     }
 
+    function getAvatar()
+    {
+        return $this->avatar;
+    }
+
 
     /* SETTERS */
 
@@ -59,22 +65,30 @@ class User
         $this->lastname = $lastname;
     }
 
-    function __construct($email, $password, $firstname, $lastname)
+    function setAvatar($avatar)
     {
+        $this->avatar = $avatar;
+    }
+
+    function __construct($id, $email, $password, $firstname, $lastname, $avatar)
+    {
+        $this->id = $id;
         $this->email = $email;
         $this->password = $password;
         $this->firstname = $firstname;
         $this->lastname = $lastname;
+        $this->avatar = $avatar;
     }
 
     function register($bdd)
     {
         if ($this->verifierSiVide()) {
             if ($this->loginUnique($bdd)) {
-                $request = $bdd->prepare('INSERT INTO `users`(`email`, `password`, `firstname`, `lastname`) VALUES (?,?,?,?)');
-                $request->execute([$this->email, $this->password, $this->firstname, $this->lastname]);
+                $request = $bdd->prepare('INSERT INTO `users`(`email`, `password`, `firstname`, `lastname`, `avatar`) VALUES (?,?,?,?,?)');
+                $request->execute([$this->email, $this->password, $this->firstname, $this->lastname, $this->avatar]);
+            }
         }
-    }}
+    }
 
     function loginUnique($bdd)
     {
@@ -105,10 +119,10 @@ class User
         if ($result) {
             $passwordHash = $result['password'];
             if ($request->rowCount() > 0 && password_verify($this->password, $passwordHash)) {
-            $_SESSION["user"] = $result;
+                $_SESSION["user"] = $result;
             }
+        }
     }
-}
 
     function disconnect()
     {
@@ -129,14 +143,25 @@ class User
     {
         $request = $bdd->prepare("UPDATE `users` SET `email`= ?,`password`= ?,`first name`= ?,`last name`= ? WHERE id = ?");
         $request->execute([$this->email, $this->password, $this->firstname, $this->lastname, $this->get_id($bdd)]);
-        
     }
-    function get_id($bdd){
+    function get_id($bdd)
+    {
         $request = $bdd->prepare('SELECT `id` FROM `users` WHERE email = ? ');
         $request->execute([$this->email]);
-        $result = $request->fetch(); 
+        $result = $request->fetch();
         return $result['id'];
     }
 
+    function addAvatar($bdd)
+    {
+        $request = $bdd->prepare('UPDATE `users` SET `avatar`= (?) WHERE `id` = ?');
+        $request->execute([$this->avatar, $this->id]);
+    }
+
+    function selectAvatar($bdd){
+        $request = $bdd->prepare('SELECT `avatar` FROM `users` WHERE `id` = ?');
+        $request->execute([$this->id]);
+        $result = $request->fetch(PDO::FETCH_ASSOC);
+        return $result['avatar'];
+    }
 }
-?>
