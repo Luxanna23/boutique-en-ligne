@@ -3,3 +3,49 @@
     width: 100px;
     border-radius: 100%;
 }
+
+/* FOOTER */
+.footerP1{
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+   padding-left: 2vh;
+   padding-right: 2vh;
+
+}
+.footerP1 div{
+    text-align: center;
+}
+
+.footerP2{
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 2vh;
+    padding-right: 2vh;
+}
+.footerP2 div{
+    text-align: center;
+}
+#catFooter{
+    text-align: left;
+}
+#inputNews, #buttonNews{
+    border: none;
+    background-color: transparent;
+}
+.newsletter{
+    text-align: center;
+    border-bottom: solid;
+    
+}
+.footerP3{
+    text-align: center;
+    padding-left: 2vh;
+    padding-right: 2vh;
+ 
+}
+.reseaux{
+    display: flex;
+    justify-content: space-between;
+}

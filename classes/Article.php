@@ -25,12 +25,12 @@ class Article
         $this->id_categorie = $id_categorie;
         $this->quantite = $quantite;
         $this->image = $image;
+        
     }
-   
-    function register($bdd){
-        $reqArticle = $bdd->prepare('INSERT INTO `articles`(`titre`, `description`, `prix`, `date`, `id_categorie`, `quantite`, `image`) VALUES(?,?,?,?,?,?,?)');
-        $reqArticle->execute([$this->titre, $this->description, $this->prix, $this->date, $this->id_categorie, $this->quantite, $this->image]);
-    
+    public function addArticle($bdd)
+    {
+        $addArticle = $bdd->prepare('INSERT INTO `articles`(`titre`, `description`, `prix`, `date`, `id_categorie`, `quantite`, `image`) VALUES(?,?,?,?,?,?,?)');
+        $addArticle->execute([$this->titre, $this->description, $this->prix, $this->date, $this->id_categorie, $this->quantite, $this->image]);
     }
 
     public function delete($bdd)
@@ -58,6 +58,10 @@ class Article
     public function getDescription()
     {
         return $this->description;
+    }
+    public function getPrix()
+    {
+        return $this->prix;
     }
     public function getDate()
     {
@@ -87,6 +91,10 @@ class Article
     {
         $this->description = $description;
     }
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+    }
     public function setDate($date)
     {
         $this->date = $date;
@@ -106,4 +114,4 @@ class Article
 }
 
 $article = new Article("boucle d'oreille", "bl bl", "4", "2023-02-02", "1", "3", "");
-$article->register($bdd);
+$article->addArticle($bdd);
