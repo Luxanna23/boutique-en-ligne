@@ -1,3 +1,4 @@
+<header>
 <?php
 // RECUPERER L'URL POUR SAVOIR SI C'EST L'INDEX OU LES AUTRES PAGES
 if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
@@ -15,14 +16,13 @@ $splitURL = explode('boutique-en-ligne', $url);  //PHP
 if ($splitURL[1] === '/index.php' || $splitURL[1] === '/') {
     /* header index */
 ?>
-    <header>
-        <nav>
+  <nav>
             <a href="./index.php">Home</a>
             <?php
             if (isset($_SESSION['user'])) { ?>
                 <a href="./php/profil.php">Profil</a>
                 <a href="./php/inscriptionAdresse.php">Inscription Adresse</a>
-                <a href="./php/deconnexion.php">Deconnexion</a>
+                <a href="./php/deconnexion.php">Disconnect</a>
                 <?php
             } else { ?>
                 <a href="./php/connexion.php">Connexion</a>
@@ -61,5 +61,6 @@ if ($splitURL[1] === '/index.php' || $splitURL[1] === '/') {
             <div id="result"></div>
         </div>
         </nav>
-    </header>
-<?php }
+    
+<?php } ?>
+</header>
