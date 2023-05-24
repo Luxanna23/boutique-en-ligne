@@ -3,7 +3,7 @@
 require_once('../classes/User.php');
 require_once('../classes/Adresse.php');
 require_once('../includes/config.php');
-ob_start('ob_gzhandler');
+//ob_start('ob_gzhandler');
 
 function submit($bdd)
 {
