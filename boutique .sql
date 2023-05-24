@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 19 mai 2023 à 08:55
+-- Généré le : mar. 23 mai 2023 à 07:57
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `articles` (
   `id` int NOT NULL AUTO_INCREMENT,
   `titre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `prix` int NOT NULL,
+  `prix` float NOT NULL,
   `date` date NOT NULL,
   `id_categorie` int NOT NULL,
   `quantite` int NOT NULL,
@@ -106,7 +106,36 @@ CREATE TABLE IF NOT EXISTS `categart` (
   `id_article` int NOT NULL,
   `id_categorie` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `categart`
+--
+
+INSERT INTO `categart` (`id`, `id_article`, `id_categorie`) VALUES
+(1, 9, 7),
+(2, 10, 10),
+(3, 11, 11),
+(4, 12, 8),
+(5, 13, 12),
+(6, 14, 12),
+(7, 15, 12),
+(8, 16, 13),
+(9, 17, 13),
+(10, 18, 14),
+(11, 19, 14),
+(12, 20, 15),
+(13, 21, 16),
+(14, 22, 16),
+(15, 23, 16),
+(16, 24, 17),
+(17, 25, 17),
+(18, 26, 18),
+(19, 27, 18),
+(20, 29, 6),
+(21, 28, 18),
+(22, 30, 6),
+(23, 31, 6);
 
 -- --------------------------------------------------------
 
@@ -158,6 +187,21 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `comment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `id_user` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `favoris`
+--
+
+DROP TABLE IF EXISTS `favoris`;
+CREATE TABLE IF NOT EXISTS `favoris` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_user` int NOT NULL,
+  `id_article` int NOT NULL,
+  `id_categ` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
