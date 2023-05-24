@@ -4,8 +4,6 @@ require_once('../classes/User.php');
 require_once('../classes/Adresse.php');
 require_once('../includes/config.php');
 //ob_start('ob_gzhandler');
-
-
 ?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
@@ -40,7 +38,7 @@ require_once('../includes/config.php');
 
         <div>
             <h3>Adresse de livraison : </h3>
-            <?php $adresse = new Adresse($_SESSION['user']['id'],'','','',''); 
+            <?php $adresse = new Adresse($_SESSION['user']['id'],'','','','','',''); 
             echo $adresse->isExisting($bdd); ?>
         </div>
 

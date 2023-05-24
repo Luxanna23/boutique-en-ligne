@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 23 mai 2023 à 09:07
+-- Généré le : mer. 24 mai 2023 à 09:59
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -56,7 +56,7 @@ DROP TABLE IF EXISTS `articles`;
 CREATE TABLE IF NOT EXISTS `articles` (
   `id` int NOT NULL AUTO_INCREMENT,
   `titreArt` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `description` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `prix` float NOT NULL,
   `date` date NOT NULL,
   `id_categorie` int NOT NULL,
@@ -73,7 +73,7 @@ INSERT INTO `articles` (`id`, `titreArt`, `description`, `prix`, `date`, `id_cat
 (9, 'Boucles d\'oreilles Jasmin', 'Boucles d\'oreilles longues doré à l\'or fin, formées de différents motifs en nacre.\r\nRavissantes boucles à l\'aspect sobre et efficace qui saura faire son effet.\r\n\r\nLongueur : 65mm\r\nPoids d\'une boucle : 4,16g', 55, '2023-05-16', 7, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SEC18315-01SEL-P_380x443_crop_center.jpg?v=1667234371'),
 (10, 'Boucles d\'oreilles Sunrise', 'Boucles d\'oreilles en acier doré à l\'or fin présentant un cercle à demi coloré.\r\nNous conseillons de les porter en accumulation afin de rehausser le style.\r\nDéclinées en bracelet, collier et bague\r\nDiamètre : 12mm\r\nPoids de la boucle : 0,77g', 30, '2023-05-16', 10, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SEM19703-01TQB-P1_380x443_crop_center.jpg?v=1678878425'),
 (11, 'Boucles d\'oreilles Lilith', 'Boucles d\'oreilles en acier doré à l\'or fin représentant un cercle martelé à l\'image d\'un soleil.\r\nL\'effet martelé de ce bijou amène un air ethnique à votre tenue. Idéal si vous souhaitez élever votre tenue sans effort.\r\nDiamètre : 28mm\r\nPoids: 2,06g', 35, '2023-05-09', 11, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SEM19976-01UNI-NM_380x443_crop_center.jpg?v=1677841640'),
-(12, 'Earcuff Chanty', 'Un earcuff ajustable en acier uni ou doré à l’or fin qu’il suffit simplement d’enfiler sur le l’oreille.\r\nMinimaliste et tellement stylé, cet accessoire se porte aussi bien seul qu’en accumulation avec d’autres boucles.\r\nÀ l’unité, pour les mixer à votre ', 20, '2023-02-08', 8, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/earcuff-chanty-acier-dore-portees_380x443_crop_center.jpg?v=1654079288'),
+(12, 'Earcuff Chanty', 'Un earcuff ajustable en acier uni ou doré à l’or fin qu’il suffit simplement d’enfiler sur le l’oreille.\r\nMinimaliste et tellement stylé, cet accessoire se porte aussi bien seul qu’en accumulation avec d’autres boucles.\r\nÀ l’unité, pour les mixer à votre guise !\r\nLargeur : 10mm', 20, '2023-02-08', 8, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/earcuff-chanty-acier-dore-portees_380x443_crop_center.jpg?v=1654079288'),
 (13, 'Bracelet Ma bonne étoile', 'Bracelet chaînette en acier uni ou doré à l\'or fin sur laquelle une médaille est gravée du message \"Ma bonne étoile\".\r\nUn ravissant petit bracelet nous rappelant qu\'il faut croire en sa bonne étoile !\r\nDécliné en collier, bague et charm\r\nLongueur : 15cm e', 25, '2023-03-08', 12, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/bracelet-ma-bonne-etoile-acier-dore_380x443_crop_center.jpg?v=1653051499'),
 (14, 'Bracelet Sienna', 'Bracelet chaînette en acier uni ou doré à l’or fin sur lequel deux petits cœurs de métal sont attachés ainsi qu’un petit zirconium en pampille.\r\nC’est un très joli bijou d’amour qui se porte comme une seconde peau et ne s’enlève jamais.\r\nDécliné en collie', 30, '2023-03-08', 12, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/Bracelet-Sienna_2c36a2e7-c42e-49fc-aa22-67cba65e5d86_380x443_crop_center.jpg?v=1653314091'),
 (15, 'Bracelet Cyloeh', 'Bracelet en acier doré à l\'or fin sur lequel est attaché un motif de papillon ciselé et orné de nacre et d\'un zirconium.\r\nNous conseillons de le porter avec d\'autres bracelets de nos collections afin de rehausser le style.\r\nDécliné en boucles d\'oreilles e', 35, '2023-03-08', 12, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SBS18073-01SEL-P_380x443_crop_center.jpg?v=1667402318'),
@@ -104,7 +104,7 @@ DROP TABLE IF EXISTS `categart`;
 CREATE TABLE IF NOT EXISTS `categart` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_article` int NOT NULL,
-  `id_categorie` int NOT NULL,
+  `id_souscat` int NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -112,30 +112,30 @@ CREATE TABLE IF NOT EXISTS `categart` (
 -- Déchargement des données de la table `categart`
 --
 
-INSERT INTO `categart` (`id`, `id_article`, `id_categorie`) VALUES
-(1, 9, 7),
-(2, 10, 10),
-(3, 11, 11),
-(4, 12, 8),
-(5, 13, 12),
-(6, 14, 12),
-(7, 15, 12),
-(8, 16, 13),
-(9, 17, 13),
-(10, 18, 14),
-(11, 19, 14),
-(12, 20, 15),
-(13, 21, 16),
-(14, 22, 16),
-(15, 23, 16),
-(16, 24, 17),
-(17, 25, 17),
+INSERT INTO `categart` (`id`, `id_article`, `id_souscat`) VALUES
+(1, 9, 1),
+(2, 10, 3),
+(3, 11, 4),
+(4, 12, 2),
+(5, 13, 5),
+(6, 14, 5),
+(7, 15, 5),
+(8, 16, 6),
+(9, 17, 6),
+(10, 18, 7),
+(11, 19, 7),
+(12, 20, 8),
+(13, 21, 9),
+(14, 22, 9),
+(15, 23, 9),
+(16, 24, 10),
+(17, 25, 10),
 (18, 26, 18),
 (19, 27, 18),
-(20, 29, 6),
-(21, 28, 18),
-(22, 30, 6),
-(23, 31, 6);
+(20, 29, 12),
+(21, 28, 11),
+(22, 30, 12),
+(23, 31, 12);
 
 -- --------------------------------------------------------
 
@@ -162,18 +162,7 @@ INSERT INTO `categorie` (`id`, `titreCat`, `imgCat`, `id_parent`) VALUES
 (3, 'Boucles d\'oreilles', 'https://cdn.shopify.com/s/files/1/2364/4415/products/IMG_9208.heic?v=1680018166', NULL),
 (4, 'Colliers', 'https://cdn.shopify.com/s/files/1/0509/4116/5720/products/colliers-elegance-or-jardin-des-bijoux-398.webp?v=1683811549&width=934', NULL),
 (5, 'Bagues', 'https://cdn.shopify.com/s/files/1/0272/2489/9683/products/bague-rubis-fines-989A0237_700x.jpg?v=1634130923', NULL),
-(6, 'Montres', 'https://www.histoiredor.com/dw/image/v2/BCQS_PRD/on/demandware.static/-/Sites-THOM_CATALOG/default/dw345e35f4/images/HIMFJQC712-model0.jpg?sw=750&sh=750', NULL),
-(7, 'Boucles longues', 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SEL19973-01GRN-NM_380x442_crop_center.jpg?v=1679327540', 3),
-(8, 'Earcuffs', 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/earcuff-randa-acier-dore-1-portees_380x443_crop_center.jpg?v=1654079953', 3),
-(10, 'Mini boucles', 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SES20140-01TQB-P2_380x443_crop_center.jpg?v=1684148052', 3),
-(11, 'Boucles medium', 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SEC18556-01UNI-P_380x443_crop_center.jpg?v=1669624528', 3),
-(12, 'Bracelets simples', 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/Collier-Ange-Bracelet-Velasquez-1_380x443_crop_center.jpg?v=1683193524', 2),
-(13, 'Bracelets multi-rangs', 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SBX16201-01CFE-P1_380x443_crop_center.jpg?v=1678350669', 2),
-(14, 'Colliers mutil-rangs', 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SNX20398-01WHT-P1_380x443_crop_center.jpg?v=1679053878', 4),
-(15, 'Colliers medium', 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SNM20301-01RED-P1_2777ef05-a0c3-48e0-8543-e4fb397ea11b_380x443_crop_center.jpg?v=1679065559', 4),
-(16, 'Sautoirs', 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/Sautoir-Alpha-Bracelet-Galaxy-840x980_eb4ac284-f2ee-4c34-8532-95f7b47195ac_380x443_crop_center.jpg?v=1649256768', 4),
-(17, 'Bagues fines', 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/bague-atomium-acier-dore-portee_380x443_crop_center.jpg?v=1668674256', 5),
-(18, 'Bagues larges', 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SRL19927-01MAT-P1_380x443_crop_center.jpg?v=1678458485', 5);
+(6, 'Montres', 'https://www.histoiredor.com/dw/image/v2/BCQS_PRD/on/demandware.static/-/Sites-THOM_CATALOG/default/dw345e35f4/images/HIMFJQC712-model0.jpg?sw=750&sh=750', NULL);
 
 -- --------------------------------------------------------
 
@@ -226,11 +215,29 @@ CREATE TABLE IF NOT EXISTS `panier` (
 DROP TABLE IF EXISTS `souscategorie`;
 CREATE TABLE IF NOT EXISTS `souscategorie` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `titre` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
+  `titreSousCat` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `imgSousCat` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `id_parent` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `souscategorie`
+--
+
+INSERT INTO `souscategorie` (`id`, `titreSousCat`, `imgSousCat`, `id_parent`) VALUES
+(1, 'Boucles longues', 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SEL19973-01GRN-NM_380x442_crop_center.jpg?v=1679327540', 3),
+(2, 'Earcuffs', 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/earcuff-randa-acier-dore-1-portees_380x443_crop_center.jpg?v=1654079953', 3),
+(3, 'Mini boucles', 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SES20140-01TQB-P2_380x443_crop_center.jpg?v=1684148052', 3),
+(4, 'Boucles medium', 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SEC18556-01UNI-P_380x443_crop_center.jpg?v=1669624528', 3),
+(5, 'Bracelets simples', 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/Collier-Ange-Bracelet-Velasquez-1_380x443_crop_center.jpg?v=1683193524', 2),
+(6, 'Bracelets multi-rangs', 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SBX16201-01CFE-P1_380x443_crop_center.jpg?v=1678350669', 2),
+(7, 'Colliers mutil-rangs', 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SNX20398-01WHT-P1_380x443_crop_center.jpg?v=1679053878', 4),
+(8, 'Colliers medium', 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SNM20301-01RED-P1_2777ef05-a0c3-48e0-8543-e4fb397ea11b_380x443_crop_center.jpg?v=1679065559', 4),
+(9, 'Sautoirs', 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/Sautoir-Alpha-Bracelet-Galaxy-840x980_eb4ac284-f2ee-4c34-8532-95f7b47195ac_380x443_crop_center.jpg?v=1649256768', 4),
+(10, 'Bagues fines', 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/bague-atomium-acier-dore-portee_380x443_crop_center.jpg?v=1668674256', 5),
+(11, 'Bagues larges', 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SRL19927-01MAT-P1_380x443_crop_center.jpg?v=1678458485', 5),
+(12, 'Montres femme', 'https://www.rienasemettre.fr/wp-content/uploads/2019/12/montre-femme-tendance-guide-achat.jpg', 6);
 
 -- --------------------------------------------------------
 

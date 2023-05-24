@@ -22,11 +22,14 @@ if ($splitURL[1] === '/index.php' || $splitURL[1] === '/') {
             if (isset($_SESSION['user'])) { ?>
                 <a href="./php/profil.php">Profil</a>
                 <a href="./php/inscriptionAdresse.php">Inscription Adresse</a>
+                <a href="./php/categories.php">Categories</a>
+                <a href="./php/panier.php">Panier</a>
                 <a href="./php/deconnexion.php">Disconnect</a>
                 <?php
             } else { ?>
                 <a href="./php/connexion.php">Connexion</a>
                 <a href="./php/inscription.php">Inscription</a>
+                <a href="./php/categories.php">Categories</a>
             <?php } ?>
             <div>
             <form method="GET">
@@ -46,12 +49,15 @@ if ($splitURL[1] === '/index.php' || $splitURL[1] === '/') {
             <?php
             if (isset($_SESSION['user'])) { ?>
                 <a href="./profil.php">Profil</a>
-                <a href="./php/inscriptionAdresse.php">Inscription Adresse</a>
+                <a href="./inscriptionAdresse.php">Inscription Adresse</a>
+                <a href="./categories.php">Categories</a>
+                <a href="./panier.php">Panier</a>
                 <a href="./deconnexion.php">Deconnexion</a>
                 <?php
             } else { ?>
                 <a href="./connexion.php">connexion</a>
                 <a href="./inscription.php">Inscription</a>
+                <a href="./categories.php">Categories</a>
             <?php } ?>
             <div>
             <form method="GET">
