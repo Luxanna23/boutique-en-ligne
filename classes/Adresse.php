@@ -28,13 +28,25 @@ function __construct($id_user, $firstname, $lastname, $numero, $rue, $codePostal
         $request->execute([$this->id_user, $this->firstname, $this->lastname, $this->numero, $this->rue, $this->codePostal, $this->ville]);
     }
 
-    function isExisting($bdd){
+    function itExist($bdd){
+        $request = $bdd->prepare('SELECT * FROM `adresse` INNER JOIN users ON adresse.id_user = users.id WHERE users.id = ?');
+        $request->execute([$_SESSION['user']['id']]);
+        $result = $request->fetch(PDO::FETCH_ASSOC);
+        if ($request->rowCount() > 0){
+            return true;
+        }
+        else {
+            return false;
+        }
+     }
+
+     function isExisting($bdd){
         $request = $bdd->prepare('SELECT * FROM `adresse` INNER JOIN users ON adresse.id_user = users.id WHERE users.id = ?');
         $request->execute([$_SESSION['user']['id']]);
         $result = $request->fetch(PDO::FETCH_ASSOC);
         if ($request->rowCount() > 0){
             $adresse = $result['firstname'] . " " . $result['lastname'] . '</br>'. $result['numero'] . " " . $result['rue'] . " " . $result['codePostal'] . " " . $result['ville'];
-            return $adresse . '<button class="button">Supprimer l\'adresse</button>'; //comment ajouter deleteAdresse($bdd) ????
+            return $adresse ;
         }
         else {
             return '<a href="inscriptionAdresse.php"><button class="button">Ajouter une adresse</button></a>';

@@ -14,7 +14,7 @@ function submit($bdd)
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
         
         if (isCompatible($bdd)) {
-            $user = new User('',$email, $passwordHash, $prenom, $nom, 'avatars/default.png');
+            $user = new User('',$email, $passwordHash, $prenom, $nom, 'avatars/default.png','');
             $user->register($bdd);
             //$adresse = new Adresse($user);
             header("Location: connexion.php");
