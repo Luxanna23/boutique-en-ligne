@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le : mer. 24 mai 2023 à 09:59
--- Version du serveur : 8.0.31
--- Version de PHP : 8.0.26
+-- Hôte : localhost:3306
+-- Généré le : mer. 31 mai 2023 à 11:53
+-- Version du serveur : 8.0.30
+-- Version de PHP : 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,24 +27,25 @@ SET time_zone = "+00:00";
 -- Structure de la table `adresse`
 --
 
-DROP TABLE IF EXISTS `adresse`;
-CREATE TABLE IF NOT EXISTS `adresse` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `adresse` (
+  `id` int NOT NULL,
   `id_user` int NOT NULL,
+  `firstname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `lastname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `numero` int NOT NULL,
   `rue` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `codePostal` int NOT NULL,
-  `ville` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `ville` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `adresse`
 --
 
-INSERT INTO `adresse` (`id`, `id_user`, `numero`, `rue`, `codePostal`, `ville`) VALUES
-(1, 1, 1, 'a', 1, 'a'),
-(2, 2, 1, 'z', 1, 'z');
+INSERT INTO `adresse` (`id`, `id_user`, `firstname`, `lastname`, `numero`, `rue`, `codePostal`, `ville`) VALUES
+(1, 1, '', '', 1, 'a', 1, 'a'),
+(2, 2, '', '', 1, 'z', 1, 'z'),
+(3, 4, 'Toto', 'Toto', 5, 'rue de la republique', 93000, 'Paris');
 
 -- --------------------------------------------------------
 
@@ -52,47 +53,45 @@ INSERT INTO `adresse` (`id`, `id_user`, `numero`, `rue`, `codePostal`, `ville`) 
 -- Structure de la table `articles`
 --
 
-DROP TABLE IF EXISTS `articles`;
-CREATE TABLE IF NOT EXISTS `articles` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `articles` (
+  `id` int NOT NULL,
   `titreArt` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `description` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `prix` float NOT NULL,
+  `prix` decimal(10,2) NOT NULL,
   `date` date NOT NULL,
   `id_categorie` int NOT NULL,
   `quantite` int NOT NULL,
-  `imgArt` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `imgArt` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `articles`
 --
 
 INSERT INTO `articles` (`id`, `titreArt`, `description`, `prix`, `date`, `id_categorie`, `quantite`, `imgArt`) VALUES
-(9, 'Boucles d\'oreilles Jasmin', 'Boucles d\'oreilles longues doré à l\'or fin, formées de différents motifs en nacre.\r\nRavissantes boucles à l\'aspect sobre et efficace qui saura faire son effet.\r\n\r\nLongueur : 65mm\r\nPoids d\'une boucle : 4,16g', 55, '2023-05-16', 7, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SEC18315-01SEL-P_380x443_crop_center.jpg?v=1667234371'),
-(10, 'Boucles d\'oreilles Sunrise', 'Boucles d\'oreilles en acier doré à l\'or fin présentant un cercle à demi coloré.\r\nNous conseillons de les porter en accumulation afin de rehausser le style.\r\nDéclinées en bracelet, collier et bague\r\nDiamètre : 12mm\r\nPoids de la boucle : 0,77g', 30, '2023-05-16', 10, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SEM19703-01TQB-P1_380x443_crop_center.jpg?v=1678878425'),
-(11, 'Boucles d\'oreilles Lilith', 'Boucles d\'oreilles en acier doré à l\'or fin représentant un cercle martelé à l\'image d\'un soleil.\r\nL\'effet martelé de ce bijou amène un air ethnique à votre tenue. Idéal si vous souhaitez élever votre tenue sans effort.\r\nDiamètre : 28mm\r\nPoids: 2,06g', 35, '2023-05-09', 11, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SEM19976-01UNI-NM_380x443_crop_center.jpg?v=1677841640'),
-(12, 'Earcuff Chanty', 'Un earcuff ajustable en acier uni ou doré à l’or fin qu’il suffit simplement d’enfiler sur le l’oreille.\r\nMinimaliste et tellement stylé, cet accessoire se porte aussi bien seul qu’en accumulation avec d’autres boucles.\r\nÀ l’unité, pour les mixer à votre guise !\r\nLargeur : 10mm', 20, '2023-02-08', 8, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/earcuff-chanty-acier-dore-portees_380x443_crop_center.jpg?v=1654079288'),
-(13, 'Bracelet Ma bonne étoile', 'Bracelet chaînette en acier uni ou doré à l\'or fin sur laquelle une médaille est gravée du message \"Ma bonne étoile\".\r\nUn ravissant petit bracelet nous rappelant qu\'il faut croire en sa bonne étoile !\r\nDécliné en collier, bague et charm\r\nLongueur : 15cm e', 25, '2023-03-08', 12, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/bracelet-ma-bonne-etoile-acier-dore_380x443_crop_center.jpg?v=1653051499'),
-(14, 'Bracelet Sienna', 'Bracelet chaînette en acier uni ou doré à l’or fin sur lequel deux petits cœurs de métal sont attachés ainsi qu’un petit zirconium en pampille.\r\nC’est un très joli bijou d’amour qui se porte comme une seconde peau et ne s’enlève jamais.\r\nDécliné en collie', 30, '2023-03-08', 12, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/Bracelet-Sienna_2c36a2e7-c42e-49fc-aa22-67cba65e5d86_380x443_crop_center.jpg?v=1653314091'),
-(15, 'Bracelet Cyloeh', 'Bracelet en acier doré à l\'or fin sur lequel est attaché un motif de papillon ciselé et orné de nacre et d\'un zirconium.\r\nNous conseillons de le porter avec d\'autres bracelets de nos collections afin de rehausser le style.\r\nDécliné en boucles d\'oreilles e', 35, '2023-03-08', 12, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SBS18073-01SEL-P_380x443_crop_center.jpg?v=1667402318'),
-(16, 'Bracelet Star', 'Bracelet triple chaîne en acier uni ou doré à l\'or fin sur laquelle sont accrochées une étoile et une pastille de métal.\r\nCe superbe bracelet occupe magnifiquement le poignet sur lequel il est établi.\r\nDécliné en collier\r\nLongueur : 15cm et 3cm de réglage', 45, '2023-03-05', 13, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/Bracelet-Newton-Bracelet-Star_e5e09ddc-fccd-4ecb-84ea-97b9eff35461_380x443_crop_center.jpg?v=1652958930'),
-(17, 'Bracelet Cross', 'Bracelet multi-rang coloré sur lequel sont enfilées des perles de pierres fines et une petite croix en nacre ou en turquoise.\r\nCe bracelet se porte comme un talisman protecteur.\r\nLongueur : 2 tours ajustables avec chaîne de rallonge', 49, '2023-03-05', 13, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/bracelet-cross-acier-dore-nacre_380x443_crop_center.jpg?v=1652948636'),
-(18, 'Collier Nawel', 'Collier multi-rang en acier doré à l\'or fin. Sur la première chaîne se trouvent trois pastilles serties d\'un zirconium en leur centre et sur la seconde chaîne, un pendentif avec un cercle dans un anneau.\r\nCe bijou a beaucoup d\'allure et habille tout de su', 45, '2023-05-12', 14, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SNX20161-01WHT-P1_380x443_crop_center.jpg?v=1679324957'),
-(19, 'Collier Sahas', '\r\nCollier en acier doré à l\'or fin à double rang, dont l\'une des deux chaînes présentent des pampilles en zirconiums colorés qui représentent les couleurs des 7 chakras : racine, sacré, plexus solaire, coeur, gorge, 3ème oeil et couronne.\r\nCe bijou a beau', 55, '2023-05-12', 14, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SNX19736-01MIX-P1_380x443_crop_center.jpg?v=1678722414'),
-(20, 'Collier Anouchka', 'Collier en acier doré à l\'or fin sur lequel deux zirconiums sont attachés. Trois chaînettes y sont suspendues.\r\nCe bijou a beaucoup d\'allure et se porte aussi bien seul qu\'en accumulation avec d\'autres colliers de nos collections.\r\nDécliné en bracelet et ', 45, '2023-05-04', 15, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SNM19887-01GRN-P1_380x443_crop_center.jpg?v=1677663287'),
-(21, 'Sautoir Pera', 'Collier long en acier uni ou doré à l\'or fin sur lequel est suspendu un pendentif de forme géométrique en forme de poire.\r\nPorté seul ou en accumulation, ce petit bijou est magnifique pour complémenter vos tenues plus estivales.\r\nLongueur : 75cm et 5cm de', 45, '2023-04-11', 16, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/sautoir-pera-acier-dore_380x443_crop_center.jpg?v=1651764278'),
-(22, 'Sautoir Astra', 'Collier long en acier doré à l’or fin sur lequel un motif ciselé d’un soleil d’or se place sur une médaille de nacre ou d’acétate de couleurs.\r\nCe long sautoir est une pièce maîtresse de nos collections et peut se porter avec les boucles d’oreilles assort', 55, '2023-04-11', 16, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/Collier-Astra-Collier-Love-Collier-Rabi_380x443_crop_center.jpg?v=1662733543'),
-(23, 'Sautoir Moonflower', 'Collier long en acier uni ou doré à l’or fin sur lequel est accrochée une médaille de nacre piquée en son centre d’un motif de fleur en zirconiums brillants.\r\nCe sautoir au look précieux pourra se porter mélanger avec d’autres colliers de nos collections ', 59, '2023-04-11', 16, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SNL13589-01SEL-P1_380x443_crop_center.jpg?v=1678374503'),
-(24, 'Bague Fiore', 'Bague ajustable en acier doré à l\'or fin avec un motif de fleur coloré.\r\nNous conseillons de la porter en accumulation avec d\'autres bagues de nos collections.\r\nDéclinée en boucles d\'oreilles, jonc, bracelet et collier\r\nDiamètre : ajustable', 30, '2023-02-20', 17, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SRM19751_380x443_crop_center.jpg?v=1679046891'),
-(25, 'Bague Louve', 'Bague ajustable en acier doré à l\'or fin sur laquelle se trouve une forme géométrique composée de pierre naturelle en son centre et de zirconiums colorés.\r\nElle est très élégante et apporte une touche subtile de couleur sur vos mains.\r\nDiamètre : ajustabl', 39, '2023-02-20', 17, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SRM19822-01GRN-P1_380x443_crop_center.jpg?v=1679328248'),
-(26, 'Bague Nacera', 'Bague ajustable en acier doré à l\'or fin sur laquelle est attachée une pastille en nacre.\r\nNous conseillons de la porter en accumulation avec d\'autres bagues de nos collections.\r\nDiamètre : ajustable\r\nLargeur : 8mm \r\nPastille : 11mm', 35, '2022-10-10', 18, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SRM19658-01SEL-P1_380x443_crop_center.jpg?v=1678093161'),
-(27, 'Bague Cassidy', 'Bague martelée ajustable en acier doré à l\'or fin à double rangée. Sur l\'une des deux rangées se trouvent des zirconiums colorés qui apportent de l\'éclat au bijou.\r\nSon allure ethnique chic habille sans effort. Elle se porte aussi bien seule qu\'accumulée ', 30, '2022-10-10', 18, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SRT20039-01WHT-P1_380x443_crop_center.jpg?v=1679327114'),
-(28, 'Bague Cameleo', 'Bague ajustable en acier doré à l\'or fin martelée.\r\nCette pièce élégante habille tout de suite votre main. Elle se porte seule ou bien accumulée avec d\'autres bagues de nos collections.\r\nDéclinée en jonc \r\nDiamètre : ajustable\r\nLargeur : 18mm', 30, '2022-10-10', 18, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SRL19908-01MAT-P2_380x443_crop_center.jpg?v=1677832809'),
-(29, 'Orion rose', 'L\'or rose glamour rencontre le titane audacieux, un duo cosmique. L\'Orion Rose de 38 mm transmet une crainte pour le céleste avec une sensibilité de conception tournée vers l\'avenir et une fonctionnalité de double fuseau horaire.', 199, '2023-05-11', 6, 0, 'https://www.mvmt.com/dw/image/v2/BDKZ_PRD/on/demandware.static/-/Sites-mgi-master/default/dw588e350b/images/products/FC01-TIRG_l_4.jpg?sw=453&sh=453'),
-(30, 'Santa Monica Black', 'Inspiré des rues emblématiques de Los Angeles, la Santa Monica Black est l\'essence d\'une pièce minimaliste. Ce modèle de 38 mm présente un coloris noir et or rose brossé saisissant.', 129, '2023-05-11', 6, 0, 'https://www.mvmt.com/dw/image/v2/BDKZ_PRD/on/demandware.static/-/Sites-mgi-master/default/dw1170c2fe/images/products/MB01-RGBL_l_2.jpg?sw=800&sh=800'),
-(31, 'Reina gold', 'Une montre-bijoux. Marqueurs cardinaux en forme de boucle. Un look classique qui survit aux tendances. La Reina s\'inspire des éléments de design de mode de longue date que nous admirons le plus. Doté d\'un bracelet double tour, un clin d\'œil au look deux m', 149, '2023-05-11', 6, 0, 'https://www.mvmt.com/dw/image/v2/BDKZ_PRD/on/demandware.static/-/Sites-mgi-master/default/dwc5b02f96/images/products/28000303_l_3.jpg?sw=800&sh=800');
+(9, 'Boucles d\'oreilles Jasmin', 'Boucles d\'oreilles longues doré à l\'or fin, formées de différents motifs en nacre.\r\nRavissantes boucles à l\'aspect sobre et efficace qui saura faire son effet.\r\n\r\nLongueur : 65mm\r\nPoids d\'une boucle : 4,16g', 55.00, '2023-05-16', 7, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SEC18315-01SEL-P_380x443_crop_center.jpg?v=1667234371'),
+(10, 'Boucles d\'oreilles Sunrise', 'Boucles d\'oreilles en acier doré à l\'or fin présentant un cercle à demi coloré.\r\nNous conseillons de les porter en accumulation afin de rehausser le style.\r\nDéclinées en bracelet, collier et bague\r\nDiamètre : 12mm\r\nPoids de la boucle : 0,77g', 30.00, '2023-05-16', 10, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SEM19703-01TQB-P1_380x443_crop_center.jpg?v=1678878425'),
+(11, 'Boucles d\'oreilles Lilith', 'Boucles d\'oreilles en acier doré à l\'or fin représentant un cercle martelé à l\'image d\'un soleil.\r\nL\'effet martelé de ce bijou amène un air ethnique à votre tenue. Idéal si vous souhaitez élever votre tenue sans effort.\r\nDiamètre : 28mm\r\nPoids: 2,06g', 35.00, '2023-05-09', 11, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SEM19976-01UNI-NM_380x443_crop_center.jpg?v=1677841640'),
+(12, 'Earcuff Chanty', 'Un earcuff ajustable en acier uni ou doré à l’or fin qu’il suffit simplement d’enfiler sur le l’oreille.\r\nMinimaliste et tellement stylé, cet accessoire se porte aussi bien seul qu’en accumulation avec d’autres boucles.\r\nÀ l’unité, pour les mixer à votre guise !\r\nLargeur : 10mm', 20.00, '2023-02-08', 8, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/earcuff-chanty-acier-dore-portees_380x443_crop_center.jpg?v=1654079288'),
+(13, 'Bracelet Ma bonne étoile', 'Bracelet chaînette en acier uni ou doré à l\'or fin sur laquelle une médaille est gravée du message \"Ma bonne étoile\".\r\nUn ravissant petit bracelet nous rappelant qu\'il faut croire en sa bonne étoile !\r\nDécliné en collier, bague et charm\r\nLongueur : 15cm e', 25.00, '2023-03-08', 12, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/bracelet-ma-bonne-etoile-acier-dore_380x443_crop_center.jpg?v=1653051499'),
+(14, 'Bracelet Sienna', 'Bracelet chaînette en acier uni ou doré à l’or fin sur lequel deux petits cœurs de métal sont attachés ainsi qu’un petit zirconium en pampille.\r\nC’est un très joli bijou d’amour qui se porte comme une seconde peau et ne s’enlève jamais.\r\nDécliné en collie', 30.00, '2023-03-08', 12, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/Bracelet-Sienna_2c36a2e7-c42e-49fc-aa22-67cba65e5d86_380x443_crop_center.jpg?v=1653314091'),
+(15, 'Bracelet Cyloeh', 'Bracelet en acier doré à l\'or fin sur lequel est attaché un motif de papillon ciselé et orné de nacre et d\'un zirconium.\r\nNous conseillons de le porter avec d\'autres bracelets de nos collections afin de rehausser le style.\r\nDécliné en boucles d\'oreilles e', 35.00, '2023-03-08', 12, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SBS18073-01SEL-P_380x443_crop_center.jpg?v=1667402318'),
+(16, 'Bracelet Star', 'Bracelet triple chaîne en acier uni ou doré à l\'or fin sur laquelle sont accrochées une étoile et une pastille de métal.\r\nCe superbe bracelet occupe magnifiquement le poignet sur lequel il est établi.\r\nDécliné en collier\r\nLongueur : 15cm et 3cm de réglage', 45.00, '2023-03-05', 13, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/Bracelet-Newton-Bracelet-Star_e5e09ddc-fccd-4ecb-84ea-97b9eff35461_380x443_crop_center.jpg?v=1652958930'),
+(17, 'Bracelet Cross', 'Bracelet multi-rang coloré sur lequel sont enfilées des perles de pierres fines et une petite croix en nacre ou en turquoise.\r\nCe bracelet se porte comme un talisman protecteur.\r\nLongueur : 2 tours ajustables avec chaîne de rallonge', 49.00, '2023-03-05', 13, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/bracelet-cross-acier-dore-nacre_380x443_crop_center.jpg?v=1652948636'),
+(18, 'Collier Nawel', 'Collier multi-rang en acier doré à l\'or fin. Sur la première chaîne se trouvent trois pastilles serties d\'un zirconium en leur centre et sur la seconde chaîne, un pendentif avec un cercle dans un anneau.\r\nCe bijou a beaucoup d\'allure et habille tout de su', 45.00, '2023-05-12', 14, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SNX20161-01WHT-P1_380x443_crop_center.jpg?v=1679324957'),
+(19, 'Collier Sahas', '\r\nCollier en acier doré à l\'or fin à double rang, dont l\'une des deux chaînes présentent des pampilles en zirconiums colorés qui représentent les couleurs des 7 chakras : racine, sacré, plexus solaire, coeur, gorge, 3ème oeil et couronne.\r\nCe bijou a beau', 55.00, '2023-05-12', 14, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SNX19736-01MIX-P1_380x443_crop_center.jpg?v=1678722414'),
+(20, 'Collier Anouchka', 'Collier en acier doré à l\'or fin sur lequel deux zirconiums sont attachés. Trois chaînettes y sont suspendues.\r\nCe bijou a beaucoup d\'allure et se porte aussi bien seul qu\'en accumulation avec d\'autres colliers de nos collections.\r\nDécliné en bracelet et ', 45.00, '2023-05-04', 15, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SNM19887-01GRN-P1_380x443_crop_center.jpg?v=1677663287'),
+(21, 'Sautoir Pera', 'Collier long en acier uni ou doré à l\'or fin sur lequel est suspendu un pendentif de forme géométrique en forme de poire.\r\nPorté seul ou en accumulation, ce petit bijou est magnifique pour complémenter vos tenues plus estivales.\r\nLongueur : 75cm et 5cm de', 45.00, '2023-04-11', 16, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/sautoir-pera-acier-dore_380x443_crop_center.jpg?v=1651764278'),
+(22, 'Sautoir Astra', 'Collier long en acier doré à l’or fin sur lequel un motif ciselé d’un soleil d’or se place sur une médaille de nacre ou d’acétate de couleurs.\r\nCe long sautoir est une pièce maîtresse de nos collections et peut se porter avec les boucles d’oreilles assort', 55.00, '2023-04-11', 16, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/Collier-Astra-Collier-Love-Collier-Rabi_380x443_crop_center.jpg?v=1662733543'),
+(23, 'Sautoir Moonflower', 'Collier long en acier uni ou doré à l’or fin sur lequel est accrochée une médaille de nacre piquée en son centre d’un motif de fleur en zirconiums brillants.\r\nCe sautoir au look précieux pourra se porter mélanger avec d’autres colliers de nos collections ', 59.00, '2023-04-11', 16, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SNL13589-01SEL-P1_380x443_crop_center.jpg?v=1678374503'),
+(24, 'Bague Fiore', 'Bague ajustable en acier doré à l\'or fin avec un motif de fleur coloré.\r\nNous conseillons de la porter en accumulation avec d\'autres bagues de nos collections.\r\nDéclinée en boucles d\'oreilles, jonc, bracelet et collier\r\nDiamètre : ajustable', 30.00, '2023-02-20', 17, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SRM19751_380x443_crop_center.jpg?v=1679046891'),
+(25, 'Bague Louve', 'Bague ajustable en acier doré à l\'or fin sur laquelle se trouve une forme géométrique composée de pierre naturelle en son centre et de zirconiums colorés.\r\nElle est très élégante et apporte une touche subtile de couleur sur vos mains.\r\nDiamètre : ajustabl', 39.00, '2023-02-20', 17, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SRM19822-01GRN-P1_380x443_crop_center.jpg?v=1679328248'),
+(26, 'Bague Nacera', 'Bague ajustable en acier doré à l\'or fin sur laquelle est attachée une pastille en nacre.\r\nNous conseillons de la porter en accumulation avec d\'autres bagues de nos collections.\r\nDiamètre : ajustable\r\nLargeur : 8mm \r\nPastille : 11mm', 35.00, '2022-10-10', 18, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SRM19658-01SEL-P1_380x443_crop_center.jpg?v=1678093161'),
+(27, 'Bague Cassidy', 'Bague martelée ajustable en acier doré à l\'or fin à double rangée. Sur l\'une des deux rangées se trouvent des zirconiums colorés qui apportent de l\'éclat au bijou.\r\nSon allure ethnique chic habille sans effort. Elle se porte aussi bien seule qu\'accumulée ', 30.00, '2022-10-10', 18, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SRT20039-01WHT-P1_380x443_crop_center.jpg?v=1679327114'),
+(28, 'Bague Cameleo', 'Bague ajustable en acier doré à l\'or fin martelée.\r\nCette pièce élégante habille tout de suite votre main. Elle se porte seule ou bien accumulée avec d\'autres bagues de nos collections.\r\nDéclinée en jonc \r\nDiamètre : ajustable\r\nLargeur : 18mm', 30.00, '2022-10-10', 18, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SRL19908-01MAT-P2_380x443_crop_center.jpg?v=1677832809'),
+(29, 'Orion rose', 'L\'or rose glamour rencontre le titane audacieux, un duo cosmique. L\'Orion Rose de 38 mm transmet une crainte pour le céleste avec une sensibilité de conception tournée vers l\'avenir et une fonctionnalité de double fuseau horaire.', 199.00, '2023-05-11', 6, 0, 'https://www.mvmt.com/dw/image/v2/BDKZ_PRD/on/demandware.static/-/Sites-mgi-master/default/dw588e350b/images/products/FC01-TIRG_l_4.jpg?sw=453&sh=453'),
+(30, 'Santa Monica Black', 'Inspiré des rues emblématiques de Los Angeles, la Santa Monica Black est l\'essence d\'une pièce minimaliste. Ce modèle de 38 mm présente un coloris noir et or rose brossé saisissant.', 129.00, '2023-05-11', 6, 0, 'https://www.mvmt.com/dw/image/v2/BDKZ_PRD/on/demandware.static/-/Sites-mgi-master/default/dw1170c2fe/images/products/MB01-RGBL_l_2.jpg?sw=800&sh=800'),
+(31, 'Reina gold', 'Une montre-bijoux. Marqueurs cardinaux en forme de boucle. Un look classique qui survit aux tendances. La Reina s\'inspire des éléments de design de mode de longue date que nous admirons le plus. Doté d\'un bracelet double tour, un clin d\'œil au look deux m', 149.00, '2023-05-11', 6, 0, 'https://www.mvmt.com/dw/image/v2/BDKZ_PRD/on/demandware.static/-/Sites-mgi-master/default/dwc5b02f96/images/products/28000303_l_3.jpg?sw=800&sh=800');
 
 -- --------------------------------------------------------
 
@@ -100,13 +99,11 @@ INSERT INTO `articles` (`id`, `titreArt`, `description`, `prix`, `date`, `id_cat
 -- Structure de la table `categart`
 --
 
-DROP TABLE IF EXISTS `categart`;
-CREATE TABLE IF NOT EXISTS `categart` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `categart` (
+  `id` int NOT NULL,
   `id_article` int NOT NULL,
-  `id_souscat` int NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id_souscat` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `categart`
@@ -143,14 +140,12 @@ INSERT INTO `categart` (`id`, `id_article`, `id_souscat`) VALUES
 -- Structure de la table `categorie`
 --
 
-DROP TABLE IF EXISTS `categorie`;
-CREATE TABLE IF NOT EXISTS `categorie` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `categorie` (
+  `id` int NOT NULL,
   `titreCat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `imgCat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `id_parent` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id_parent` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `categorie`
@@ -167,11 +162,58 @@ INSERT INTO `categorie` (`id`, `titreCat`, `imgCat`, `id_parent`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `commande`
+--
+
+CREATE TABLE `commande` (
+  `id` int NOT NULL,
+  `id_user` int NOT NULL,
+  `adresse` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `date` date NOT NULL,
+  `prixTotal` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `commande`
+--
+
+INSERT INTO `commande` (`id`, `id_user`, `adresse`, `phone`, `date`, `prixTotal`) VALUES
+(24, 4, 'toto toto</br>5 rue de la republique 93000 Paris', '06 02 03 28 84', '2023-05-31', 84.99),
+(25, 4, 'toto toto</br>5 rue de la republique 93000 Paris', '06 02 03 28 84', '2023-05-31', 49.99);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `commandpanier`
+--
+
+CREATE TABLE `commandpanier` (
+  `id` int NOT NULL,
+  `id_commande` int NOT NULL,
+  `id_article` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `commandpanier`
+--
+
+INSERT INTO `commandpanier` (`id`, `id_commande`, `id_article`) VALUES
+(17, 21, 10),
+(18, 22, 24),
+(19, 22, 25),
+(20, 23, 14),
+(21, 24, 15),
+(22, 24, 16),
+(23, 25, 16);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `comment`
 --
 
-DROP TABLE IF EXISTS `comment`;
-CREATE TABLE IF NOT EXISTS `comment` (
+CREATE TABLE `comment` (
   `id` int NOT NULL,
   `comment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `id_user` int NOT NULL
@@ -183,13 +225,11 @@ CREATE TABLE IF NOT EXISTS `comment` (
 -- Structure de la table `favoris`
 --
 
-DROP TABLE IF EXISTS `favoris`;
-CREATE TABLE IF NOT EXISTS `favoris` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `favoris` (
+  `id` int NOT NULL,
   `id_user` int NOT NULL,
   `id_article` int NOT NULL,
-  `id_categ` int NOT NULL,
-  PRIMARY KEY (`id`)
+  `id_categ` int NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
@@ -198,12 +238,11 @@ CREATE TABLE IF NOT EXISTS `favoris` (
 -- Structure de la table `panier`
 --
 
-DROP TABLE IF EXISTS `panier`;
-CREATE TABLE IF NOT EXISTS `panier` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `panier` (
+  `id` int NOT NULL,
   `id_user` int NOT NULL,
   `id_article` int NOT NULL,
-  PRIMARY KEY (`id`)
+  `quantite_art` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -212,14 +251,12 @@ CREATE TABLE IF NOT EXISTS `panier` (
 -- Structure de la table `souscategorie`
 --
 
-DROP TABLE IF EXISTS `souscategorie`;
-CREATE TABLE IF NOT EXISTS `souscategorie` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `souscategorie` (
+  `id` int NOT NULL,
   `titreSousCat` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `imgSousCat` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `id_parent` int NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3;
+  `id_parent` int NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `souscategorie`
@@ -245,12 +282,10 @@ INSERT INTO `souscategorie` (`id`, `titreSousCat`, `imgSousCat`, `id_parent`) VA
 -- Structure de la table `usernewsletter`
 --
 
-DROP TABLE IF EXISTS `usernewsletter`;
-CREATE TABLE IF NOT EXISTS `usernewsletter` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `usernewsletter` (
+  `id` int NOT NULL,
   `email` varchar(255) NOT NULL,
-  `date_subbed` datetime NOT NULL,
-  PRIMARY KEY (`id`)
+  `date_subbed` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
@@ -259,23 +294,162 @@ CREATE TABLE IF NOT EXISTS `usernewsletter` (
 -- Structure de la table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `id` int NOT NULL,
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `firstname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `lastname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `phoneUser` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `firstname`, `lastname`, `avatar`) VALUES
-(4, 'toto@toto', '$2y$10$46Arck0Y.tYTGJ7IUR6rNezORV84MryqzSKGSnzM0XUPKS6/jpRDW', 'toto', 'toto', 'avatars/default.png');
+INSERT INTO `users` (`id`, `email`, `password`, `firstname`, `lastname`, `avatar`, `phoneUser`) VALUES
+(4, 'toto@toto', '$2y$10$46Arck0Y.tYTGJ7IUR6rNezORV84MryqzSKGSnzM0XUPKS6/jpRDW', 'toto', 'toto', 'avatars/default.png', '06 02 03 28 84');
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `adresse`
+--
+ALTER TABLE `adresse`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `articles`
+--
+ALTER TABLE `articles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `categart`
+--
+ALTER TABLE `categart`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `commande`
+--
+ALTER TABLE `commande`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `commandpanier`
+--
+ALTER TABLE `commandpanier`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `favoris`
+--
+ALTER TABLE `favoris`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `panier`
+--
+ALTER TABLE `panier`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `souscategorie`
+--
+ALTER TABLE `souscategorie`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `usernewsletter`
+--
+ALTER TABLE `usernewsletter`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `adresse`
+--
+ALTER TABLE `adresse`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT pour la table `articles`
+--
+ALTER TABLE `articles`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT pour la table `categart`
+--
+ALTER TABLE `categart`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT pour la table `commande`
+--
+ALTER TABLE `commande`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT pour la table `commandpanier`
+--
+ALTER TABLE `commandpanier`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT pour la table `favoris`
+--
+ALTER TABLE `favoris`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `panier`
+--
+ALTER TABLE `panier`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT pour la table `souscategorie`
+--
+ALTER TABLE `souscategorie`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT pour la table `usernewsletter`
+--
+ALTER TABLE `usernewsletter`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
