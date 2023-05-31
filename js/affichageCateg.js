@@ -12,28 +12,44 @@ categoryParent.forEach((element) => {
   });
 });
 
+fetch(`traitementArt.php`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        data.forEach((element) => {
+            console.log(element);
+          let li = document.createElement("li");
+          let imgArt = document.createElement("img");
+
+          imgArt.className = "resultsImg";
+
+          imgArt.src = element.imgArt;
+
+          li.append(imgArt, element.titreArt, element.prix);
+          allItems.append(li);
+        });
+      });
+
 // * générer les enfants dans le parent correspondant
 for (let i = 0; i < categoryChild.length; i++) {
   categoryChild[i].addEventListener("click", () => {
-    console.log('ok');
     allItems.innerHTML = "";
     fetch(`traitementCateg.php?subCategory=` + categoryChild[i].id)
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         data.forEach((element) => {
+            console.log(element);
           let li = document.createElement("li");
-          let itemImg = document.createElement("img");
+          let imgArt = document.createElement("img");
 
-          itemImg.className = "resultsImg";
+          imgArt.className = "resultsImg";
 
-          itemImg.src = `.${
-            getPage()[1]
-          }/assets/img_item/CorsairK55RGBPRO.webp`;
+          imgArt.src = element.imgArt;
 
-          li.append(itemImg, element.name, element.description, element.price);
+          li.append(imgArt, element.titreArt, element.prix);
           allItems.append(li);
         });
       });
