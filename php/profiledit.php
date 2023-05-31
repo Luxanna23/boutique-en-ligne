@@ -10,7 +10,7 @@ if (isset($_FILES['photo']['tmp_name'])) {
     $retour = copy($_FILES['photo']['tmp_name'], $_FILES['photo']['name']);
     if ($retour) {
         $avatar = $_FILES['photo']['name'];
-        $user = new User($_SESSION['user']['id'],'','', '', '', $avatar);
+        $user = new User($_SESSION['user']['id'],'','', '', '', $avatar,'');
         $user->addAvatar($bdd);
         echo '<p>La photo a bien été enregistré.</p>';
         //echo '<img src="' . $_FILES['photo']['name'] . '">';
@@ -61,7 +61,7 @@ if (isset($_POST['submitInfo'])) {
     <?php require_once('../includes/header.php'); ?>
     <main>
         <h1>Profil</h1>
-        <?php $user = new User($_SESSION['user']['id'],'','', '', '', ''); ?>
+        <?php $user = new User($_SESSION['user']['id'],'','', '', '', '',''); ?>
         <img id="imageProfil" src="<?= $user->selectAvatar($bdd) ?>" >
 
         <form method="post" enctype="multipart/form-data">

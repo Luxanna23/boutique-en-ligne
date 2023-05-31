@@ -1,7 +1,7 @@
 <?php
 require_once('../classes/User.php');
 require_once('../includes/config.php');
-ob_start('ob_gzhandler');
+//ob_start('ob_gzhandler');
 
 
 function submit($bdd)
@@ -11,7 +11,7 @@ function submit($bdd)
         $prenom = '';
         $nom = '';
         $password = $_POST['password'];
-        $user = new User('',$email, $password, $prenom, $nom, '');
+        $user = new User('',$email, $password, $prenom, $nom, '','');
         $user->connect($bdd);
         if ($user->isConnected()) {
             header("Location: inscriptionAdresse.php");

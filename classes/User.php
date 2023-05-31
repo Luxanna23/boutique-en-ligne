@@ -8,6 +8,7 @@ class User
     public $firstname;
     public $lastname;
     public $avatar;
+    public $phoneUser;
 
     /* GETTERS */
 
@@ -70,7 +71,7 @@ class User
         $this->avatar = $avatar;
     }
 
-    function __construct($id, $email, $password, $firstname, $lastname, $avatar)
+    function __construct($id, $email, $password, $firstname, $lastname, $avatar, $phoneUser)
     {
         $this->id = $id;
         $this->email = $email;
@@ -78,6 +79,7 @@ class User
         $this->firstname = $firstname;
         $this->lastname = $lastname;
         $this->avatar = $avatar;
+        $this->phoneUser = $phoneUser;
     }
 
     function register($bdd)
@@ -163,5 +165,29 @@ class User
         $request->execute([$this->id]);
         $result = $request->fetch(PDO::FETCH_ASSOC);
         return $result['avatar'];
+    }
+
+    function isPhoneExist($bdd){
+        $request = $bdd->prepare('SELECT `phoneUser` FROM `users` WHERE users.id = ?');
+        $request->execute([$_SESSION['user']['id']]);
+        $result = $request->fetch(PDO::FETCH_ASSOC);
+        if ($result['phoneUser'] == ""){
+            return false;
+        }
+        else {
+            return true;
+        }
+     }
+
+    function selectPhoneNumber($bdd){
+        $request = $bdd->prepare('SELECT `phoneUser` FROM `users` WHERE users.id = ?');
+        $request->execute([$_SESSION['user']['id']]);
+        $result = $request->fetch(PDO::FETCH_ASSOC);
+        return $result['phoneUser'];
+    }
+
+    function addPhone($bdd){
+        $request = $bdd->prepare('UPDATE `users` SET `phoneUser`= (?) WHERE users.id = ?');
+        $request->execute([$_POST['phone'],$_SESSION['user']['id']]);
     }
 }

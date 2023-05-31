@@ -2,7 +2,7 @@
 //require_once('../includes/header.php');
 require_once('../classes/User.php');
 require_once('../includes/config.php');
-ob_start('ob_gzhandler');
+//ob_start('ob_gzhandler');
 
 function submit($bdd)
 {
@@ -14,7 +14,7 @@ function submit($bdd)
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
         
         if (isCompatible($bdd)) {
-            $user = new User('',$email, $passwordHash, $prenom, $nom, 'avatars/default.png');
+            $user = new User('',$email, $passwordHash, $prenom, $nom, 'avatars/default.png','');
             $user->register($bdd);
             //$adresse = new Adresse($user);
             header("Location: connexion.php");
