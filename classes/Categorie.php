@@ -5,25 +5,20 @@ class Categorie
 {
     // les atributs
     public $id;
-    public $titre;
-    public $image;
-    public $id_parent;
+    public $titreCat;
+    public $imgCat;
    
 
-
-
     // methodes
-    public function __construct($titre, $image, $id_parent)
+    public function __construct($titreCat, $imgCat)
     {
-        $this->titre = $titre;
-        $this->image = $image;
-        $this->id_parent = $id_parent;
-        
+        $this->titreCat = $titreCat;
+        $this->imgCat = $imgCat;
     }
     public function addCategorie($bdd)
     {
-        $addCategorie = $bdd->prepare('INSERT INTO `categorie`(`titre`, `image`, `id_parent`) VALUES(?,?,?)');
-        $addCategorie->execute([$this->titre, $this->image, $this->id_parent]);
+        $addCategorie = $bdd->prepare('INSERT INTO `categorie`(`titreCat`, `imgCat`) VALUES(?,?)');
+        $addCategorie->execute([$this->titreCat, $this->imgCat]);
     }
 
     public function delete($bdd)
@@ -36,45 +31,37 @@ class Categorie
       
         $bdd
     ) {
-        $req = $bdd->prepare("UPDATE `categorie` SET titre=?, image=?, id_parent=? WHERE id = ?");
-        $req->execute([$this->titre, $this->image, $this->id_parent, $this->id]);
+        $req = $bdd->prepare("UPDATE `categorie` SET titreCat=?, imgCat=? WHERE id = ?");
+        $req->execute([$this->titreCat, $this->imgCat, $this->id]);
     }
 
     public function getId()
     {
         return $this->id;
     }
-    public function getTitre()
+    public function getTitreCat()
     {
-        return $this->titre;
+        return $this->titreCat;
     }
-    public function getimage()
+    public function getimgCat()
     {
-        return $this->image;
-    }
-    public function getid_parent()
-    {
-        return $this->id_parent;
+        return $this->imgCat;
     }
    
     public function setId($id)
     {
         $this->id = $id;
     }
-    public function setTitre($titre)
+    public function setTitreCat($titreCat)
     {
-        $this->titre = $titre;
+        $this->titreCat = $titreCat;
     }
-    public function setimage($image)
+    public function setimgCat($imgCat)
     {
-        $this->image = $image;
-    }
-    public function setid_parent($id_parent)
-    {
-        $this->id_parent = $id_parent;
+        $this->imgCat = $imgCat;
     }
    
 }
+// $categorie=new Categorie("vélo", "https://just-ebike.com/1183-large_default/velo-electrique-o2feel-vern-urban-power-91.jpg");
+// $categorie->addCategorie($bdd);
 
-// $article = new Article("boucle d'oreille", "bl bl", "4", "2023-02-02", "1", "3", "");
-// $article->addArticle($bdd);
