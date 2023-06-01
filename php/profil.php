@@ -28,7 +28,7 @@ ob_start('ob_gzhandler'); //si il y a un pb essayer avec ob_start()
     <main>
         <h1>Profil</h1>
         <?php $user = new User($_SESSION['user']['id'], $_SESSION['user']['email'], $_SESSION['user']['password'], $_SESSION['user']['firstname'], $_SESSION['user']['lastname'], '', ''); ?>
-        <img id="imageProfil" src="<?= $user->selectAvatar($bdd) ?>">
+        <img id="imageProfil" src="avatars/<?= $user->selectAvatar($bdd) ?>">
 
         <h3><?= $user->getFirstname() . " " . $user->getLastname() ?></h3>
         <p><?= $user->getEmail() ?></p>

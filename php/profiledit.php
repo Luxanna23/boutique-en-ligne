@@ -6,16 +6,27 @@ require_once('../includes/config.php');
 ob_start('ob_gzhandler');
 
 
+// if (isset($_FILES['photo']['tmp_name'])) {
+//     $retour = copy($_FILES['photo']['tmp_name'], $_FILES['photo']['name']);
+//     if ($retour) {
+//         $avatar = pathinfo($_FILES["photo"]["name"],PATHINFO_EXTENSION);
+//         $user = new User($_SESSION['user']['id'],'','', '', '', $avatar,'');
+//         $user->addAvatar($bdd);
+//         echo '<p>La photo a bien été enregistré.</p>';
+//         //echo '<img src="' . $_FILES['photo']['name'] . '">';
+//         move_uploaded_file($_FILES["photo"]["tmp_name"],'./avatars/'.$_SESSION['user']['id'].'.'.pathinfo($_FILES["photo"]["name"],PATHINFO_EXTENSION));
+//     }
+// }
+
 if (isset($_FILES['photo']['tmp_name'])) {
-    $retour = copy($_FILES['photo']['tmp_name'], $_FILES['photo']['name']);
-    if ($retour) {
-        $avatar = $_FILES['photo']['name'];
-        $user = new User($_SESSION['user']['id'],'','', '', '', $avatar,'');
-        $user->addAvatar($bdd);
-        echo '<p>La photo a bien été enregistré.</p>';
-        //echo '<img src="' . $_FILES['photo']['name'] . '">';
-        move_uploaded_file($_FILES["photo"]["tmp_name"],'./avatars/'.$_SESSION['user']['id'].'.'.pathinfo($_FILES["photo"]["name"],PATHINFO_EXTENSION));
-    }
+  if (move_uploaded_file($_FILES["photo"]["tmp_name"],'./avatars/'.$_SESSION['user']['id'].'.'.pathinfo($_FILES["photo"]["name"],PATHINFO_EXTENSION))) {
+      $avatar = pathinfo($_FILES["photo"]["name"],PATHINFO_EXTENSION);
+      $user = new User($_SESSION['user']['id'],'','', '', '', $avatar,'');
+      $user->addAvatar($bdd);
+      echo '<p>La photo a bien été enregistrée.</p>';
+  } else {
+      echo '<p>Une erreur s\'est produite lors du déplacement du fichier.</p>';
+  }
 }
 
 if (isset($_POST['submitInfo'])) {
@@ -62,7 +73,7 @@ if (isset($_POST['submitInfo'])) {
     <main>
         <h1>Profil</h1>
         <?php $user = new User($_SESSION['user']['id'],'','', '', '', '',''); ?>
-        <img id="imageProfil" src="<?= $user->selectAvatar($bdd) ?>" >
+        <img id="imageProfil" src="avatars/<?= $_SESSION['user']['id'] . "." . $user->selectAvatar($bdd) ?>" >
 
         <form method="post" enctype="multipart/form-data">
             <input type="file" name="photo">
