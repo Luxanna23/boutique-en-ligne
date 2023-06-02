@@ -1,9 +1,9 @@
 <?php
-//require_once('header.php');
+require_once('../includes/header.php');
 require_once('../classes/User.php');
 require_once('../classes/Adresse.php');
 require_once('../includes/config.php');
-//ob_start('ob_gzhandler');
+ob_start();
 
 function submit($bdd)
 {
@@ -15,11 +15,15 @@ function submit($bdd)
         $rue = htmlspecialchars($_POST['rue']);
         $postal = htmlspecialchars($_POST['postal']);
         $ville = htmlspecialchars($_POST['ville']);
-        
-            $adresse = new Adresse ($id_user,$firstname, $lastname, $numero, $rue, $postal, $ville);
+
+        $adresse = new Adresse ($id_user,$firstname, $lastname, $numero, $rue, $postal, $ville);
+        if ($adresse->itExist($bdd)){
+            $adresse->editAdresse($bdd);
+        }
+        else {
             $adresse->register($bdd);
-            //header("Location: connexion.php");
-        
+        }
+        header("Location: profil.php");
     }
 }
 
@@ -34,11 +38,12 @@ submit($bdd);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/e1a1b68f9b.js" crossorigin="anonymous"></script>
+    <script src="../js/autocompletion.js" defer></script>
 </head>
 
 <body>

@@ -21,6 +21,7 @@ ob_start('ob_gzhandler'); //si il y a un pb essayer avec ob_start()
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/e1a1b68f9b.js" crossorigin="anonymous"></script>
+    <script src="../js/autocompletion.js" defer></script>
 </head>
 
 <body>
@@ -28,7 +29,7 @@ ob_start('ob_gzhandler'); //si il y a un pb essayer avec ob_start()
     <main>
         <h1>Profil</h1>
         <?php $user = new User($_SESSION['user']['id'], $_SESSION['user']['email'], $_SESSION['user']['password'], $_SESSION['user']['firstname'], $_SESSION['user']['lastname'], '', ''); ?>
-        <img id="imageProfil" src="avatars/<?= $user->selectAvatar($bdd) ?>">
+        <img id="imageProfil" src="avatars/<?= $_SESSION['user']['id'] . "." . $user->selectAvatar($bdd) ?>">
 
         <h3><?= $user->getFirstname() . " " . $user->getLastname() ?></h3>
         <p><?= $user->getEmail() ?></p>
@@ -41,14 +42,19 @@ ob_start('ob_gzhandler'); //si il y a un pb essayer avec ob_start()
         <div>
             <h3>Adresse de livraison : </h3>
             <?php $adresse = new Adresse($_SESSION['user']['id'], '', '', '', '', '', '');
-            echo $adresse->isExisting($bdd); ?>
+            echo $adresse->isExisting($bdd);
+            if( $adresse->itExist($bdd)){ ?>
+                <form method="POST">
+                    <input type="submit" name="delete" value="Supprimer l'adresse">
+                </form>
+                
+            <?php
+            if (isset($_POST['delete'])){
+                $adresse->deleteAdresse($bdd);
+                header('Location:profil.php');
+            }
+         } ?>
         </div>
-
-        <!-- <div>
-            <h3>Liste de souhaits : </h3>
-            <div id="list_favoris">
-            </div>
-        </div> -->
 
         <div>
             <h3>Commandes passées:</h3>
@@ -65,12 +71,12 @@ ob_start('ob_gzhandler'); //si il y a un pb essayer avec ob_start()
                         $idCommande = $commande['id'];
 
                         // Récupérer les informations de l'article depuis la base de données
-                        $request2 = $bdd->prepare('SELECT * FROM commande INNER JOIN commandpanier ON commande.id = commandpanier.id_commande INNER JOIN articles ON commandpanier.id_article = articles.id WHERE id_user = ? AND commande.id = ?');
+                        $request2 = $bdd->prepare('SELECT * FROM commande INNER JOIN commandpanier ON commande.id = commandpanier.id_commande INNER JOIN articles ON commandpanier.id_article = articles.idArt WHERE id_user = ? AND commande.id = ?');
                         $request2->execute([$_SESSION['user']['id'], $idCommande ]);
                         $result2 = $request2->fetchAll(PDO::FETCH_ASSOC);
                         echo "</br>Commande passée le : " . $date . " - Total : " . $commande['prixTotal'] . "$</span></br>";
                         foreach ($result2 as $key){
-                            echo "<span><img src='" . $key['imgArt'] . " '><span>";
+                            echo "<a href='detail.php?article_id=" . $key['idArt'] ."'><span><img src='" . $key['imgArt'] . " '><span></a>";
                         }
                         
                     }

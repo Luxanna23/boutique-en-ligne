@@ -72,3 +72,26 @@
 #carousel2{
     display: flex;
 }
+
+/* NAVVV */
+#logo{
+    height: 50px;
+    width: 60px;
+}
+#result, #result2 {
+    z-index: 2;
+    position: absolute;
+    top: 50px;
+    background-color: #9d9d9d;
+  }
+  #result a, #result2 a {
+    text-decoration: none;
+    color: #fff;
+  }
+  @media screen and (max-width: 991px) {
+    #result {
+      top: 330px;
+    }
+  }
+
+  /* FIN DE NAV */

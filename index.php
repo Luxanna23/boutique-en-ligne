@@ -1,8 +1,7 @@
 <?php
 // phpinfo(); // pour chopper les infos version etc de mon php
 require_once('classes/User.php');
-require_once('includes/config.php');
-ob_start(); // contre l'erreur d'header location //
+ob_start(); // contre l'erreur d'header location 
 
 
 ?>
@@ -19,11 +18,12 @@ ob_start(); // contre l'erreur d'header location //
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://kit.fontawesome.com/020a26a846.js" crossorigin="anonymous"></script>
+  <script src="./js/autocompletion.js" defer></script>
 </head>
 
 <body>
   <?php
-  require_once('includes/header.php'); ?>
+  require_once('./includes/header.php'); ?>
 
   <main id="mainIndex">
     <div id="carouselAutoplaying" class="carousel slide" data-bs-ride="carousel">
