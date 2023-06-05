@@ -1,5 +1,6 @@
 <header>
 <?php
+require_once('includes/config.php');
 // session_start();
 // RECUPERER L'URL POUR SAVOIR SI C'EST L'INDEX OU LES AUTRES PAGES
 if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')

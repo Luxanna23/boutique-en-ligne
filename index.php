@@ -1,7 +1,7 @@
 <?php
 // phpinfo(); // pour chopper les infos version etc de mon php
 require_once('classes/User.php');
-require_once('includes/config.php');
+
 // ob_start('ob_gzhandler'); // contre l'erreur d'header location //
 
 
