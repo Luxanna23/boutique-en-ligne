@@ -20,26 +20,23 @@ if (isset($_GET['article_id'])) {
     <body>
         <?php require_once('../includes/header.php'); ?>
         <main id="mainDetail">
-<!-- <?php var_dump($_SESSION);?>  -->
-
-
-
+            <?php var_dump($_SESSION); ?>
         </main>
 
     </body>
- <?php
- if(isset($_SESSION["user"])){
-    if(isset($_GET["AjouterPanier"])){
-        var_dump("woow");
-    }
- }
+    <?php
 
- ?>
+    if (isset($_SESSION["user"])) { ?>
+        <input type="hidden" id="user_id" value="<?php $_SESSION['user']['id'] ?>">
+
+<?php } else {
+    echo "Vous devez être connecté pour pouvoir ajouter au panier";
+}
+?>
 
     </html>
     <script>
-                // document.addEventListener('DOMContentLoaded', () => {
-                    let id = window.location.href.split('=');
+        let id = window.location.href.split('=');
         console.log(window.location.href);
         console.log(id[1])
         fetch('recherche.php?id=' + id[1]).then(response => {
@@ -63,7 +60,7 @@ if (isset($_GET['article_id'])) {
             description.textContent = data.description;
             let form = document.createElement("form");
             let button = document.createElement("button");
-            button.setAttribute("id", "AjouterPanier");
+            button.setAttribute("id", "panier");
             button.setAttribute("name", "AjouterPanier");
             button.setAttribute("value", data.idArt);
             button.textContent = "Ajouter au panier ";
@@ -80,36 +77,67 @@ if (isset($_GET['article_id'])) {
             infos.append(description);
             form.append(button);
             infos.append(form);
+            // let button = document.getElementById('panier');
+            console.log(button)
+            let id_user = document.getElementById('user_id').value;
+            console.log(id_user)
 
+            button.addEventListener('click', () => {
+                // console.log($_GET["AjouterPanier"])
+                let formData = {
+                    'idArt': this.value,
+                    'id_user': id_user
+                }
+                fetch('traitementTest.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'multipart/form-data',
+                    },
+                    body: JSON.stringify(formData),
+                }).then(resp => {
+                    resp.json()
+                }).then(data => {
+                    console.log(data)
+                }).catch(err => {
+                    console.log(err)
+                })
+
+            })
 
         }).catch(err => {
             console.log(err)
         });
-// })
-       
 
+        // document.addEventListener('DOMContentLoaded', () => {
+        // let button = document.getElementById('panier');
+        // console.log(button)
+        // let id_user = document.getElementById('user_id').value;
+        // console.log(id_user)
 
-    // })
-//         document.addEventListener('DOMContentLoaded', () => {
-//         let button = document.getElementById('panier');
-// console.log(button)
-// let id_user = document.getElementById('user_id').value;
-// console.log(id_user)
+        // button.addEventListener('click', () => {
+        //     console.log($_POST["panier"])
+        //     let formData = {
+        //         'idArt': this.value,
+        //         'id_user': id_user
+        //     }
+        //     fetch('traitementTest.php', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-type': 'multipart/form-data',
+        //         },
+        //         body: JSON.stringify(formData),
+        //     }).then(resp => {
+        //         resp.json()
+        //     }).then(data => {
+        //         console.log(data)
+        //     }).catch(err => {
+        //         console.log(err)
+        //     })
 
-// button.addEventListener('click',()=>{
-//     console.log(this.value)
-//     let formData = {'idArt': this.value, 'id_user':id_user}
-//     fetch('traitementTest.php', {
-//         method :'POST',
-//         headers: {
-//             'Content-type':'multipart/form-data',
-//         },
-//         body:JSON.stringify(formData),
-//     }).then(resp => {resp.json()}).then(data => { console.log(data)}).catch(err => { console.log(err)})
+        // })
 
-// })
-
-    // })
-
+        // })
     </script>
-<?php } ?>
+    <?php 
+}
+?>

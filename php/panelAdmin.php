@@ -13,13 +13,17 @@ require_once('../includes/config.php');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/panelAdmin.css">
+    <script src="https://kit.fontawesome.com/020a26a846.js" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
 
 <body>
+    <?php
+    require_once('../includes/header.php'); ?>
     <main id="panelAdmin">
         <div class="categories">
-            <form action="" method="$_POST">
+            <form action="" method="POST">
                 <h2>Création de catégorie</h2>
                 <input type="text" name="titreCat" id="" placeholder="Nom de la catégorie">
                 <input type="text" name="imgCat" id="" placeholder="URL de l'image">
@@ -42,16 +46,27 @@ require_once('../includes/config.php');
             return response.json();
         }).then(data => {
             let panelAdmin = document.getElementById("panelAdmin");
-            let cat = document.createElement("div");
-            cat.setAttribute("id", "cat");
-            panelAdmin.append(cat);
+            let cats = document.createElement("div");
+            cats.setAttribute("id", "cats");
+            panelAdmin.append(cats);
+
             data.filter(function(resultats) {
-                console.log(resultats)
+                console.log(resultats);
                 let p = document.createElement('p');
-               p.innerText=resultats.titreCat + '<i class="fa-regular fa-trash-can"></i>'; 
-               cat.append(p);
+                p.innerHTML = '<span>' + resultats.titreCat + '</span> <button type="submit" name="deleteCat" id="deleteCat'+resultats.idCat+'"><i class="fa-solid fa-trash-can fa-lg"></i></button>' + '</span> <button type="submit" name="editCat" id="editCat'+resultats.idCat+'"><i class="fa-regular fa-pen-to-square fa-lg"></i></button>';
+                cats.append(p);
+                     let submit = document.getElementById("deleteCat"+resultats.idCat);
+                submit.addEventListener("click", () => {
+                console.log("wowwwww");
             })
-        }).catch(error => console.log(error))
+          
+            })
+       
+        }).catch(error => console.log(error));
+        // let submit = document.getElementById("deleteCat");
+        // submit.addEventListener("click", () => {
+        //     console.log("wowwwww");
+        // })
     </script>
 </body>
 

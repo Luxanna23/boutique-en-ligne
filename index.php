@@ -63,7 +63,7 @@ require_once('includes/config.php');
   require_once('includes/footer.php'); ?>
 </body>
 <script>
-  fetch('./php/recherche.php?index=1').then(response => {
+  fetch('./php/recherche.php?all=1').then(response => {
     return response.json();
   }).then(data => {
     let mainIndex = document.getElementById("mainIndex");
@@ -107,5 +107,5 @@ require_once('includes/config.php');
   }).catch(error => console.log(error))
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-
+<?php var_dump($_SESSION["user"]["id"]);?>
 </html>
