@@ -22,6 +22,76 @@ function __construct($id_user, $firstname, $lastname, $numero, $rue, $codePostal
         $this->ville = $ville;
     }
 
+    /* GETTERS */
+
+    function getId_user()
+    {
+        return $this->id_user;
+    }
+
+    function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    function getLastname()
+    {
+        return $this->lastname;
+    }
+
+    function getNumero()
+    {
+        return $this->numero;
+    }
+
+    function getRue()
+    {
+        return $this->rue;
+    }
+
+    function getCodePostal()
+    {
+        return $this->codePostal;
+    }
+
+    function getVille()
+    {
+        return $this->ville;
+    }
+
+
+    /* SETTERS */
+
+    function setFirstname($firstname)
+    {
+        $this->firstname = $firstname;
+    }
+
+    function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
+    }
+
+    function setNumero($numero)
+    {
+        $this->numero = $numero;
+    }
+
+    function setRue($rue)
+    {
+        $this->rue = $rue;
+    }
+
+    function setCodePostal($codePostal)
+    {
+        $this->codePostal = $codePostal;
+    }
+
+    function setVille($ville)
+    {
+        $this->ville = $ville;
+    }
+
 
     function register($bdd){
         $request = $bdd->prepare('INSERT INTO `adresse`(`id_user`, `firstname`, `lastname`,`numero`, `rue`, `codePostal`, `ville`) VALUES (?,?,?,?,?,?,?)');
@@ -38,28 +108,28 @@ function __construct($id_user, $firstname, $lastname, $numero, $rue, $codePostal
         else {
             return false;
         }
-     }
+    }
 
-     function isExisting($bdd){
-        $request = $bdd->prepare('SELECT * FROM `adresse` INNER JOIN users ON adresse.id_user = users.id WHERE users.id = ?');
+    function isExisting($bdd){
+        $request = $bdd->prepare('SELECT * FROM `adresse` WHERE id_user = ?');
         $request->execute([$_SESSION['user']['id']]);
         $result = $request->fetch(PDO::FETCH_ASSOC);
         if ($request->rowCount() > 0){
             $adresse = $result['firstname'] . " " . $result['lastname'] . '</br>'. $result['numero'] . " " . $result['rue'] . " " . $result['codePostal'] . " " . $result['ville'];
-            return $adresse ;
+            return $adresse . ' <a href="inscriptionAdresse.php"><button class="button">Modifier l\'adresse</button></a>';
         }
         else {
             return '<a href="inscriptionAdresse.php"><button class="button">Ajouter une adresse</button></a>';
         }
-     }
+    }
 
-     function editAdresse($bdd){
-        $request = $bdd->prepare("UPDATE `adresse` SET `firstname`=?,`lastname`=?,`numero`= ?,`rue`= ?,`codePostal``= ?,`ville`= ? INNER JOIN users ON adresse.id_user = users.id WHERE users.id = ?");
-        $request->execute([$this->numero, $this->rue, $this->codePostal, $this->ville, $_SESSION['user']['id']]);
+    function editAdresse($bdd){
+        $request = $bdd->prepare("UPDATE adresse SET firstname=?, lastname=?, numero= ?, rue= ?, codePostal= ?, ville= ? WHERE id_user = ?");
+        $request->execute([$this->firstname, $this->lastname, $this->numero, $this->rue, $this->codePostal, $this->ville, $_SESSION['user']['id']]);
     }
 
     function deleteAdresse($bdd){
-        $request = $bdd->prepare('DELETE FROM `adresse` INNER JOIN users ON adresse.id_user = users.id WHERE users.id = ?');
+        $request = $bdd->prepare('DELETE FROM `adresse` WHERE id_user = ?');
         $request->execute([$_SESSION['user']['id']]);
     }
 }

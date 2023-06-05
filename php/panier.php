@@ -13,13 +13,14 @@ ob_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panier</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/e1a1b68f9b.js" crossorigin="anonymous"></script>
     <script src="https://js.stripe.com/v3/"></script>
     <script src="https://www.paypal.com/sdk/js?client-id=AfNE3JJ7EtwG46wj6LKUtZN_5ZJxLktEDgUoy_aNZzYP_p_ntfLrgWi5NcNI7ADu1BvVKahVVfJ3MFpF"></script>
+    <script src="../js/autocompletion.js" defer></script>
 </head>
 
 <body>
@@ -42,12 +43,11 @@ ob_start();
                     $articleIDPanier = $produit['id_article'];
 
                     // Récupérer les informations de l'article depuis la base de données
-                    $request2 = $bdd->prepare('SELECT * FROM `articles` WHERE `id` = ?');
+                    $request2 = $bdd->prepare('SELECT * FROM `articles` WHERE `idArt` = ?');
                     $request2->execute([$articleIDPanier]);
                     $result2 = $request2->fetch(PDO::FETCH_ASSOC);
                     $somme += $result2['prix'];
-                    echo "<img src='" . $result2['imgArt'] . " '><span>" . $result2['titreArt'] . " - Prix : " . $result2['prix'] . "$</span></br>";
-                    //$countArt++;
+                    echo "<a href='detail.php?article_id=" . $result2['idArt'] ."'><img src='" . $result2['imgArt'] . " '></a><span>" . $result2['titreArt'] . " - Prix : " . $result2['prix'] . "$</span></br>";
                 }
                 $prixTotal = $somme + $livraison;
                 echo "<span>Sous total : " . $somme . "$</span></br>

@@ -1,9 +1,9 @@
 <?php
 require_once('../classes/User.php');
 require_once('../includes/config.php');
-//ob_start('ob_gzhandler');
+ob_start();
 
-
+$msg ='';
 function submit($bdd)
 {
     if (isset($_POST["Envoyer"])) {
@@ -14,11 +14,11 @@ function submit($bdd)
         $user = new User('',$email, $password, $prenom, $nom, '','');
         $user->connect($bdd);
         if ($user->isConnected()) {
-            header("Location: inscriptionAdresse.php");
+            header("Location: ../index.php");
         }
-        // else {
-        //     echo "l'email et mot de passe ne correspondent pas.";
-        // }
+        else {
+            $msg = "l'email et le mot de passe ne correspondent pas.";
+        }
 
     }
 }
@@ -34,11 +34,12 @@ submit($bdd);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/e1a1b68f9b.js" crossorigin="anonymous"></script>
+    <script src="../js/autocompletion.js" defer></script>
 </head>
 
 <body>
@@ -55,7 +56,7 @@ submit($bdd);
             <label for="password">Mot de passe</label><br>
             <input type="password" id="password" name="password" /><br>
 
-            <p id="message"></p>
+            <p id="message"><?= $msg ?></p>
 
             <input type="submit" name="Envoyer">
 
