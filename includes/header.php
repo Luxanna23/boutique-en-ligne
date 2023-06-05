@@ -13,7 +13,7 @@ require_once('config.php'); ?>
     $url .= $_SERVER['HTTP_HOST'];
     $url .= $_SERVER['REQUEST_URI'];
     $splitURL = explode('boutique-en-ligne', $url);  //PHP
-<?php
+
 // session_start();
 // RECUPERER L'URL POUR SAVOIR SI C'EST L'INDEX OU LES AUTRES PAGES
 if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
