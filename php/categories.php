@@ -25,7 +25,7 @@ require_once('../includes/config.php');
 
 <body>
     <?php require_once('../includes/header.php');
-    require_once('../includes/config.php'); ?>
+     ?>
     <main>
         <?php
         $req = $bdd->prepare('SELECT * FROM `categorie`');
@@ -37,7 +37,7 @@ require_once('../includes/config.php');
             <form action="" method="get">
                 <div id="filterDiv"> <?php
                     foreach ($result as $categorie) {
-                        $categorieId = $categorie['id'];
+                        $categorieId = $categorie['idCat'];
                         $categorieNom = $categorie['titreCat']; ?>
                         <div class="categoryParentDiv" data-parent-id="<?= $categorieId; ?>">
                             <ul>
