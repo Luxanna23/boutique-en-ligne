@@ -3,27 +3,25 @@ require_once('../classes/User.php');
 require_once('../includes/config.php');
 ob_start();
 
-$msg ='';
-function submit($bdd)
-{
-    if (isset($_POST["Envoyer"])) {
-        $email = htmlspecialchars($_POST['email']);
-        $prenom = '';
-        $nom = '';
-        $password = $_POST['password'];
-        $user = new User('',$email, $password, $prenom, $nom, '','');
+$msg = '';
+if (isset($_POST["Envoyer"])) {
+    $email = htmlspecialchars($_POST['email']);
+    $prenom = '';
+    $nom = '';
+    $password = $_POST['password'];
+    if (!empty($email) && !empty($password)) {
+        $user = new User('', $email, $password, $prenom, $nom, '', '');
         $user->connect($bdd);
         if ($user->isConnected()) {
             header("Location: ../index.php");
-        }
-        else {
+        } else {
             $msg = "l'email et le mot de passe ne correspondent pas.";
         }
-
+    } else {
+        $msg = "Veuillez remplir tout les champs.";
     }
 }
 
-submit($bdd);
 
 ?>
 <!DOCTYPE html>
@@ -43,7 +41,7 @@ submit($bdd);
 </head>
 
 <body>
-<?php require_once('../includes/header.php'); ?>
+    <?php require_once('../includes/header2.php'); ?>
     <main>
         <h1>Connexion</h1>
 

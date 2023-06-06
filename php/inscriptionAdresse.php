@@ -47,7 +47,7 @@ submit($bdd);
 </head>
 
 <body>
-<?php require_once('../includes/header.php'); ?>
+<?php require_once('../includes/header2.php'); ?>
     <main>
         <h1>Adresse</h1>
 

@@ -19,7 +19,7 @@ if (isset($_GET['article_id'])) {
     </head>
 
     <body>
-        <?php require_once('../includes/header.php'); ?>
+        <?php require_once('../includes/header2.php'); ?>
         <main id="mainDetail">
 <!-- <?php var_dump($_SESSION);?>  -->
 

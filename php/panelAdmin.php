@@ -20,7 +20,7 @@ require_once('../includes/config.php');
 
 <body>
     <?php
-    require_once('../includes/header.php'); ?>
+    require_once('../includes/header2.php'); ?>
     <main id="panelAdmin">
         <div class="categories">
             <form action="" method="POST">
