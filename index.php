@@ -23,7 +23,7 @@ ob_start(); // contre l'erreur d'header location
 
 <body>
   <?php
-  require_once('./includes/header.php'); ?>
+  require_once('./includes/header2.php'); ?>
 
   <main id="mainIndex">
     <div id="carouselAutoplaying" class="carousel slide" data-bs-ride="carousel">

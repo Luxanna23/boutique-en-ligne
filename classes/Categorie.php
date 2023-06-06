@@ -19,7 +19,7 @@ class Categorie
     {
         $addCategorie = $bdd->prepare('INSERT INTO `categorie`(`titreCat`, `imgCat`) VALUES(?,?)');
         $addCategorie->execute([$this->titreCat, $this->imgCat]);
-    }
+        }
 
     public function delete($bdd)
     {

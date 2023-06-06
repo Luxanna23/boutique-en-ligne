@@ -24,7 +24,7 @@ require_once('../includes/config.php');
 </head>
 
 <body>
-    <?php require_once('../includes/header.php');
+    <?php require_once('../includes/header2.php');
      ?>
     <main>
         <?php
@@ -41,37 +41,28 @@ require_once('../includes/config.php');
                         $categorieNom = $categorie['titreCat']; ?>
                         <div class="categoryParentDiv" data-parent-id="<?= $categorieId; ?>">
                             <ul>
-                                <li class="resultParent dropdown-toggle" id="<?= $categorieId; ?>">
-                                    <?= $categorieNom; ?>
+                                <li class="resultParent dropdown-toggle" id="<?= $categorieNom; ?>">
+                                    <input type="radio" class="category" name="category" id="<?= $categorieId; ?>"><?= $categorieNom; ?>
                                 </li>
                                 <ul class="categoryChildDiv" id="categoryChildDiv<?= $categorieId; ?>" data-parent-id="<?= $categorieId; ?>">
                                     <?php
-                                            //echo "<ul><li><button onclick=\"window.location.href='categories.php?categorieId=$categorieId'\">$categorieNom</button></li>";
-                                            //echo "<ul><li><input type='radio' name='Categ' id='$categorieId'\">$categorieNom</li>";
                                             $req2 = $bdd->prepare('SELECT * FROM `souscategorie` WHERE `id_parent` = ?');
                                             $req2->execute([$categorieId]);
                                             $result2 = $req2->fetchAll(PDO::FETCH_ASSOC);
-                                            //echo "<ul>";
                                             foreach ($result2 as $Subcategorie) {
                                                 $subCategorieId = $Subcategorie['id'];
                                                 $subCategorieNom = $Subcategorie['titreSousCat']; ?>
                                         <li id="<?= $subCategorieNom; ?>">
-                                            <input type="radio" name="subCategory" id="<?= $subCategorieId; ?>">
+                                            <input type="radio" class="subCategory" name="subCategory" id="<?= $subCategorieId; ?>">
                                             <?= $subCategorieNom; ?>
                                         </li>
                                     <?php
-                                                //echo "<li><input type='radio' name='subCateg' id='$subCategorieId'\">$subCategorieNom</li>";
-
-                                                //echo "</ul></ul>";
                                             }
                                     ?>
                                 </ul>
                             </ul>
                             </a>
-
-                            <!-- <ul class="dropdown-menu categoryParent"> -->
                         </div>
-                        <!-- </ul> -->
                     <?php
                     }
                     ?>

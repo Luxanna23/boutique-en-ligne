@@ -9,7 +9,7 @@ $msg = '';
 if (isset($_FILES['photo']['tmp_name'])) {
   $extension = strtolower(pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION));
   // Vérification de l'extension 
-  if ($extension === 'png' || $extension === 'jpg') {
+  if ($extension === 'png' || $extension === 'jpg' || $extension === 'gif') {
     if (move_uploaded_file($_FILES["photo"]["tmp_name"], './avatars/' . $_SESSION['user']['id'] . '.' . pathinfo($_FILES["photo"]["name"], PATHINFO_EXTENSION))) {
       $avatar = pathinfo($_FILES["photo"]["name"], PATHINFO_EXTENSION);
       $user = new User($_SESSION['user']['id'], '', '', '', '', $avatar, '');
@@ -64,7 +64,7 @@ if (isset($_POST['submitInfo'])) {
 </head>
 
 <body>
-  <?php require_once('../includes/header.php'); ?>
+  <?php require_once('../includes/header2.php'); ?>
   <main>
     <h1>Profil</h1>
     <?php $user = new User($_SESSION['user']['id'], '', '', '', '', '', ''); ?>
