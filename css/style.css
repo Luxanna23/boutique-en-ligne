@@ -71,6 +71,7 @@
 /* INDEX/CAROUSEL 2 */
 #carousel2{
     display: flex;
+    flex-wrap: wrap;
 }
 
 /* NAVVV */

@@ -53,20 +53,32 @@ require_once('../includes/config.php');
             data.filter(function(resultats) {
                 console.log(resultats);
                 let p = document.createElement('p');
-                p.innerHTML = '<span>' + resultats.titreCat + '</span> <button type="submit" name="deleteCat" id="deleteCat'+resultats.idCat+'"><i class="fa-solid fa-trash-can fa-lg"></i></button>' + '</span> <button type="submit" name="editCat" id="editCat'+resultats.idCat+'"><i class="fa-regular fa-pen-to-square fa-lg"></i></button>';
+                p.innerHTML = '<span>' + resultats.titreCat + '</span> <input type="button" name="deleteCat" data-id ="' + resultats.idCat + '" id="deleteCat' + resultats.idCat + '"><i class="fa-solid fa-trash-can fa-lg"></i></input>' + '</span> <button type="submit" name="editCat" id="editCat' + resultats.idCat + '"><i class="fa-regular fa-pen-to-square fa-lg"></i></button>';
                 cats.append(p);
-                     let submit = document.getElementById("deleteCat"+resultats.idCat);
-                submit.addEventListener("click", () => {
-                console.log("wowwwww");
+
+
             })
-          
-            })
-       
+            let submit = document.getElementsByName("deleteCat");
+            // console.log(submit.length);
+            console.log(submit[0]);
+
+            for (let i = 0; i < 7; i++) {
+                console.log(i)
+                submit[i].addEventListener('click', () => {
+                    let id = submit[i].getAttribute('data-id');
+                    // submit[i].id
+                    console.log(submit[i]);
+                    fetch("traitementPanel.php", {
+                        method: "POST",
+                        body: JSON.stringify({
+                            "idDelete": id
+                        })
+                    }).then(response => response.json()).then(data => //window.location.reload())
+                        console.log(data)).catch(error => console.log(error));
+                })
+            }
+
         }).catch(error => console.log(error));
-        // let submit = document.getElementById("deleteCat");
-        // submit.addEventListener("click", () => {
-        //     console.log("wowwwww");
-        // })
     </script>
 </body>
 
