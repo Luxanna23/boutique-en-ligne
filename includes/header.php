@@ -1,7 +1,11 @@
 <header>
 <?php
-require_once('config.php'); ?>
-    <?php
+require_once('config.php'); 
+
+$returnCategoryParent = $bdd->prepare('SELECT * FROM categorie');
+$returnCategoryParent->execute();
+$resultCategoryParent = $returnCategoryParent->fetchAll(PDO::FETCH_OBJ);
+
     // RECUPERER L'URL POUR SAVOIR SI C'EST L'INDEX OU LES AUTRES PAGES
     if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
         $url = "https";
@@ -47,7 +51,7 @@ $splitURL = explode('boutique-en-ligne', $url);  //PHP
                         if (isset($_SESSION['user'])) {
                             $user = new User($_SESSION['user']['id'], '', '', '', '', '', '');
                         ?>
-                            <a href="./php/categories.php">Categories </a>
+                            <a href="./php/categories.php">Toutes les Categories </a>
                             <a href="./php/panier.php"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></a>
                             <a href="./php/profil.php"><i class="fa-solid fa-user" style="color: #000000;"></i></a>
                         <?php
@@ -89,7 +93,7 @@ $splitURL = explode('boutique-en-ligne', $url);  //PHP
                         <a href="../index.php">Home </a>
                         <?php
                         if (isset($_SESSION['user'])) { ?>
-                            <a href="./categories.php">Categories </a>
+                            <a href="./categories.php">Toutes les Categories </a>
                             <a href="./panier.php"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></a>
                             <a href="./profil.php"><i class="fa-solid fa-user" style="color: #000000;"></i></a>
                         <?php

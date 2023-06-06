@@ -24,7 +24,7 @@ ob_start();
 </head>
 
 <body>
-    <?php require_once('../includes/header.php'); ?>
+    <?php require_once('../includes/header2.php'); ?>
     <main>
         <h1>Mon Panier</h1>
         <div id="panier">

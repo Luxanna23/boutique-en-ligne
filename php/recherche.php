@@ -33,3 +33,5 @@ $result = $requete->fetchAll(PDO::FETCH_ASSOC); // IMPORTANT fetchAll pour affic
 }
 }
 echo json_encode($result);
+?>
+
