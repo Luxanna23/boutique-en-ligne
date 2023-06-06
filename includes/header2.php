@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="../css/header.css">
 <?php
 function getURL()
 {
@@ -16,23 +17,15 @@ function getURL()
 }
 require_once('config.php');
 
-
-$returnCategoryParent = $bdd->prepare('SELECT * FROM categorie');
-$returnCategoryParent->execute();
-$resultCategoryParent = $returnCategoryParent->fetchAll(PDO::FETCH_OBJ);
-
-
 if (getURL()[0][1] === '/index.php' || getURL()[0][1] === '/') {
     includeHeader($bdd, './', './php/', './maquette/'); //si on est sur l'index, les redirections seront ça
 } else {
-    includeHeader($bdd, '../', '../php/', '../maquette/');//si on n'est pas sur l'index, les redirections seront ça
+    includeHeader($bdd, '../', '../php/', '../maquette/'); //si on n'est pas sur l'index, les redirections seront ça
 }
 
 function includeHeader($bdd, $index, $urlPHP, $urlMaquette)
 {
-    $returnCategoryParent = $bdd->prepare('SELECT * FROM categorie');
-    $returnCategoryParent->execute();
-    $resultCategoryParent = $returnCategoryParent->fetchAll(PDO::FETCH_OBJ); ?>
+     ?>
     <header id="allHeader">
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
@@ -68,7 +61,45 @@ function includeHeader($bdd, $index, $urlPHP, $urlMaquette)
                         </div>
 
                     </div>
+                        <!-- AFFICHAGE DES CATEGORIES ET DES SOUS CATEGORIES -->
+                    <div>
+                        <ul id="menu-demo2">
+                            <a href="<?= $urlPHP ?>categories.php">Tous les articles</a>
+                            <?php
+                            $requestCategory = $bdd->prepare('SELECT * FROM categorie');
+                            $requestCategory->execute();
+                            $resultCategory = $requestCategory->fetchAll(PDO::FETCH_ASSOC);
+
+                            foreach ($resultCategory as $categorie) {   
+                                $categorieId = $categorie['idCat'];
+                                $categorieNom = $categorie['titreCat'];                           
+                            ?>
+                                <li>
+                                    <a href="<?= $urlPHP ?>categories.php?category=<?= $categorieId ?>">
+                                        <?= $categorieNom; ?>
+                                    </a>
+                                    <ul>
+                                        <?php
+                                        $requestSubCategory = $bdd->prepare('SELECT * FROM souscategorie WHERE id_parent = ?');
+                                        $requestSubCategory->execute([$categorieId]);
+                                        $resultSubCategory = $requestSubCategory->fetchAll(PDO::FETCH_ASSOC);
+                                        foreach ($resultSubCategory as $Subcategorie) {
+                                            $subCategorieId = $Subcategorie['id'];
+                                            $subCategorieNom = $Subcategorie['titreSousCat'];
+                                        ?> <li><a href="<?= $urlPHP ?>categories.php?subCategory=<?= $categorieId ?>"><?= $subCategorieNom; ?></a></li>
+                                           
+                                        <?php
+                                        }
+                                        ?>
+                                    </ul>
+                                </li>
+                            <?php
+                            }
+                            ?>
+                        </ul>
+                    </div>
+
                 </div>
-        </nav> 
+        </nav>
     </header>
 <?php } ?>

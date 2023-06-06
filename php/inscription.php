@@ -39,7 +39,6 @@ if (isset($_POST["Envoyer"])) {
 }
 
 
-
 function isCompatible()
 {
   if ($_POST['password'] == $_POST['password2']) {
