@@ -84,8 +84,12 @@ class User
 
     function register($bdd)
     {
+        $email = trim($this->email);
+        $firstname = trim($this->firstname);
+        $lastname = trim($this->lastname);
+        $password = password_hash(trim($this->password), PASSWORD_DEFAULT);
         $request = $bdd->prepare('INSERT INTO `users`(`email`, `password`, `firstname`, `lastname`, `avatar`) VALUES (?,?,?,?,?)');
-        $request->execute([$this->email, $this->password, $this->firstname, $this->lastname, $this->avatar]);
+        $request->execute([$email, $password, $firstname, $lastname, $this->avatar]);
     }
 
     function loginUnique($bdd)
