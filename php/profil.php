@@ -70,12 +70,12 @@ ob_start('ob_gzhandler'); //si il y a un pb essayer avec ob_start()
                         $dateCommande = explode("-", $commande['date']);
                         $date= $dateCommande[2] . " / " . $dateCommande[1] . " / " . $dateCommande[0];
                         $idCommande = $commande['id'];
-
                         // Récupérer les informations de l'article depuis la base de données
                         $request2 = $bdd->prepare('SELECT * FROM commande INNER JOIN commandpanier ON commande.id = commandpanier.id_commande INNER JOIN articles ON commandpanier.id_article = articles.idArt WHERE id_user = ? AND commande.id = ?');
                         $request2->execute([$_SESSION['user']['id'], $idCommande ]);
                         $result2 = $request2->fetchAll(PDO::FETCH_ASSOC);
-                        echo "</br>Commande passée le : " . $date . " - Total : " . $commande['prixTotal'] . "$</span></br>";
+                        echo "</br>Commande passée le : " . $date . " - Total : " . $commande['prixTotal'] . "€</br>
+                        Livré à : " . $commande['adresse'] . "<br>Numero de Tel : ". $commande['phone']."</span></br>";
                         foreach ($result2 as $key){
                             echo "<a href='detail.php?article_id=" . $key['idArt'] ."'><span><img src='" . $key['imgArt'] . " '><span></a>";
                         }

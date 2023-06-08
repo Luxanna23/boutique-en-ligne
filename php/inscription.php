@@ -38,16 +38,6 @@ $msg = '';
 //   }
 // }
 
-
-// function isCompatible()
-// {
-//   if ($_POST['password'] == $_POST['password2']) {
-//     return true;
-//   } else {
-//     return false;
-//   }
-// }
-
 ?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
@@ -95,6 +85,8 @@ $msg = '';
 
       <input type="submit" name="Envoyer">
     </form>
+
+    <span>Vous avez deja un compte ? <a href="connexion.php">Connectez-vous !</a></span>
   </main>
 
 </body>

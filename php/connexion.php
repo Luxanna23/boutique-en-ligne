@@ -61,6 +61,7 @@ if (isset($_POST["Envoyer"])) {
             <input type="submit" name="Envoyer">
 
         </form>
+        <span>Vous n'avez pas encore de compte ? <a href="inscription.php">Inscrivez-vous !</a></span>
     </main>
 
 </body>
