@@ -27,29 +27,12 @@ function includeHeader($bdd, $index, $urlPHP, $urlMaquette)
 {
      ?>
     <header id="allHeader">
-        <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid">
-                <span class="navbar-brand"><img id="logo" src="<?= $urlMaquette ?>logo-removebg.png"></span>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse  justify-content-between" id="navbarNavAltMarkup">
+        <nav>
+            <div class="nav1">
+            <a href="<?= $index ?>"><img id="logo" src="<?= $urlMaquette ?>logo-removebg.png"></a>
+                
+                <div id="navbarNavAltMarkup">
                     <div class="navbar-nav ">
-                        <a href="<?= $index ?>">Home </a>
-                        <?php
-                        if (isset($_SESSION['user'])) {
-                            $user = new User($_SESSION['user']['id'], '', '', '', '', '', '');
-                        ?>
-                            <a href="<?= $urlPHP ?>categories.php">Toutes les Categories </a>
-                            <a href="<?= $urlPHP ?>panier.php"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></a>
-                            <a href="<?= $urlPHP ?>profil.php"><i class="fa-solid fa-user" style="color: #000000;"></i></a>
-                        <?php
-                        } else { ?>
-                            <a href="<?= $urlPHP ?>connexion.php">Connexion </a>
-                            <a href="<?= $urlPHP ?>inscription.php">Inscription </a>
-                            <a href="<?= $urlPHP ?>categories.php">Categories </a>
-                        <?php } ?>
-
                         <!-- SEARCH BAR -->
                         <div class="search ">
                             <form class="d-flex" role="search" method="GET">
@@ -59,17 +42,28 @@ function includeHeader($bdd, $index, $urlPHP, $urlMaquette)
                             <div id="result2"></div>
 
                         </div>
+                        <?php
+                        if (isset($_SESSION['user'])) {
+                            $user = new User($_SESSION['user']['id'], '', '', '', '', '', '');
+                        ?>
+                            <a href="<?= $urlPHP ?>panier.php"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></a>
+                            <a href="<?= $urlPHP ?>profil.php"><i class="fa-solid fa-user" style="color: #000000;"></i></a>
+                        <?php
+                        } else { ?>
+                            <a href="<?= $urlPHP ?>connexion.php">Connexion </a>
+                            <a href="<?= $urlPHP ?>inscription.php">Inscription </a>
+                            <a href="<?= $urlPHP ?>categories.php">Categories </a>
+                        <?php } ?>
 
                     </div>
                         <!-- AFFICHAGE DES CATEGORIES ET DES SOUS CATEGORIES -->
                     <div>
                         <ul id="menu-demo2">
-                            <a href="<?= $urlPHP ?>categories.php">Tous les articles</a>
                             <?php
                             $requestCategory = $bdd->prepare('SELECT * FROM categorie');
                             $requestCategory->execute();
                             $resultCategory = $requestCategory->fetchAll(PDO::FETCH_ASSOC);
-
+                            ?><li><a href="<?= $urlPHP ?>categories.php">Toutes les Categories </a></li><?php
                             foreach ($resultCategory as $categorie) {   
                                 $categorieId = $categorie['idCat'];
                                 $categorieNom = $categorie['titreCat'];                           
@@ -86,7 +80,7 @@ function includeHeader($bdd, $index, $urlPHP, $urlMaquette)
                                         foreach ($resultSubCategory as $Subcategorie) {
                                             $subCategorieId = $Subcategorie['id'];
                                             $subCategorieNom = $Subcategorie['titreSousCat'];
-                                        ?> <li><a href="<?= $urlPHP ?>categories.php?subCategory=<?= $categorieId ?>"><?= $subCategorieNom; ?></a></li>
+                                        ?> <li><a href="<?= $urlPHP ?>categories.php?subCategory=<?= $subCategorieId ?>"><?= $subCategorieNom; ?></a></li>
                                            
                                         <?php
                                         }

@@ -65,3 +65,9 @@
     #menu-demo2 li:hover a, #menu-demo2 li li:hover a{
     color:#fffefe;
     }
+
+    .nav1 {
+        display: flex;
+    }
+
+    

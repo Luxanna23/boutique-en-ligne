@@ -1,5 +1,4 @@
 <?php
-//require_once('header.php');
 require_once('../classes/User.php');
 require_once('../classes/Adresse.php');
 require_once('../includes/config.php');
@@ -15,6 +14,7 @@ ob_start('ob_gzhandler'); //si il y a un pb essayer avec ob_start()
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil</title>
+    <link rel="stylesheet" type="text/css" href="../css/profil.css">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <script src="../js/favoris.js" defer></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -39,7 +39,7 @@ ob_start('ob_gzhandler'); //si il y a un pb essayer avec ob_start()
             <a href="deconnexion.php"><button class="button">Se déconnecter</button></a>
         </div>
 
-        <div>
+        <div id="adresse">
             <h3>Adresse de livraison : </h3>
             <?php $adresse = new Adresse($_SESSION['user']['id'], '', '', '', '', '', '');
             echo $adresse->isExisting($bdd);
