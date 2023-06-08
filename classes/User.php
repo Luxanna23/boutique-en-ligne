@@ -84,19 +84,15 @@ class User
 
     function register($bdd)
     {
-        if ($this->verifierSiVide()) {
-            if ($this->loginUnique($bdd)) {
-                $request = $bdd->prepare('INSERT INTO `users`(`email`, `password`, `firstname`, `lastname`, `avatar`) VALUES (?,?,?,?,?)');
-                $request->execute([$this->email, $this->password, $this->firstname, $this->lastname, $this->avatar]);
-            }
-        }
+        $request = $bdd->prepare('INSERT INTO `users`(`email`, `password`, `firstname`, `lastname`, `avatar`) VALUES (?,?,?,?,?)');
+        $request->execute([$this->email, $this->password, $this->firstname, $this->lastname, $this->avatar]);
     }
 
     function loginUnique($bdd)
     {
         $request = $bdd->prepare('SELECT `email` FROM `users` WHERE email = ?');
-        $request->execute([$_POST['email']]);
-        if ($request->rowCount() < 1) {
+        $request->execute([$this->email]);
+        if ($request->rowCount() > 0) {
             return true;
         } else {
             return false;
@@ -108,20 +104,19 @@ class User
         if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['firstName']) && !empty($_POST['lastName'])) {
             return true;
         } else {
-            echo "Il faut remplir tout les champs";
             return false;
         }
     }
 
     function connect($bdd)
-    {
+    {   
         $request = $bdd->prepare('SELECT * FROM `users` WHERE email = ? ');
         $request->execute([$this->email]);
         $result = $request->fetch();
         if ($result) {
             $passwordHash = $result['password'];
             if ($request->rowCount() > 0 && password_verify($this->password, $passwordHash)) {
-                $_SESSION["user"] = $result;
+                return $_SESSION["user"] = $result;
             }
         }
     }
@@ -160,34 +155,37 @@ class User
         $request->execute([$this->avatar, $this->id]);
     }
 
-    function selectAvatar($bdd){
+    function selectAvatar($bdd)
+    {
         $request = $bdd->prepare('SELECT `avatar` FROM `users` WHERE `id` = ?');
         $request->execute([$this->id]);
         $result = $request->fetch(PDO::FETCH_ASSOC);
         return $result['avatar'];
     }
 
-    function isPhoneExist($bdd){
+    function isPhoneExist($bdd)
+    {
         $request = $bdd->prepare('SELECT `phoneUser` FROM `users` WHERE users.id = ?');
         $request->execute([$_SESSION['user']['id']]);
         $result = $request->fetch(PDO::FETCH_ASSOC);
-        if ($result['phoneUser'] == ""){
+        if ($result['phoneUser'] == "") {
             return false;
-        }
-        else {
+        } else {
             return true;
         }
-     }
+    }
 
-    function selectPhoneNumber($bdd){
+    function selectPhoneNumber($bdd)
+    {
         $request = $bdd->prepare('SELECT `phoneUser` FROM `users` WHERE users.id = ?');
         $request->execute([$_SESSION['user']['id']]);
         $result = $request->fetch(PDO::FETCH_ASSOC);
         return $result['phoneUser'];
     }
 
-    function addPhone($bdd){
+    function addPhone($bdd)
+    {
         $request = $bdd->prepare('UPDATE `users` SET `phoneUser`= (?) WHERE users.id = ?');
-        $request->execute([$_POST['phone'],$_SESSION['user']['id']]);
+        $request->execute([$_POST['phone'], $_SESSION['user']['id']]);
     }
 }

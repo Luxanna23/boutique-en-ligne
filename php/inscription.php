@@ -1,52 +1,52 @@
 <?php
-//require_once('../includes/header.php');
+
 require_once('../classes/User.php');
 require_once('../includes/config.php');
-//ob_start('ob_gzhandler');
+ob_start();
 $msg = '';
 
 
-if (isset($_POST["Envoyer"])) {
-  $email = htmlspecialchars($_POST['email']);
-  $prenom = htmlspecialchars($_POST['firstName']);
-  $nom = htmlspecialchars($_POST['lastName']);
-  $password = $_POST['password'];
-  $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+// if (isset($_POST["Envoyer"])) {
+//   $email = htmlspecialchars($_POST['email']);
+//   $prenom = htmlspecialchars($_POST['firstName']);
+//   $nom = htmlspecialchars($_POST['lastName']);
+//   $password = $_POST['password'];
+//   $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-  if (!empty($email) && !empty($prenom) && !empty($nom) && !empty($password) && !empty($_POST['password2'])) {
-    if (isCompatible($bdd)) {
-      $user = new User('', $email, $passwordHash, $prenom, $nom, 'avatars/default.png', '');
-      if ($user->loginUnique($bdd)) {
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-          if (preg_match('/^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[#?!@$%^&*-]).{8,}$/', $password)) {
-            $user->register($bdd);
-            header("Location: connexion.php");
-          } else {
-            $msg = "Le mot de passe doit contenir au moins une majuscule, une minuscule et un caractère spécial.";
-          }
-        } else {
-          $msg = "Veuillez rentrer un format d'email valide.";
-        }
-      } else {
-        $msg = "Cet email existe deja, utilisez un autre email ou connectez vous si vous avez deja un compte.";
-      }
-    } else {
-      $msg = "Les deux mots de passe ne sont pas identiques.";
-    }
-  } else {
-    $msg = "Veuillez remplir tout les champs.";
-  }
-}
+//   if (!empty($email) && !empty($prenom) && !empty($nom) && !empty($password) && !empty($_POST['password2'])) {
+//     if (isCompatible($bdd)) {
+//       $user = new User('', $email, $passwordHash, $prenom, $nom, 'avatars/default.png', '');
+//       if ($user->loginUnique($bdd)) {
+//         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+//           if (preg_match('/^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[#?!@$%^&*-]).{8,}$/', $password)) {
+//             $user->register($bdd);
+//             header("Location: connexion.php");
+//           } else {
+//             $msg = "Le mot de passe doit contenir au moins une majuscule, une minuscule et un caractère spécial.";
+//           }
+//         } else {
+//           $msg = "Veuillez rentrer un format d'email valide.";
+//         }
+//       } else {
+//         $msg = "Cet email existe deja, utilisez un autre email ou connectez vous si vous avez deja un compte.";
+//       }
+//     } else {
+//       $msg = "Les deux mots de passe ne sont pas identiques.";
+//     }
+//   } else {
+//     $msg = "Veuillez remplir tout les champs.";
+//   }
+// }
 
 
-function isCompatible()
-{
-  if ($_POST['password'] == $_POST['password2']) {
-    return true;
-  } else {
-    return false;
-  }
-}
+// function isCompatible()
+// {
+//   if ($_POST['password'] == $_POST['password2']) {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// }
 
 ?>
 <!DOCTYPE html>
@@ -58,11 +58,13 @@ function isCompatible()
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inscription</title>
   <link rel="stylesheet" type="text/css" href="../css/style.css">
+  <link rel="stylesheet" type="text/css" href="../css/header.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://kit.fontawesome.com/e1a1b68f9b.js" crossorigin="anonymous"></script>
   <script src="../js/autocompletion.js" defer></script>
+  <script src="../js/inscription.js" defer></script>
 </head>
 
 <body>
@@ -99,7 +101,7 @@ function isCompatible()
 
 </html>
 
-<script>
+<!-- <script>
   let prenom = document.querySelector("#firstName");
   let nom = document.querySelector("#lastName");
   let email = document.querySelector("#email");
@@ -147,4 +149,4 @@ function isCompatible()
       e.preventDefault();
     }
   });
-</script>
+</script> -->

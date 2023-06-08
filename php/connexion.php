@@ -3,7 +3,7 @@ require_once('../classes/User.php');
 require_once('../includes/config.php');
 ob_start();
 
-$msg = '';
+ $msg = '';
 if (isset($_POST["Envoyer"])) {
     $email = htmlspecialchars($_POST['email']);
     $prenom = '';
@@ -33,11 +33,13 @@ if (isset($_POST["Envoyer"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/header.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/e1a1b68f9b.js" crossorigin="anonymous"></script>
     <script src="../js/autocompletion.js" defer></script>
+    <script src="../js/connexion.js" defer></script>
 </head>
 
 <body>
@@ -65,7 +67,7 @@ if (isset($_POST["Envoyer"])) {
 
 </html>
 
-<script>
+<!-- <script>
     let email = document.querySelector("#email");
     let password = document.querySelector("#password");
     let message = document.querySelector("#message");
@@ -87,4 +89,4 @@ if (isset($_POST["Envoyer"])) {
             e.preventDefault();
         }
     });
-</script>
+</script> -->
