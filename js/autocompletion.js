@@ -41,7 +41,6 @@ fetch('autocompletion.php/?id=' + idIndex[1])
 
 const search = document.getElementById('search-bar');
 const result = document.getElementById('result');
-console.log(search);
 if (search) {
     search.addEventListener("keyup", () => {
         result.innerHTML = '';

@@ -2,3 +2,7 @@ deleteCat, editCat{
 background-color: transparent;
 border:transparent;
 }
+
+#imgCat{
+    width:100px;
+}
