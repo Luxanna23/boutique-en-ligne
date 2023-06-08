@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="../css/header.css">
+
 <?php
 function getURL()
 {
@@ -44,7 +44,6 @@ function includeHeader($bdd, $index, $urlPHP, $urlMaquette)
                         </div>
                         <?php
                         if (isset($_SESSION['user'])) {
-                            $user = new User($_SESSION['user']['id'], '', '', '', '', '', '');
                         ?>
                             <a href="<?= $urlPHP ?>panier.php"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></a>
                             <a href="<?= $urlPHP ?>profil.php"><i class="fa-solid fa-user" style="color: #000000;"></i></a>

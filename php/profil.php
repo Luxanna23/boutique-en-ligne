@@ -16,6 +16,7 @@ ob_start('ob_gzhandler'); //si il y a un pb essayer avec ob_start()
     <title>Profil</title>
     <link rel="stylesheet" type="text/css" href="../css/profil.css">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/header.css">
     <script src="../js/favoris.js" defer></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
