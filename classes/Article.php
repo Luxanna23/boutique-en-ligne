@@ -1,5 +1,5 @@
 <?php
-require("../includes/config.php");
+// require("../includes/config.php");
 
 class Article
 {
@@ -29,7 +29,7 @@ class Article
     }
     public function addArticle($bdd)
     {
-        $addArticle = $bdd->prepare('INSERT INTO `articles`(`titre`, `description`, `prix`, `date`, `id_categorie`, `quantite`, `image`) VALUES(?,?,?,?,?,?,?)');
+        $addArticle = $bdd->prepare('INSERT INTO `articles`(`titreArt`, `description`, `prix`, `date`, `id_categorie`, `quantite`, `imgArt`) VALUES(?,?,?,?,?,?,?)');
         $addArticle->execute([$this->titre, $this->description, $this->prix, $this->date, $this->id_categorie, $this->quantite, $this->image]);
     }
 
@@ -113,5 +113,5 @@ class Article
     }
 }
 
-$article = new Article("boucle d'oreille", "bl bl", "4", "2023-02-02", "1", "3", "");
-$article->addArticle($bdd);
+// $article = new Article("boucle d'oreille", "bl bl", "4", "2023-02-02", "1", "3", "");
+// $article->addArticle($bdd);

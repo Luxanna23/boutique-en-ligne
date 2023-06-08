@@ -32,6 +32,14 @@ $requete->execute();
 $result = $requete->fetchAll(PDO::FETCH_ASSOC); // IMPORTANT fetchAll pour afficher plusieurs trucs, si fetch ça n'affiche que le premier resultat
 }
 }
+
+if(isset($_GET["sousCat"])){
+    if($_GET["sousCat"]==1){
+$requete = $bdd->prepare('SELECT * FROM souscategorie');
+$requete->execute();
+$result = $requete->fetchAll(PDO::FETCH_ASSOC); // IMPORTANT fetchAll pour afficher plusieurs trucs, si fetch ça n'affiche que le premier resultat
+}
+}
 echo json_encode($result);
 ?>
 

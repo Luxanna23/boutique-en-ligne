@@ -3,6 +3,6 @@ background-color: transparent;
 border:transparent;
 }
 
-#imgCat{
+#imgCat, #imgSousCat{
     width:100px;
 }
