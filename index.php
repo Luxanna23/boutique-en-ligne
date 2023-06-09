@@ -1,5 +1,5 @@
 <?php
-phpinfo(); // pour chopper les infos version etc de mon php
+// phpinfo(); // pour chopper les infos version etc de mon php
 require_once('classes/User.php');
 ob_start(); // contre l'erreur d'header location 
 
