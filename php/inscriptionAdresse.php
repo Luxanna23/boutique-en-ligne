@@ -50,7 +50,7 @@ submit($bdd);
 <body>
 <?php require_once('../includes/header2.php'); ?>
     <main>
-        <h1>Adresse</h1>
+        <h1>Adresse de Livraison</h1>
 
         <form method="post" id="signup">
             <label for="numero">Nom</label><br>
