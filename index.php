@@ -20,6 +20,7 @@ ob_start(); // contre l'erreur d'header location
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://kit.fontawesome.com/020a26a846.js" crossorigin="anonymous"></script>
   <script src="./js/autocompletion.js" defer></script>
+  <script src="./js/fonction.js" defer></script>
 </head>
 
 <body>

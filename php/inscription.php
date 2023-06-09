@@ -55,6 +55,7 @@ $msg = '';
   <script src="https://kit.fontawesome.com/e1a1b68f9b.js" crossorigin="anonymous"></script>
   <script src="../js/autocompletion.js" defer></script>
   <script src="../js/inscription.js" defer></script>
+  <script src="../js/fonction.js" defer></script>
 </head>
 
 <body>
