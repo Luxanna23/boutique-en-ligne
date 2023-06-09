@@ -22,6 +22,7 @@ ob_start();
     <script src="https://js.stripe.com/v3/"></script>
     <script src="https://www.paypal.com/sdk/js?client-id=AfNE3JJ7EtwG46wj6LKUtZN_5ZJxLktEDgUoy_aNZzYP_p_ntfLrgWi5NcNI7ADu1BvVKahVVfJ3MFpF"></script>
     <script src="../js/autocompletion.js" defer></script>
+    <script src="../js/fonction.js" defer></script>
 </head>
 
 <body>

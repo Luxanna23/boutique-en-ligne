@@ -68,6 +68,11 @@
 
     .nav1 {
         display: flex;
+        width: 100%;
+        justify-content: space-between;
     }
 
+    .search {
+        width: 50%;
+    }
     
