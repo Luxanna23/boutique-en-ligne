@@ -23,7 +23,7 @@ formEl.addEventListener("submit", (event) => {
       if (data.erreur) {
         message.innerHTML = data.erreur;
       } else {
-        //window.location.href = `http://localhost/boutique-en-ligne/index.php`;
+        window.location.href = `http://localhost/boutique-en-ligne/index.php`;
         message.style.color = "green";
         message.innerHTML = data.succes;
         formEl.reset();

@@ -30,6 +30,7 @@ ob_start();
         <h1>Mon Panier</h1>
         <div id="panier">
             <?php
+            $isPanierExist = null;
             $somme = 0;
             $livraison = 4.99;
             $prixTotal = 0;
@@ -39,6 +40,7 @@ ob_start();
             $result = $request->fetchAll(PDO::FETCH_ASSOC);
 
             if ($result) {
+                $isPanierExist = true;
                 // Afficher les produits du panier
                 foreach ($result as $produit) {
                     $articleIDPanier = $produit['id_article'];
@@ -48,13 +50,18 @@ ob_start();
                     $request2->execute([$articleIDPanier]);
                     $result2 = $request2->fetch(PDO::FETCH_ASSOC);
                     $somme += $result2['prix'];
-                    echo "<a href='detail.php?article_id=" . $result2['idArt'] ."'><img src='" . $result2['imgArt'] . " '></a><span>" . $result2['titreArt'] . " - Prix : " . $result2['prix'] . "$</span></br>";
+                    echo "<a href='detail.php?article_id=" . $result2['idArt'] ."'><img src='" . $result2['imgArt'] . " '></a><span>" . $result2['titreArt'] . " - Prix : " . $result2['prix'] . "€</span></br>";
                 }
+                // $somme c'est le prix AVEC TVA comprise
+                $tva = (20/100); // on met la TVA toujours a 20% ici
+                $prixTva = $somme / (1 + $tva);
                 $prixTotal = $somme + $livraison;
-                echo "<span>Sous total : " . $somme . "$</span></br>
-            <span>Frais de livraison : 4,99$ </span></br>
-            <span>Total : " . ($prixTotal) . "$</span>";
+                echo "<span>Sous total (hors taxes) : " . $prixTva . " €</span></br>
+                <span>TVA : + 20% </span></br>
+                <span>Frais de livraison : 4,99 € </span></br>
+                <span>Total : " . ($prixTotal) . " €</span>";
             } else {
+                $isPanierExist = false;
                 echo "<p>Panier vide</p>";
                 $somme = 0;
             }
@@ -90,7 +97,9 @@ ob_start();
             }
             ?>
         </form>
-        <?php } 
+        <?php }
+        
+        if ($isPanierExist){
         ?>
         <div><span>Choisissez un moyen de payement :</span></div>
         <div id="paypal-boutons"></div>
@@ -158,6 +167,7 @@ ob_start();
             $request6->execute([$_SESSION['user']['id']]);
             header('Location:panier.php');
         }
+    }
         ?>
     </main>
 </body>

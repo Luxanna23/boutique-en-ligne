@@ -1,0 +1,148 @@
+/* 
+  
+ 
+  #filterDiv {
+    width: 250px;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .categoryParentDiv {
+    margin-bottom: 10px;
+  }
+  
+  .resultParent {
+    cursor: pointer;
+    font-weight: bold;
+    padding: 5px;
+  }
+  
+  .resultParent:hover {
+    background-color: #eee;
+  }
+  
+  
+  
+  
+  .item {
+    width: 200px;
+    height: 200px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+a { 
+    color: black;
+} */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style-type: none;
+  }
+  #container {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    margin-top: 20px;
+  }
+  #allItems {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+.categoryChildDiv {
+    display: none;
+  }
+  
+  .categoryChildDivBlock {
+    display: block;
+  }
+  
+  #container {
+    display: flex !important;
+    flex-direction: row;
+  }
+  
+  main li {
+    list-style: none;
+  }
+  
+  .divImg {
+    width: 15%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .itemImg {
+    width: 70%;
+    /* padding: 0.5em !important; */
+  }
+  .divGlobal {
+      border-color: black;
+      border: 1px solid;
+      border-radius: 10px;
+      margin-bottom: 1em !important;
+  }
+  
+  .divGlobal a {
+      display: flex;
+      text-decoration: none;
+      color: black;
+      width: 100%;
+      padding: 1em !important;
+  }
+  
+  .divNameDesc {
+    /* margin-left: 30px !important; */
+    width: 70%;
+  }
+  .divPrice {
+    /* margin-left: 30px !important; */
+    width: 15%;
+    margin: auto !important;
+    text-align: center;
+    font-weight: bolder;
+  }
+  .itemPrice{
+      font-size: 2em;
+      color: #e26464;
+  }
+  .itemStock{
+      font-size: 1em;
+  }
+  .itemName {
+    font-weight: bolder;
+  }
+  .divGlobal:hover .itemName {
+    color: red;
+    transition: 0.3s;
+  }
+  .divGlobal:hover .itemImg {
+    transform: scale(1.1);
+    transition: 0.5s ease-in-out;
+  }
+  .divGlobal .itemImg {
+    transform: scale(1);
+    transition: 0.5s ease-in-out;
+  }
+  
+  #filterDiv {
+    width: 200px;
+  }
+
+  img {
+    height: 200px;
+    width: 200px;
+  }
