@@ -191,5 +191,6 @@ class User
     {
         $request = $bdd->prepare('UPDATE `users` SET `phoneUser`= (?) WHERE users.id = ?');
         $request->execute([$_POST['phone'], $_SESSION['user']['id']]);
+        $_SESSION['user']['phoneUser'] = $_POST['phone'];
     }
 }

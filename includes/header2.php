@@ -41,12 +41,11 @@ function includeHeader($bdd, $index, $urlPHP, $urlMaquette)
                 </div>
                 <div class="links">
                     <?php if (isset($_SESSION['user'])) { ?>
-                        <a href="<?= $urlPHP ?>panier.php"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></a>
-                        <a href="<?= $urlPHP ?>profil.php"><i class="fa-solid fa-user" style="color: #000000;"></i></a>
+                        <a href="<?= $urlPHP ?>panier.php"><i class="fa-solid fa-cart-shopping fa-2xl" style="color: #000000;"></i></a>
+                        <a href="<?= $urlPHP ?>profil.php"><i class="fa-solid fa-user fa-2xl" style="color: #000000;"></i></a>
                     <?php } else { ?>
                         <a href="<?= $urlPHP ?>connexion.php">Connexion </a>
                         <a href="<?= $urlPHP ?>inscription.php">Inscription </a>
-                        <a href="<?= $urlPHP ?>categories.php">Categories </a>
                     <?php } ?>
                 </div>
             </div>    

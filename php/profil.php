@@ -45,7 +45,9 @@ ob_start('ob_gzhandler'); //si il y a un pb essayer avec ob_start()
             <h3>Adresse de livraison : </h3>
             <?php $adresse = new Adresse($_SESSION['user']['id'], '', '', '', '', '', '');
             echo $adresse->isExisting($bdd);
-            if( $adresse->itExist($bdd)){ ?>
+            if( $adresse->itExist($bdd)){ 
+                echo ' <a href="inscriptionAdresse.php"><button class="buttonAdresse">Modifier l\'adresse</button></a>';
+                ?>
                 <form method="POST">
                     <input type="submit" name="delete" value="Supprimer l'adresse">
                 </form>

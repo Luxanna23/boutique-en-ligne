@@ -9,7 +9,7 @@ if (isset($_GET['article_id'])) {
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Profil</title>
+        <title>Detail</title>
         <link rel="stylesheet" type="text/css" href="../css/style.css">
         <link rel="stylesheet" type="text/css" href="../css/header.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -23,24 +23,33 @@ if (isset($_GET['article_id'])) {
     <body>
         <?php require_once('../includes/header2.php'); ?>
         <main id="mainDetail">
-<!-- <?php var_dump($_SESSION);?>  -->
+            <!-- <?php var_dump($_SESSION); ?>  -->
 
 
 
         </main>
 
     </body>
- <?php
- if(isset($_SESSION["user"])){
-    if(isset($_POST["AjouterPanier"])){
-        $req = $bdd->prepare("INSERT INTO `panier`(`id_user`, `id_article`, `quantite_art`) VALUES (?,?,?)");
-        $req->execute([$_SESSION['user']['id'],$_POST["AjouterPanier"],1]);
-        // $_POST["AjouterPanier"] == id de l'article (jsp ce qu'il fout la)
-        echo '<i class="fa-solid fa-circle-check" style="color: #0cad00;"></i> Article ajouté au panier.';
+    <?php
+    if (isset($_SESSION["user"])) {
+        if (isset($_POST["AjouterPanier"])) {
+            $req2 = $bdd->prepare("SELECT `quantite_art` FROM `panier` WHERE id_article = ?");
+            $req2->execute([$_POST["AjouterPanier"]]);
+            $res2 = $req2->fetch(PDO::FETCH_ASSOC);
+            if ($req2->rowCount() > 0) {
+                $req3 = $bdd->prepare("UPDATE `panier` SET `quantite_art`= ? WHERE id_article = ?");
+                $req3->execute([$res2["quantite_art"] + 1, $_POST["AjouterPanier"]]);
+                echo '<i class="fa-solid fa-circle-check" style="color: #0cad00;"></i> Article ajouté au panier.';
+            } else {
+                $req = $bdd->prepare("INSERT INTO `panier`(`id_user`, `id_article`, `quantite_art`) VALUES (?,?,?)");
+                $req->execute([$_SESSION['user']['id'], $_POST["AjouterPanier"], 1]);
+                // $_POST["AjouterPanier"] == id de l'article (jsp ce qu'il fout la)
+                echo '<i class="fa-solid fa-circle-check" style="color: #0cad00;"></i> Article ajouté au panier.';
+            }
+        }
     }
- }
 
- ?>
+    ?>
 
     </html>
     <script>
@@ -92,6 +101,5 @@ if (isset($_GET['article_id'])) {
         }).catch(err => {
             console.log(err)
         });
-
     </script>
 <?php } ?>
