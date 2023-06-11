@@ -32,8 +32,11 @@ if (isset($_GET['article_id'])) {
     </body>
  <?php
  if(isset($_SESSION["user"])){
-    if(isset($_GET["AjouterPanier"])){
-        var_dump("woow");
+    if(isset($_POST["AjouterPanier"])){
+        $req = $bdd->prepare("INSERT INTO `panier`(`id_user`, `id_article`, `quantite_art`) VALUES (?,?,?)");
+        $req->execute([$_SESSION['user']['id'],$_POST["AjouterPanier"],1]);
+        // $_POST["AjouterPanier"] == id de l'article (jsp ce qu'il fout la)
+        echo '<i class="fa-solid fa-circle-check" style="color: #0cad00;"></i> Article ajouté au panier.';
     }
  }
 
@@ -41,8 +44,8 @@ if (isset($_GET['article_id'])) {
 
     </html>
     <script>
-                // document.addEventListener('DOMContentLoaded', () => {
-                    let id = window.location.href.split('=');
+        // document.addEventListener('DOMContentLoaded', () => {
+        let id = window.location.href.split('=');
         console.log(window.location.href);
         console.log(id[1])
         fetch('recherche.php?id=' + id[1]).then(response => {
@@ -65,6 +68,7 @@ if (isset($_GET['article_id'])) {
             let description = document.createElement("p");
             description.textContent = data.description;
             let form = document.createElement("form");
+            form.method = "POST";
             let button = document.createElement("button");
             button.setAttribute("id", "AjouterPanier");
             button.setAttribute("name", "AjouterPanier");
@@ -88,31 +92,6 @@ if (isset($_GET['article_id'])) {
         }).catch(err => {
             console.log(err)
         });
-// })
-       
-
-
-    // })
-//         document.addEventListener('DOMContentLoaded', () => {
-//         let button = document.getElementById('panier');
-// console.log(button)
-// let id_user = document.getElementById('user_id').value;
-// console.log(id_user)
-
-// button.addEventListener('click',()=>{
-//     console.log(this.value)
-//     let formData = {'idArt': this.value, 'id_user':id_user}
-//     fetch('traitementTest.php', {
-//         method :'POST',
-//         headers: {
-//             'Content-type':'multipart/form-data',
-//         },
-//         body:JSON.stringify(formData),
-//     }).then(resp => {resp.json()}).then(data => { console.log(data)}).catch(err => { console.log(err)})
-
-// })
-
-    // })
 
     </script>
 <?php } ?>
