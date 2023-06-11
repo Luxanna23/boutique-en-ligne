@@ -46,6 +46,7 @@ if ($result) {
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <link rel="stylesheet" type="text/css" href="../css/header.css">
     <link rel="stylesheet" type="text/css" href="../css/checkout.css">
+    <link rel="stylesheet" type="text/css" href="../css/panier.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -74,8 +75,9 @@ if ($result) {
                 // $somme c'est le prix AVEC TVA comprise
                 $tva = (20 / 100); // on met la TVA toujours a 20% ici
                 $prixTva = $somme / (1 + $tva);
+                $valeurLimiteeTva = number_format($prixTva, 2); // pour limiter le calcul a 2 chiffres apres la virgule
                 $prixTotal = $somme + $livraison;
-                echo "<span>Sous total (hors taxes) : " . $prixTva . " €</span></br>
+                echo "<span>Sous total (hors taxes) : " . $valeurLimiteeTva . " €</span></br>
                 <span>TVA : + 20% </span></br>
                 <span>Frais de livraison : 4,99 € </span></br>
                 <span>Total : " . ($prixTotal) . " €</span>";
