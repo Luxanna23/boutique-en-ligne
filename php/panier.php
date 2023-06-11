@@ -11,6 +11,10 @@ require_once('../includes/keyStripe.php');
 
 ob_start();
 
+$user = new User($_SESSION['user']['id'], '', '', '', '', '', '');
+$adresse = new Adresse($_SESSION['user']['id'], '', '', '', '', '', '');
+$adresse->isExisting($bdd);
+
 $somme = 0;
 $livraison = 4.99;
 $prixTotal = 0;
@@ -24,12 +28,14 @@ $products = [];
 if ($result) {
     foreach ($result as $productInCart) {
         $product_id = $productInCart['id_article'];
+        $quantity = $productInCart['quantite_art'];
 
         // Récupérer les informations de l'article depuis la base de données
         $productRequest = $bdd->prepare('SELECT * FROM `articles` WHERE `idArt` = ?');
         $productRequest->execute([$product_id]);
         $product = $productRequest->fetch(PDO::FETCH_ASSOC);
-        $somme += $product['prix'];
+        $product['quantite'] = $quantity;
+        $somme += $product['prix'] * $quantity;
 
         $products[] = $product;
     }
@@ -54,11 +60,18 @@ if ($result) {
     <script src="../js/autocompletion.js" defer></script>
     <script src="../js/fonction.js" defer></script>
     <script src="https://js.stripe.com/v3/"></script>
-    <script src="../js/checkout.js" defer></script>
     <script>
-        const products = <?= json_encode($products) ?>;
-        const email = "<?= $_SESSION['user']['email'] ?>";
+        const cart = {
+            products: <?= json_encode($products) ?>,
+            user: {
+                id: <?= $_SESSION['user']['id'] ?>,
+                email: '<?= $_SESSION['user']['email'] ?>',
+                phone: '<?= $_SESSION['user']['phoneUser'] ?>',
+                adresse: '<?= $adresse->getFirstname() . " " . $adresse->getLastname() . " " . $adresse->getNumero() . " " . $adresse->getRue() . " " . $adresse->getCodePostal() . " " . $adresse->getVille() ?>',
+            },
+        };
     </script>
+    <script src="../js/checkout.js" defer></script>
 </head>
 
 <body>
@@ -70,7 +83,8 @@ if ($result) {
             if (count($products) > 0) {
                 // Afficher les produits du panier
                 foreach ($products as $product) {
-                    echo "<a href='detail.php?article_id=" . $product['idArt'] . "'><img src='" . $product['imgArt'] . " '></a><span>" . $product['titreArt'] . " - Prix : " . $product['prix'] . "€</span></br>";
+                    echo "<a href='detail.php?article_id=" . $product['idArt'] . "'><img src='" . $product['imgArt'] . " '></a><span>" . $product['titreArt'] . " - quantité : " . $product['quantite'] . " - Prix : " . ($product['prix'] * $product['quantite']) . "€</span>
+                    <button><i class='fa-solid fa-trash fa-lg' style='color: #000000;'></i></button></br>";
                 }
                 // $somme c'est le prix AVEC TVA comprise
                 $tva = (20 / 100); // on met la TVA toujours a 20% ici
@@ -87,10 +101,10 @@ if ($result) {
             ?>
         </div>
         <div><span>Adresse de livraison :</span>
-            <?php $adresse = new Adresse($_SESSION['user']['id'], '', '', '', '', '', '');
+            <?php
             if ($adresse->itExist($bdd)) {
                 $adresseCommande = $adresse->isExisting($bdd);
-                echo $adresseCommande;
+                echo $adresseCommande . ' <a href="inscriptionAdresse.php"><button class="buttonAdresse">Modifier l\'adresse</button></a>';
             } else {
                 echo $adresse->isExisting($bdd);
             }
@@ -98,7 +112,7 @@ if ($result) {
         </div>
 
         <div><span>Numero de téléphone :</span>
-            <?php $user = new User($_SESSION['user']['id'], '', '', '', '', '', '');
+            <?php
             if ($user->isPhoneExist($bdd)) {
                 $phoneCommande = $user->selectPhoneNumber($bdd);
                 echo $phoneCommande;
@@ -115,10 +129,10 @@ if ($result) {
                 </form>
             <?php }
 
-            if (count($products) > 0) {
+            if (count($products) > 0 && $user->isPhoneExist($bdd) && $adresse->itExist($bdd)) {
             ?>
-                <div><span>Choisissez un moyen de payement :</span></div>
-                <div style="margin-top: 10px; max-width: 200px;">
+                <div><span>Proceder au paiement :</span></div>
+                <form id="payment-form" style="margin-top: 10px; max-width: 200px;">
                     <div id="link-authentication-element">
                         <!--Stripe.js injects the Link Authentication Element-->
                     </div>
@@ -130,28 +144,12 @@ if ($result) {
                         <span id="button-text">Acheter</span>
                     </button>
                     <div id="payment-message" class="hidden"></div>
-                </div>
+                </form>
 
                 <!-- <form method="POST"><input type="submit" name="validerPanier" value="Valider la commande"></form> -->
             <?php
-                if (isset($_POST['validerPanier'])) {
-                    $dateActuelle = date('Y-m-d');
-                    $request3 = $bdd->prepare('INSERT INTO `commande`(`adresse`, `id_user`, `phone`, `date`, `prixTotal`) VALUES (?,?,?,?,?)');
-                    $request3->execute([$adresseCommande, $_SESSION['user']['id'], $phoneCommande, $dateActuelle, $prixTotal]);
-                    $idcommande = $bdd->lastInsertId();
-
-                    if ($result) {
-                        // parcourir les produits du panier
-                        foreach ($result as $produit) {
-                            $articleIDPanier = $produit['id_article'];
-                            $request5 = $bdd->prepare('INSERT INTO `commandpanier`(`id_commande`, `id_article`) VALUES (?,?)');
-                            $request5->execute([$idcommande, $articleIDPanier]);
-                        }
-                    }
-                    $request6 = $bdd->prepare('DELETE FROM `panier` WHERE `id_user` = (?)');
-                    $request6->execute([$_SESSION['user']['id']]);
-                    header('Location:panier.php');
-                }
+            } else {
+                echo "Veuillez reinseigner un numero de téléphone et une adresse valide.";
             }
             ?>
     </main>

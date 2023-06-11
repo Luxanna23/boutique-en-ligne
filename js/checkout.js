@@ -1,5 +1,7 @@
 // This is your test publishable API key.
-const stripe = Stripe("pk_test_51NHY1WJ37nAgG00XUhMUwWT1utq5GN12R5Q3hgYklcrfWBe0VFTIX3PYfbP7DNbPcfjdJpz7WEK981ANNoAygQ6r00CCEbKnNa");
+const stripe = Stripe(
+  "pk_test_51NHY1WJ37nAgG00XUhMUwWT1utq5GN12R5Q3hgYklcrfWBe0VFTIX3PYfbP7DNbPcfjdJpz7WEK981ANNoAygQ6r00CCEbKnNa"
+);
 
 let elements;
 
@@ -12,10 +14,10 @@ document
 
 // Fetches a payment intent and captures the client secret
 async function initialize() {
-  const { clientSecret } = await fetch("/create.php", {
+  const { clientSecret } = await fetch("../php/paiement.php", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(products),
+    body: JSON.stringify(cart),
   }).then((r) => r.json());
 
   elements = stripe.elements({ clientSecret });
@@ -39,8 +41,8 @@ async function handleSubmit(e) {
     elements,
     confirmParams: {
       // Make sure to change this to your payment completion page
-      return_url: `${window.location.origin}/confirmationPanier.php`,
-      receipt_email: email,
+      return_url: `http://localhost/boutique-en-ligne/php/confirmationPanier.php`,
+      receipt_email: cart.user.email,
     },
   });
 

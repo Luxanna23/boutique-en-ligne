@@ -115,8 +115,14 @@ function __construct($id_user, $firstname, $lastname, $numero, $rue, $codePostal
         $request->execute([$_SESSION['user']['id']]);
         $result = $request->fetch(PDO::FETCH_ASSOC);
         if ($request->rowCount() > 0){
-            $adresse = $result['firstname'] . " " . $result['lastname'] . '</br>'. $result['numero'] . " " . $result['rue'] . " " . $result['codePostal'] . " " . $result['ville'];
-            return $adresse . ' <a href="inscriptionAdresse.php"><button class="buttonAdresse">Modifier l\'adresse</button></a>';
+            $this->firstname = $result['firstname'];
+            $this->lastname = $result['lastname'];
+            $this->numero = $result['numero'];
+            $this->rue = $result['rue'];
+            $this->codePostal = $result['codePostal'];
+            $this->ville = $result['ville'];
+            $adresse = $result['firstname'] . " " . $result['lastname'] . " " . $result['numero'] . " " . $result['rue'] . " " . $result['codePostal'] . " " . $result['ville'];
+            return $adresse;
         }
         else {
             return '<a href="inscriptionAdresse.php"><button class="buttonAdresse">Ajouter une adresse</button></a>';
