@@ -22,7 +22,7 @@ require_once('../includes/config.php');
 
 <body>
     <?php
-    require_once('../includes/header.php'); ?>
+    // require_once('../includes/header.php'); ?>
     <main id="panelAdmin">
         <div id="categories">
             <form action="" method="POST">
@@ -49,10 +49,10 @@ require_once('../includes/config.php');
                 <input type="text" name="titreArt" id="" placeholder="Nom de l'article">
                 <textarea name="description" id="" placeholder="Description"></textarea>
                 <input type="text" name="prix" id="" placeholder="Prix de l'article">€
-                <select name="categorie" id="categories-select" value="categorie">
+                <select name="categories" id="categories-select" value="categorie">
                     <option selected disabled>Catégorie</option>
                 </select>
-                <select name="sousCategorie" id="sousCategories-select" value="sousCategorie">
+                <select name="sousCategories" id="sousCategories-select" value="sousCategorie">
                     <option selected disabled>Sous-catégorie</option>
                 </select>
                 <input type="text" name="quantite" id="" placeholder="Quantité">
@@ -72,7 +72,7 @@ require_once('../includes/config.php');
         if (isset($_POST["creerSousCat"])) {
             $titreSousCat = htmlspecialchars($_POST['titreSousCat']);
             $imgSousCat = htmlspecialchars($_POST['imgSousCat']);
-            $idParent = htmlspecialchars($_POST['idParent']);
+            $idParent = htmlspecialchars($_POST['categorie']);
             $souscategorie = new SousCategorie($titreSousCat, $imgSousCat, $idParent);
             $souscategorie->addSousCategorie($bdd);
             header("Location: panelAdmin.php"); // Evite qu'en rechargeant la page on recrée la même cat.
@@ -82,17 +82,19 @@ require_once('../includes/config.php');
             $description = htmlspecialchars($_POST['description']);
             $prix = htmlspecialchars($_POST['prix']);
             $date = date('Y-m-d');
-            $categorie = htmlspecialchars($_POST['categorie']);
+            $categories = "vroom";
+            // $categories = htmlspecialchars($_POST['categories']);
             $quantite = htmlspecialchars($_POST['quantite']);
-            $sousCatagorie = htmlspecialchars($_POST['sousCategorie']);
+            // $sousCatagories = htmlspecialchars($_POST['sousCategories']);
             $imgArt=htmlspecialchars($_POST['imgArt']);
-            $article = new Article($titreArt,$description,$prix,$date,$categorie,$quantite,$imgArt);
+            $article = new Article($titreArt,$description,$prix,$date,$categories,$quantite,$imgArt);
             $article->addArticle($bdd);
-            header("Location: panelAdmin.php"); // Evite qu'en rechargeant la page on recrée la même cat.
+            // header("Location: panelAdmin.php"); // Evite qu'en rechargeant la page on recrée la même cat.
         }
         ?>
     </main>
     <script>
+        // recupération et affichage des menus select catégorie, dans la création de sous cat et création d'article
         fetch('./recherche.php?panelAdmin=1').then((res) =>
             res.json()
         ).then((data) => {
@@ -110,6 +112,7 @@ require_once('../includes/config.php');
             });
 
         })
+        // recupération et affichage du menus select sous-catégorie
         fetch('./recherche.php?sousCat=1').then((res) =>
             res.json()
         ).then((data) => {
@@ -122,6 +125,7 @@ require_once('../includes/config.php');
             });
 
         })
+        //affichage des catégories avec deletion et modification
         fetch('./recherche.php?panelAdmin=1').then(response => {
             return response.json();
         }).then(data => {
@@ -207,7 +211,7 @@ require_once('../includes/config.php');
 
         }).catch(error => console.log(error));
 
-
+//affichage des sous-catégories avec deletion et modification
         fetch('./recherche.php?sousCat=1').then(response => {
             return response.json();
         }).then(data => {
@@ -230,7 +234,6 @@ require_once('../includes/config.php');
 
                 let submit = document.getElementsByName("deleteSousCat");
                 // console.log(submit[0]);
-
                 for (let i = 0; i < submit.length; i++) {
                     console.log(i)
                     submit[i].addEventListener('click', () => {
@@ -253,13 +256,9 @@ require_once('../includes/config.php');
                 console.log(update[0]);
 
                 for (let i = 0; i < update.length; i++) {
-
-                    // console.log(imgCat.src, titreCat.value)
-                    // console.log(update[i].id)
                     update[i].addEventListener('click', () => {
-                        let imgSousCat = document.getElementById("imgSousCat" + resultats.idCat);
-                        let titreSousCat = document.getElementById("titreSousCat" + resultats.idCat);
-                        console.log(titreCat);
+                        let imgSousCat = document.getElementById("imgSousCat" + resultats.id);
+                        let titreSousCat = document.getElementById("titreSousCat" + resultats.id);
                         let id2 = update[i].getAttribute('data-id');
                         let img = imgSousCat.value;
                         let titre = titreSousCat.value;

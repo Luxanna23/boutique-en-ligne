@@ -113,5 +113,5 @@ class Article
     }
 }
 
-// $article = new Article("boucle d'oreille", "bl bl", "4", "2023-02-02", "1", "3", "");
+// $article = new Article("boucle d'oreille", "bl bl", "4", "2023-02-02", "1", "3", "img33");
 // $article->addArticle($bdd);
