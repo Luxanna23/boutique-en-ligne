@@ -26,17 +26,17 @@ if (isset($_FILES['photo']['tmp_name'])) {
 
 if (isset($_POST['submitInfo'])) {
   if (!empty($_POST['email'])) {
-    $email = !empty($_POST['email']) ? $_POST['email'] : $_SESSION['email'];
-    $log = $_SESSION['email'];
-    $request = $bdd->prepare("UPDATE utilisateurs SET email = :email WHERE id = :id");
-    $request->execute(["email" => $email, "id" => $_SESSION['id']]);
-    $_SESSION['email'] = $email;
+    $email = !empty($_POST['email']) ? $_POST['email'] : $_SESSION['user']['email'];
+    $log = $_SESSION['user']['email'];
+    $request = $bdd->prepare("UPDATE users SET email = :email WHERE id = :id");
+    $request->execute(["email" => $email, "id" => $_SESSION['user']['id']]);
+    $_SESSION['user']['email'] = $email;
     header('refresh:0');
   }
   if (!empty($_POST['password1']) && !empty($_POST['password2'])) {
     if ($_POST['password1'] == $_POST['password2']) {
       $mdp = $_POST['password1'];
-      $sql = "UPDATE utilisateurs SET password = ? WHERE id = ?";
+      $sql = "UPDATE users SET password = ? WHERE id = ?";
       $request = $bdd->prepare($sql);
       $request->execute([$mdp, $id]);
       $result = $request->fetchAll(PDO::FETCH_ASSOC);
@@ -45,6 +45,17 @@ if (isset($_POST['submitInfo'])) {
     }
   } else {
     $message = "Il faut remplir tous les champs de mot de passe !";
+  }
+  if (!empty($_POST['firstname'])) {
+    $firstname = !empty($_POST['firstname']) ? $_POST['firstname'] : $_SESSION['user']['firstname'];
+    $request = $bdd->prepare("UPDATE users SET firstname = :firstname WHERE id = :id");
+    $request->execute(["firstname" => $firstname, "id" => $_SESSION['user']['id']]);
+    $_SESSION['user']['firstname'] = $_POST['firstname'];
+  }
+  if (!empty($_POST['lastname'])) {
+    $request = $bdd->prepare("UPDATE users SET lastname = (?) WHERE id = ?");
+    $request->execute([$_POST['lastname'], $_SESSION['user']['id']]);
+    $_SESSION['user']['lastname'] = $_POST['lastname'];
   }
 }
 ?>
@@ -57,10 +68,13 @@ if (isset($_POST['submitInfo'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profil</title>
   <link rel="stylesheet" type="text/css" href="../css/style.css">
+  <link rel="stylesheet" type="text/css" href="../css/header.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://kit.fontawesome.com/e1a1b68f9b.js" crossorigin="anonymous"></script>
+  <script src="../js/autocompletion.js" defer></script>
+  <script src="../js/fonction.js" defer></script>
 </head>
 
 <body>
@@ -83,12 +97,12 @@ if (isset($_POST['submitInfo'])) {
 
       <div class="field">
         <label>Prenom</label>
-        <input type="text" name="firstName" placeholder="<?php echo $_SESSION['user']['firstname']; ?>">
+        <input type="text" name="firstname" placeholder="<?php echo $_SESSION['user']['firstname']; ?>">
       </div>
 
       <div class="field">
         <label>Nom </label>
-        <input type="text" name="lastName" placeholder="<?php echo $_SESSION['user']['lastname']; ?>">
+        <input type="text" name="lastname" placeholder="<?php echo $_SESSION['user']['lastname']; ?>">
       </div>
 
       <div class="field">
@@ -116,8 +130,8 @@ if (isset($_POST['submitInfo'])) {
 </html>
 
 <script>
-  let prenom = document.querySelector("#firstName");
-  let nom = document.querySelector("#lastName");
+  let prenom = document.querySelector("#firstname");
+  let nom = document.querySelector("#lastname");
   let email = document.querySelector("#email");
   let password = document.querySelector("#password");
   let password2 = document.querySelector("#password2");

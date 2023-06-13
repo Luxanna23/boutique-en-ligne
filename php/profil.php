@@ -16,12 +16,14 @@ ob_start('ob_gzhandler'); //si il y a un pb essayer avec ob_start()
     <title>Profil</title>
     <link rel="stylesheet" type="text/css" href="../css/profil.css">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/header.css">
     <script src="../js/favoris.js" defer></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/e1a1b68f9b.js" crossorigin="anonymous"></script>
     <script src="../js/autocompletion.js" defer></script>
+    <script src="../js/fonction.js" defer></script>
 </head>
 
 <body>
@@ -43,7 +45,9 @@ ob_start('ob_gzhandler'); //si il y a un pb essayer avec ob_start()
             <h3>Adresse de livraison : </h3>
             <?php $adresse = new Adresse($_SESSION['user']['id'], '', '', '', '', '', '');
             echo $adresse->isExisting($bdd);
-            if( $adresse->itExist($bdd)){ ?>
+            if( $adresse->itExist($bdd)){ 
+                echo ' <a href="inscriptionAdresse.php"><button class="buttonAdresse">Modifier l\'adresse</button></a>';
+                ?>
                 <form method="POST">
                     <input type="submit" name="delete" value="Supprimer l'adresse">
                 </form>
@@ -69,12 +73,12 @@ ob_start('ob_gzhandler'); //si il y a un pb essayer avec ob_start()
                         $dateCommande = explode("-", $commande['date']);
                         $date= $dateCommande[2] . " / " . $dateCommande[1] . " / " . $dateCommande[0];
                         $idCommande = $commande['id'];
-
                         // Récupérer les informations de l'article depuis la base de données
                         $request2 = $bdd->prepare('SELECT * FROM commande INNER JOIN commandpanier ON commande.id = commandpanier.id_commande INNER JOIN articles ON commandpanier.id_article = articles.idArt WHERE id_user = ? AND commande.id = ?');
                         $request2->execute([$_SESSION['user']['id'], $idCommande ]);
                         $result2 = $request2->fetchAll(PDO::FETCH_ASSOC);
-                        echo "</br>Commande passée le : " . $date . " - Total : " . $commande['prixTotal'] . "$</span></br>";
+                        echo "</br>Commande passée le : " . $date . " - Total : " . $commande['prixTotal'] . "€</br>
+                        Livré à : " . $commande['adresse'] . "<br>Numero de Tel : ". $commande['phone']."</span></br>";
                         foreach ($result2 as $key){
                             echo "<a href='detail.php?article_id=" . $key['idArt'] ."'><span><img src='" . $key['imgArt'] . " '><span></a>";
                         }

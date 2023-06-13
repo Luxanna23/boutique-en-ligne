@@ -3,6 +3,17 @@ let category = document.querySelectorAll(".category");
 let categoryChild = document.querySelectorAll(".subCategory");
 let categoryParent = document.querySelectorAll(".resultParent");
 
+
+// * afficher ou cacher les child dans le parent correspondant au click du parent
+category.forEach((element) => {
+  element.addEventListener("click", () => {
+    let childElement = document.querySelectorAll(
+      "#categoryChildDiv" + element.getAttribute("id")
+    );
+    childElement[0].classList.toggle("categoryChildDivBlock");
+  });
+});
+
 function allArticles() {
   fetch(`traitementArt.php`)
     .then((response) => {
@@ -11,6 +22,9 @@ function allArticles() {
     .then((data) => {
       data.forEach((element) => {
         let divUnArt = document.createElement("div");
+        let descri = document.createElement("div");
+        let pTitre = document.createElement("p");
+        let pPrix = document.createElement("p");
         let li = document.createElement("li");
         let imgArt = document.createElement("img");
         let linkart = document.createElement("a");
@@ -19,10 +33,12 @@ function allArticles() {
           "./detail.php?article_id=" + element.idArt
         );
         imgArt.className = "resultsImg";
-
+        pTitre.append(element.titreArt)
+        pPrix.append(element.prix, "€")
         imgArt.src = element.imgArt;
         linkart.append(imgArt);
-        divUnArt.append(linkart, element.titreArt, element.prix);
+        descri.append(pTitre, pPrix);
+        divUnArt.append(linkart, descri);
         li.append(divUnArt);
         allItems.append(li);
       });
@@ -66,6 +82,9 @@ function thisSubCategorie(id) {
     .then((data) => {
       data.forEach((element) => {
         let divUnArt = document.createElement("div");
+        let descri = document.createElement("div");
+        let pTitre = document.createElement("p");
+        let pPrix = document.createElement("p");
         let li = document.createElement("li");
         let imgArt = document.createElement("img");
         let linkart = document.createElement("a");
@@ -74,10 +93,12 @@ function thisSubCategorie(id) {
           "./detail.php?article_id=" + element.idArt
         );
         imgArt.className = "resultsImg";
-
+        pTitre.append(element.titreArt)
+        pPrix.append(element.prix, "€")
         imgArt.src = element.imgArt;
         linkart.append(imgArt);
-        divUnArt.append(linkart, element.titreArt, element.prix);
+        descri.append(pTitre, pPrix);
+        divUnArt.append(linkart, descri);
         li.append(divUnArt);
         allItems.append(li);
       });
@@ -95,6 +116,9 @@ function thisCategorie(id) {
     .then((data) => {
       data.forEach((element) => {
         let divUnArt = document.createElement("div");
+        let descri = document.createElement("div");
+        let pTitre = document.createElement("p");
+        let pPrix = document.createElement("p");
         let li = document.createElement("li");
         let imgArt = document.createElement("img");
         let linkart = document.createElement("a");
@@ -103,10 +127,12 @@ function thisCategorie(id) {
           "./detail.php?article_id=" + element.idArt
         );
         imgArt.className = "resultsImg";
-
+        pTitre.append(element.titreArt)
+        pPrix.append(element.prix, "€")
         imgArt.src = element.imgArt;
         linkart.append(imgArt);
-        divUnArt.append(linkart, element.titreArt, element.prix);
+        descri.append(pTitre, pPrix);
+        divUnArt.append(linkart, descri);
         li.append(divUnArt);
         allItems.append(li);
       });

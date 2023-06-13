@@ -39,17 +39,19 @@ submit($bdd);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/header.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/e1a1b68f9b.js" crossorigin="anonymous"></script>
     <script src="../js/autocompletion.js" defer></script>
+    <script src="../js/fonction.js" defer></script>
 </head>
 
 <body>
 <?php require_once('../includes/header2.php'); ?>
     <main>
-        <h1>Adresse</h1>
+        <h1>Adresse de Livraison</h1>
 
         <form method="post" id="signup">
             <label for="numero">Nom</label><br>
