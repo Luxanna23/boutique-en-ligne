@@ -48,6 +48,9 @@ if (isset($_GET['article_id'])) {
             }
         }
     }
+    else {
+        echo "Veuillez vous connecter pour ajouter des articles a vos paniers";
+    }
 
     ?>
 
