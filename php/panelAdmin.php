@@ -1,12 +1,9 @@
-Gestion des produits à l’aide de back office (Ajout / Suppression /
-Modifications de produits, stocks...)
-○ Gestion des catégories et des sous catégories de produits (Ajout /
-Suppression / Modifications...)
 <?php
 require_once('../classes/Categorie.php');
 require_once('../classes/SousCategorie.php');
 require_once('../classes/Article.php');
 require_once('../includes/config.php');
+require_once('../includes/header2.php');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -21,8 +18,7 @@ require_once('../includes/config.php');
 </head>
 
 <body>
-    <?php
-    // require_once('../includes/header.php'); ?>
+   
     <main id="panelAdmin">
         <div id="categories">
             <form action="" method="POST">
