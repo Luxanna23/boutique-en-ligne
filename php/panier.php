@@ -84,7 +84,21 @@ if ($result) {
                 // Afficher les produits du panier
                 foreach ($products as $product) {
                     echo "<a href='detail.php?article_id=" . $product['idArt'] . "'><img src='" . $product['imgArt'] . " '></a><span>" . $product['titreArt'] . " - quantité : " . $product['quantite'] . " - Prix : " . ($product['prix'] * $product['quantite']) . "€</span>
-                    <button><i class='fa-solid fa-trash fa-lg' style='color: #000000;'></i></button></br>";
+                    <button name='deleteArt'><i class='fa-solid fa-trash fa-lg' style='color: #000000;'></i></button></br>";
+                
+                    if (isset($_POST["deleteArt"])) { //! pour supprimer du panier mais MARCHE PAS !!!
+                        if ($product['quantite'] != 1){
+                            $req3 = $bdd->prepare("UPDATE `panier` SET `quantite_art`= ? WHERE id_user = ? AND id_article = ?");
+                            $req3->execute([$product['quantite'] - 1, $_SESSION['user']['id']$product['idArt']]);
+                            echo '<i class="fa-solid fa-circle-minus fa-lg" style="color: #ff0000;"></i> Article supprimé du panier.';
+                        
+                        }
+                        elseif (($product['quantite'] == 1)){
+                            $req = $bdd->prepare("DELETE FROM `panier` WHERE id_user = ? AND id_article = ? ");
+                            $req->execute([$_SESSION['user']['id'], $product['idArt']]);
+                            echo '<i class="fa-solid fa-circle-minus fa-lg" style="color: #ff0000;"></i> Article supprimé du panier.';
+                        }
+                    }
                 }
                 // $somme c'est le prix AVEC TVA comprise
                 $tva = (20 / 100); // on met la TVA toujours a 20% ici
@@ -148,8 +162,6 @@ if ($result) {
 
                 <!-- <form method="POST"><input type="submit" name="validerPanier" value="Valider la commande"></form> -->
             <?php
-            } else {
-                echo "Veuillez reinseigner un numero de téléphone et une adresse valide.";
             }
             ?>
     </main>
