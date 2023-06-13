@@ -4,56 +4,56 @@
 class Article
 {
     // les atributs
-    public $id;
-    public $titre;
+    public $idArt;
+    public $titreArt;
     public $description;
     public $prix;
     public $date;
     public $id_categorie;
     public $quantite;
-    public $image;
+    public $imgArt;
 
 
 
     // methodes
-    public function __construct($titre, $description, $prix, $date, $id_categorie, $quantite, $image)
+    public function __construct($titreArt, $description, $prix, $date, $id_categorie, $quantite, $imgArt)
     {
-        $this->titre = $titre;
+        $this->titreArt = $titreArt;
         $this->description = $description;
         $this->prix = $prix;
         $this->date = $date;
         $this->id_categorie = $id_categorie;
         $this->quantite = $quantite;
-        $this->image = $image;
+        $this->imgArt = $imgArt;
         
     }
     public function addArticle($bdd)
     {
         $addArticle = $bdd->prepare('INSERT INTO `articles`(`titreArt`, `description`, `prix`, `date`, `id_categorie`, `quantite`, `imgArt`) VALUES(?,?,?,?,?,?,?)');
-        $addArticle->execute([$this->titre, $this->description, $this->prix, $this->date, $this->id_categorie, $this->quantite, $this->image]);
+        $addArticle->execute([$this->titreArt, $this->description, $this->prix, $this->date, $this->id_categorie, $this->quantite, $this->imgArt]);
     }
 
     public function delete($bdd)
     {
-        $req = $bdd->prepare('DELETE FROM `articles` WHERE id=?');
-        $req->execute([$this->id]);
+        $req = $bdd->prepare('DELETE FROM `articles` WHERE idArt=?');
+        $req->execute([$this->idArt]);
         exit;
     }
     public function update(
       
         $bdd
     ) {
-        $req = $bdd->prepare("UPDATE `articles` SET titre=?, description=?, image=? WHERE id = ?");
-        $req->execute([$this->titre, $this->description, $this->image, $this->id]);
+        $req = $bdd->prepare("UPDATE `articles` SET titreArt=?, description=?, imgArt=? WHERE idArt = ?");
+        $req->execute([$this->titreArt, $this->description, $this->imgArt, $this->idArt]);
     }
 
     public function getId()
     {
-        return $this->id;
+        return $this->idArt;
     }
-    public function getTitre()
+    public function gettitreArt()
     {
-        return $this->titre;
+        return $this->titreArt;
     }
     public function getDescription()
     {
@@ -75,17 +75,17 @@ class Article
     {
         return $this->quantite;
     }
-    public function getimage()
+    public function getimgArt()
     {
-        return $this->image;
+        return $this->imgArt;
     }
-    public function setId($id)
+    public function setId($idArt)
     {
-        $this->id = $id;
+        $this->idArt = $idArt;
     }
-    public function setTitre($titre)
+    public function settitreArt($titreArt)
     {
-        $this->titre = $titre;
+        $this->titreArt = $titreArt;
     }
     public function setDescription($description)
     {
@@ -107,9 +107,9 @@ class Article
     {
         $this->quantite = $quantite;
     }
-    public function setImage($image)
+    public function setimgArt($imgArt)
     {
-        $this->id = $image;
+        $this->imgArt = $imgArt;
     }
 }
 

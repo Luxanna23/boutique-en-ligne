@@ -82,14 +82,13 @@ require_once('../includes/config.php');
             $description = htmlspecialchars($_POST['description']);
             $prix = htmlspecialchars($_POST['prix']);
             $date = date('Y-m-d');
-            $categories = "vroom";
-            // $categories = htmlspecialchars($_POST['categories']);
+            $categories = htmlspecialchars($_POST['categories']);
             $quantite = htmlspecialchars($_POST['quantite']);
-            // $sousCatagories = htmlspecialchars($_POST['sousCategories']);
+            $sousCatagories = htmlspecialchars($_POST['sousCategories']);
             $imgArt=htmlspecialchars($_POST['imgArt']);
             $article = new Article($titreArt,$description,$prix,$date,$categories,$quantite,$imgArt);
             $article->addArticle($bdd);
-            // header("Location: panelAdmin.php"); // Evite qu'en rechargeant la page on recrée la même cat.
+            header("Location: panelAdmin.php"); // Evite qu'en rechargeant la page on recrée la même cat.
         }
         ?>
     </main>
