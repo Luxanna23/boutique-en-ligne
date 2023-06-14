@@ -1,4 +1,33 @@
+<<<<<<< HEAD
 img {
     height: 200px;
     width: 200px;
   }
+=======
+main {
+  font-family: 'Inria Serif';
+  font-size: large;
+}
+
+img {
+    height: 200px;
+    width: 200px;
+    padding: 1%;
+  }
+
+.prduitImgDescri {
+    display: flex;
+}
+
+.produitPanier {
+}
+
+hr {
+  color: black;
+}
+
+.prix {
+  display: flex;
+  justify-content: space-between;
+}
+>>>>>>> main
