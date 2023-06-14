@@ -78,18 +78,19 @@ if ($result) {
     <?php require_once('../includes/header2.php'); ?>
     <main>
         <h1>Mon Panier</h1>
+        <hr>
         <div id="panier">
             <?php
             if (count($products) > 0) {
                 // Afficher les produits du panier
                 foreach ($products as $product) {
-                    echo "<a href='detail.php?article_id=" . $product['idArt'] . "'><img src='" . $product['imgArt'] . " '></a><span>" . $product['titreArt'] . " - quantité : " . $product['quantite'] . " - Prix : " . ($product['prix'] * $product['quantite']) . "€</span>
-                    <button name='deleteArt'><i class='fa-solid fa-trash fa-lg' style='color: #000000;'></i></button></br>";
+                    echo "<div class='prduitImgDescri'><a href='detail.php?article_id=" . $product['idArt'] . "'><img src='" . $product['imgArt'] . " '></a><div class='produitPanier'><span>" . $product['titreArt'] . "<br>Quantité : " . $product['quantite'] . "<br>Prix : " . ($product['prix'] * $product['quantite']) . "€</span>
+                    <button name='deleteArt'><i class='fa-solid fa-trash fa-lg' style='color: #000000;'></i></button></br></div></div>";
                 
                     if (isset($_POST["deleteArt"])) { //! pour supprimer du panier mais MARCHE PAS !!!
                         if ($product['quantite'] != 1){
                             $req3 = $bdd->prepare("UPDATE `panier` SET `quantite_art`= ? WHERE id_user = ? AND id_article = ?");
-                            $req3->execute([$product['quantite'] - 1, $_SESSION['user']['id']$product['idArt']]);
+                            $req3->execute([$product['quantite'] - 1, $_SESSION['user']['id'],$product['idArt']]);
                             echo '<i class="fa-solid fa-circle-minus fa-lg" style="color: #ff0000;"></i> Article supprimé du panier.';
                         
                         }
@@ -105,10 +106,10 @@ if ($result) {
                 $prixTva = $somme / (1 + $tva);
                 $valeurLimiteeTva = number_format($prixTva, 2); // pour limiter le calcul a 2 chiffres apres la virgule
                 $prixTotal = $somme + $livraison;
-                echo "<span>Sous total (hors taxes) : " . $valeurLimiteeTva . " €</span></br>
-                <span>TVA : + 20% </span></br>
-                <span>Frais de livraison : 4,99 € </span></br>
-                <span>Total : " . ($prixTotal) . " €</span>";
+                echo "<div><span class='prix'><div>Sous total (hors taxes) : </div><div>" . $valeurLimiteeTva . " €</span></div></div><br>
+                <div><span class='prix'><div>TVA : </div><div> 20% </span></div></div><br>
+                <div><span class='prix'><div>Frais de livraison : </div><div>4,99 € </span></div></div><br>
+                <div><span class='prix'><div>Total : </div><div>" . ($prixTotal) . " €</span></div></div></div>";
             } else {
                 echo "<p>Panier vide</p>";
             }
