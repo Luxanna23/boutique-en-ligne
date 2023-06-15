@@ -59,6 +59,7 @@ if ($result) {
     <script src="https://kit.fontawesome.com/e1a1b68f9b.js" crossorigin="anonymous"></script>
     <script src="../js/autocompletion.js" defer></script>
     <script src="../js/fonction.js" defer></script>
+    <script src="../js/panier.js" defer></script>
     <script src="https://js.stripe.com/v3/"></script>
     <script>
         const cart = {
@@ -84,48 +85,20 @@ if ($result) {
             if (count($products) > 0) {
                 // Afficher les produits du panier
                 foreach ($products as $product) {
-<<<<<<< HEAD
-                    echo "<a href='detail.php?article_id=" . $product['idArt'] . "'><img src='" . $product['imgArt'] . " '></a><span>" . $product['titreArt'] . " - quantité : " . $product['quantite'] . " - Prix : " . ($product['prix'] * $product['quantite']) . "€</span>
-                    <button name='deleteArt'><i class='fa-solid fa-trash fa-lg' style='color: #000000;'></i></button></br>";
-=======
-                    echo "<div class='prduitImgDescri'><a href='detail.php?article_id=" . $product['idArt'] . "'><img src='" . $product['imgArt'] . " '></a><div class='produitPanier'><span>" . $product['titreArt'] . "<br>Quantité : " . $product['quantite'] . "<br>Prix : " . ($product['prix'] * $product['quantite']) . "€</span>
-                    <button name='deleteArt'><i class='fa-solid fa-trash fa-lg' style='color: #000000;'></i></button></br></div></div>";
->>>>>>> main
+                    echo "<div class='prduitImgDescri' id='prduitImgDescri".$product['idArt']."'><a href='detail.php?article_id=" . $product['idArt'] . "'><img src='" . $product['imgArt'] . " '></a><div class='produitPanier'><span>" . $product['titreArt'] . "<br><span id='quantite".$product['idArt']."'>Quantité : " . $product['quantite'] . "</span><br>Prix : " . ($product['prix'] * $product['quantite']) . "€</span>
+                    <button name='deleteArt' value=".$product['idArt']."><i class='fa-solid fa-trash fa-lg' style='color: #000000;'></i></button></br></div></div>";
+                   
                 
-                    if (isset($_POST["deleteArt"])) { //! pour supprimer du panier mais MARCHE PAS !!!
-                        if ($product['quantite'] != 1){
-                            $req3 = $bdd->prepare("UPDATE `panier` SET `quantite_art`= ? WHERE id_user = ? AND id_article = ?");
-<<<<<<< HEAD
-                            $req3->execute([$product['quantite'] - 1, $_SESSION['user']['id']$product['idArt']]);
-=======
-                            $req3->execute([$product['quantite'] - 1, $_SESSION['user']['id'],$product['idArt']]);
->>>>>>> main
-                            echo '<i class="fa-solid fa-circle-minus fa-lg" style="color: #ff0000;"></i> Article supprimé du panier.';
-                        
-                        }
-                        elseif (($product['quantite'] == 1)){
-                            $req = $bdd->prepare("DELETE FROM `panier` WHERE id_user = ? AND id_article = ? ");
-                            $req->execute([$_SESSION['user']['id'], $product['idArt']]);
-                            echo '<i class="fa-solid fa-circle-minus fa-lg" style="color: #ff0000;"></i> Article supprimé du panier.';
-                        }
-                    }
                 }
                 // $somme c'est le prix AVEC TVA comprise
                 $tva = (20 / 100); // on met la TVA toujours a 20% ici
                 $prixTva = $somme / (1 + $tva);
                 $valeurLimiteeTva = number_format($prixTva, 2); // pour limiter le calcul a 2 chiffres apres la virgule
                 $prixTotal = $somme + $livraison;
-<<<<<<< HEAD
-                echo "<span>Sous total (hors taxes) : " . $valeurLimiteeTva . " €</span></br>
-                <span>TVA : + 20% </span></br>
-                <span>Frais de livraison : 4,99 € </span></br>
-                <span>Total : " . ($prixTotal) . " €</span>";
-=======
                 echo "<div><span class='prix'><div>Sous total (hors taxes) : </div><div>" . $valeurLimiteeTva . " €</span></div></div><br>
-                <div><span class='prix'><div>TVA : </div><div> 20% </span></div></div><br>
+                <div><span class='prix'><div>TVA : </div><span class='trait'></span><div> 20% </span></div></div><br>
                 <div><span class='prix'><div>Frais de livraison : </div><div>4,99 € </span></div></div><br>
                 <div><span class='prix'><div>Total : </div><div>" . ($prixTotal) . " €</span></div></div></div>";
->>>>>>> main
             } else {
                 echo "<p>Panier vide</p>";
             }
