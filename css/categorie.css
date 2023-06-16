@@ -12,10 +12,9 @@ body {
     margin-top: 20px;
   }
   #allItems {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
   }
 .categoryChildDiv {
     display: none;
@@ -99,7 +98,7 @@ body {
   }
 
   img {
-    height: 200px;
-    width: 200px;
+    height: 250px;
+    width: 250px;
     padding: 1%;
   }

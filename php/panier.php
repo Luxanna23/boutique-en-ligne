@@ -85,7 +85,7 @@ if ($result) {
             if (count($products) > 0) {
                 // Afficher les produits du panier
                 foreach ($products as $product) {
-                    echo "<div class='prduitImgDescri' id='prduitImgDescri".$product['idArt']."'><a href='detail.php?article_id=" . $product['idArt'] . "'><img src='" . $product['imgArt'] . " '></a><div class='produitPanier'><span>" . $product['titreArt'] . "<br><span id='quantite".$product['idArt']."'>Quantité : " . $product['quantite'] . "</span><br>Prix : " . ($product['prix'] * $product['quantite']) . "€</span>
+                    echo "<div class='prduitImgDescri' id='prduitImgDescri".$product['idArt']."'><a href='detail.php?article_id=" . $product['idArt'] . "'><img src='" . $product['imgArt'] . " '></a><div class='produitPanier'><span>" . $product['titreArt'] . "<br><span id='quantite".$product['idArt']."'>Quantité : " . $product['quantite'] . "</span><br>Prix : " . ($product['prix'] * $product['quantite']) . "€ (soit " . $product['quantite']." × ".$product['prix'] . " €)</span>
                     <button name='deleteArt' value=".$product['idArt']."><i class='fa-solid fa-trash fa-lg' style='color: #000000;'></i></button></br></div></div>";
                    
                 
