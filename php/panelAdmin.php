@@ -15,12 +15,14 @@ require_once('../includes/config.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../css/panelAdmin.css">
     <script src="https://kit.fontawesome.com/020a26a846.js" crossorigin="anonymous"></script>
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../css/header.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <title>Panel Admin</title>
 </head>
 
 <body>
     <?php
-    require_once('../includes/header.php'); ?>
+    require_once('../includes/header2.php'); ?>
     <main id="panelAdmin">
         <div class="categories">
             <form action="" method="POST">
