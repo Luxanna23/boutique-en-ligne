@@ -5,94 +5,124 @@
 }
 
 /* FOOTER */
-.footerP1{
-    width:100%;
+.footerP1 {
+    width: 100%;
     display: flex;
     justify-content: space-between;
-   padding-left: 2vh;
-   padding-right: 2vh;
+    padding-left: 2vh;
+    padding-right: 2vh;
 
 }
-.footerP1 div{
+
+.footerP1 div {
     text-align: center;
 }
 
-.footerP2{
-    width:100%;
+.footerP2 {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     padding-left: 2vh;
     padding-right: 2vh;
 }
-.footerP2 div{
+
+.footerP2 div {
     text-align: center;
 }
-#catFooter{
+
+#catFooter {
     text-align: left;
 }
-#inputNews, #buttonNews{
+
+#inputNews,
+#buttonNews {
     border: none;
     background-color: transparent;
 }
-.newsletter{
+
+.newsletter {
     text-align: center;
     border-bottom: solid;
-    
+
 }
-.footerP3{
+
+.footerP3 {
     text-align: center;
     padding-left: 2vh;
     padding-right: 2vh;
- 
+
 }
-.reseaux{
+
+.reseaux {
     display: flex;
     justify-content: space-between;
 }
 
 /* PAGE PRODUIT */
 
-#detail{
+#detail {
     display: flex;
 }
-#titrePrix{
+
+#titrePrix {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-#titrePrix p{
+
+#titrePrix p {
     font-size: large;
 }
-#buttons{
+
+#buttons {
     display: flex;
     justify-content: space-between;
 }
 
 /* INDEX/CAROUSEL 2 */
-#carousel2{
+#carousel2 {
     display: flex;
     flex-wrap: wrap;
 }
 
 /* NAVVV */
-#logo{
+#logo {
     height: 50px;
     width: 60px;
 }
-#result, #result2 {
+
+#result,
+#result2 {
     z-index: 2;
     position: absolute;
     top: 50px;
     background-color: #9d9d9d;
-  }
-  #result a, #result2 a {
+}
+
+#result a,
+#result2 a {
     text-decoration: none;
     color: #fff;
-  }
-  @media screen and (max-width: 991px) {
-    #result {
-      top: 330px;
-    }
-  }
+}
 
-  /* FIN DE NAV */
+@media screen and (max-width: 991px) {
+    #result {
+        top: 330px;
+    }
+}
+
+/* FIN DE NAV */
+
+/* .carousel-inner {
+    height: 500px;
+} */
+
+.article {
+    position: relative;
+}
+
+.nouveaute {
+    position: absolute;
+    z-index: 2;
+    background-color: #fff;
+}

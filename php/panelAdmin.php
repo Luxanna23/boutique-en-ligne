@@ -18,8 +18,10 @@ require_once('../includes/header2.php');
 </head>
 
 <body>
-   
+
     <main id="panelAdmin">
+        <div id="modifCarouselIndex">
+        </div>
         <div id="categories">
             <form action="" method="POST">
                 <h2>Création de catégorie</h2>
@@ -56,7 +58,10 @@ require_once('../includes/header2.php');
                 <button type="submit" name="creerArt">Créer l'article</button>
             </form>
         </div>
+
+
         <?php
+
         // CREATION DE CATEGORIES
         if (isset($_POST["creerCat"])) {
             $titreCat = htmlspecialchars($_POST['titreCat']);
@@ -77,12 +82,12 @@ require_once('../includes/header2.php');
             $titreArt = htmlspecialchars($_POST['titreArt']);
             $description = htmlspecialchars($_POST['description']);
             $prix = htmlspecialchars($_POST['prix']);
-            $date = date('Y-m-d');
+            $date = date('Y/m/d');
             $categories = htmlspecialchars($_POST['categories']);
             $quantite = htmlspecialchars($_POST['quantite']);
             $sousCatagories = htmlspecialchars($_POST['sousCategories']);
-            $imgArt=htmlspecialchars($_POST['imgArt']);
-            $article = new Article($titreArt,$description,$prix,$date,$categories,$quantite,$imgArt);
+            $imgArt = htmlspecialchars($_POST['imgArt']);
+            $article = new Article($titreArt, $description, $prix, $date, $categories, $quantite, $imgArt);
             $article->addArticle($bdd);
             header("Location: panelAdmin.php"); // Evite qu'en rechargeant la page on recrée la même cat.
         }
@@ -134,8 +139,8 @@ require_once('../includes/header2.php');
                 let deleteCat = document.createElement('div');
                 let updateCat = document.createElement('div');
 
-                deleteCat.innerHTML = '<span>  <img id="imgCat" src="' + resultats.imgCat + '" alt="">' + resultats.titreCat + '</span> <button type="button" name="deleteCat" data-id ="' + resultats.idCat + '" id="deleteCat' + resultats.idCat + '"><i class="fa-solid fa-trash-can fa-lg"></i></button>';
-                updateCat.innerHTML = '<input id="imgCat' + resultats.idCat + '"  value="' + resultats.imgCat + '"><input id="titreCat' + resultats.idCat + '" value="' + resultats.titreCat + '"><input type="button" name="editCat" data-id ="' + resultats.idCat + '"  id="editCat' + resultats.idCat + '"><i class="fa-regular fa-pen-to-square fa-lg"></i></button>';
+                deleteCat.innerHTML = '<span>  <img id="imgCat" src="' + resultats.imgCat + '" alt="">' + resultats.titreCat + '</span> <button class="deleteCat" name="deleteCat" data-id ="' + resultats.idCat + '" id="deleteCat' + resultats.idCat + '"><i class="fa-solid fa-trash-can"></i></button>';
+                updateCat.innerHTML = '<input id="imgCat' + resultats.idCat + '"  value="' + resultats.imgCat + '"><input id="titreCat' + resultats.idCat + '" value="' + resultats.titreCat + '"><button class="editCat" name="editCat" data-id ="' + resultats.idCat + '"  id="editCat' + resultats.idCat + '"><i class="fa-regular fa-pen-to-square"></i></button>';
 
                 cats.append(deleteCat);
                 cats.append(updateCat);
@@ -175,13 +180,6 @@ require_once('../includes/header2.php');
                         let id2 = update[i].getAttribute('data-id');
                         let img = imgCat.value;
                         let titre = titreCat.value;
-                        console.log(id2, img, titre);
-                        console.log(JSON.stringify({
-                            "titreUpdate": titre,
-                            "imgUpdate": img,
-                            "idUpdate": id2,
-
-                        }))
                         // submit[i].id
                         console.log(update[i]);
                         fetch("traitementPanel.php", {
@@ -206,7 +204,7 @@ require_once('../includes/header2.php');
 
         }).catch(error => console.log(error));
 
-//affichage des sous-catégories avec deletion et modification
+        //affichage des sous-catégories avec deletion et modification
         fetch('./recherche.php?sousCat=1').then(response => {
             return response.json();
         }).then(data => {
@@ -230,7 +228,6 @@ require_once('../includes/header2.php');
                 let submit = document.getElementsByName("deleteSousCat");
                 // console.log(submit[0]);
                 for (let i = 0; i < submit.length; i++) {
-                    console.log(i)
                     submit[i].addEventListener('click', () => {
                         let id = submit[i].getAttribute('data-id');
                         // submit[i].id
@@ -248,7 +245,7 @@ require_once('../includes/header2.php');
                     })
                 }
                 let update = document.getElementsByName("editSousCat");
-                console.log(update[0]);
+                // console.log(update[0]);
 
                 for (let i = 0; i < update.length; i++) {
                     update[i].addEventListener('click', () => {
@@ -287,6 +284,66 @@ require_once('../includes/header2.php');
 
 
         }).catch(error => console.log(error));
+
+        // MODIFICATION DU CAROUSEL EN HAUT DE L'INDEX
+        // MODIFIE QUE LE DERNIER ET CHANGE LES AUTRES AC LES INFOS DU DERNIER
+        fetch('./recherche.php?carousel=1')
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                let modifCarouselIndex = document.getElementById("modifCarouselIndex");
+                let slide = document.createElement("div");
+                slide.setAttribute("id", "slide");
+                modifCarouselIndex.append(slide);
+
+                data.filter(function(resultats) {
+                    console.log(resultats);
+                    let displaySlide = document.createElement('div');
+                    let updateSlide = document.createElement('div');
+
+                    displaySlide.innerHTML = '</br><span>  <img class="imgCarousel" id="imgCarousel' + resultats.id + '" src="' + resultats.imgCarousel + '" alt=""><h1>' + resultats.titreCarousel + '</h1> <p>' + resultats.texteCarousel + '</p></span>';
+                    updateSlide.innerHTML = '<input id="inputCarousel' + resultats.id + '"  value="' + resultats.imgCarousel + '"><input id="titreCarousel' + resultats.id + '" value="' + resultats.titreCarousel + '"><input id="texteCarousel' + resultats.id + '" value="' + resultats.texteCarousel + '"><button name="editCarousel" data-idCar ="' + resultats.id + '"  id="editCarousel' + resultats.id + '"><i class="fa-regular fa-pen-to-square fa-lg"></i></button></br>';
+
+                    slide.append(displaySlide);
+                    slide.append(updateSlide);
+                });
+
+                let updateCar = document.getElementsByName("editCarousel");
+                for (let i = 0; i < updateCar.length; i++) {
+                    let id2 = updateCar[i].getAttribute('data-idCar');
+                    let imgCarousel = document.getElementById("inputCarousel" + id2);
+                    console.log(imgCarousel);
+                    updateCar[i].addEventListener('click', () => {
+                        let id2 = updateCar[i].getAttribute('data-idCar');
+                        let imgCarousel = document.getElementById("inputCarousel" + id2);
+                        let titreCarousel = document.getElementById("titreCarousel" + id2);
+                        let texteCarousel = document.getElementById("texteCarousel" + id2);
+                        let img = imgCarousel.value;
+                        console.log(img);
+                        let titre = titreCarousel.value;
+                        let texte = texteCarousel.value;
+                        console.log(img, titre, texte);
+
+                        fetch("traitementPanel.php", {
+                                method: "POST",
+                                headers: {
+                                    'Content-type': "multipart/form-data"
+                                },
+                                body: JSON.stringify({
+                                    "imgUpdate": img,
+                                    "titreUpdate": titre,
+                                    "texteUpdate": texte,
+                                    "idUpdate": id2,
+                                    "action": "updateCarousel"
+                                })
+                            })
+                            .then(response => response.json()).then(data => window.location.reload()) // window.location.reload(), permet de voir en direct la suppression
+                            .catch(error => console.log(error));
+                    });
+                }
+            })
+            .catch(error => console.log(error));
     </script>
 </body>
 

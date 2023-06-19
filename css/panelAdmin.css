@@ -1,8 +1,8 @@
-deleteCat, editCat{
+.deleteCat, .editCat{
 background-color: transparent;
 border:transparent;
 }
 
-#imgCat, #imgSousCat{
+#imgCat, #imgSousCat, .imgCarousel{
     width:100px;
 }

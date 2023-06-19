@@ -34,3 +34,10 @@ if ($_POST["action"] === "updateSousCat") {
     $message["statut"] = "OK";
     echo json_encode($message);
 }
+
+if ($_POST["action"] === "updateCarousel") {
+    $requete = $bdd->prepare('UPDATE `carousel` SET `imgCarousel`=?, `titreCarousel`=?,`texteCarousel`=? WHERE id=?');
+    $requete->execute(array( $_POST["imgUpdate"], $_POST["titreUpdate"], $_POST["texteUpdate"], $_POST["idUpdate"]));
+    $message["statut"] = "OK";
+    echo json_encode($message);
+}
