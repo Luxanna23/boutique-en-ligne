@@ -77,4 +77,9 @@
     }
     nav {
         padding: 1%;
+        font-family: 'Indie Flower', cursive;
+    }
+    #menu-demo2 a {
+        font-family: 'Indie Flower', cursive;
+        font-size: larger;
     }

@@ -9,7 +9,16 @@ $stripe = new \Stripe\StripeClient($stripeSecretKey);
 
 $paymentIntentId = $_GET['payment_intent'];
 
-if ($paymentIntentId) {
+if (isset($paymentIntentId) && !empty($paymentIntentId)) {
+
+    $request = $bdd->prepare('SELECT * FROM commande WHERE paymentIntentId = ?');
+    $request->execute([$paymentIntentId]);
+
+    if ($request->rowCount() > 0) {
+        header('Location: panier.php');
+        return;
+    }
+
     $paymentIntent = $stripe->paymentIntents->retrieve($paymentIntentId);
 
     if ($paymentIntent->status === 'succeeded') {
@@ -33,19 +42,19 @@ if ($paymentIntentId) {
 
         $prixTotal = $paymentIntent->amount / 100;
 
-        $request = $bdd->prepare('INSERT INTO `commande`(`adresse`, `id_user`, `phone`, `date`, `prixTotal`) VALUES (?,?,?,?,?)');
-        $request->execute([$user['adresse'], $user['id'], $user['phone'], date('Y-m-d'), $prixTotal]);
+        $request2 = $bdd->prepare('INSERT INTO `commande`(`adresse`, `id_user`, `phone`, `date`, `prixTotal`,`paymentIntentId`) VALUES (?,?,?,?,?,?)');
+        $request2->execute([$user['adresse'], $user['id'], $user['phone'], date('Y-m-d'), $prixTotal, $paymentIntentId]);
         $idcommande = $bdd->lastInsertId();
 
         // parcourir les produits du panier
         foreach ($products as $product) {
             $articleIDPanier = $product['idArt'];
-            $request2 = $bdd->prepare('INSERT INTO `commandpanier`(`id_commande`, `id_article`) VALUES (?,?)');
-            $request2->execute([$idcommande, $articleIDPanier]);
+            $request3 = $bdd->prepare('INSERT INTO `commandpanier`(`id_commande`, `id_article`, quantite_art) VALUES (?,?,?)');
+            $request3->execute([$idcommande, $articleIDPanier, 0]);
         }
 
-        $request3 = $bdd->prepare('DELETE FROM `panier` WHERE `id_user` = (?)');
-        $request3->execute([$user['id']]);
+        $request4 = $bdd->prepare('DELETE FROM `panier` WHERE `id_user` = (?)');
+        $request4->execute([$user['id']]);
     } else {
         header('Location: panier.php');
     }

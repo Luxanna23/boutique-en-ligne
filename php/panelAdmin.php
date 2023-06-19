@@ -14,7 +14,14 @@ require_once('../includes/header2.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../css/panelAdmin.css">
     <script src="https://kit.fontawesome.com/020a26a846.js" crossorigin="anonymous"></script>
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../css/header.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script src="../js/autocompletion.js" defer></script>
+    <script src="../js/fonction.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <title>Panel Admin</title>
 </head>
 
 <body>
@@ -169,96 +176,21 @@ require_once('../includes/header2.php');
                 let update = document.getElementsByName("editCat");
                 console.log(update[0]);
 
-                for (let i = 0; i < update.length; i++) {
-
-                    // console.log(imgCat.src, titreCat.value)
-                    // console.log(update[i].id)
-                    update[i].addEventListener('click', () => {
-                        let imgCat = document.getElementById("imgCat" + resultats.idCat);
-                        let titreCat = document.getElementById("titreCat" + resultats.idCat);
-                        console.log(titreCat);
-                        let id2 = update[i].getAttribute('data-id');
-                        let img = imgCat.value;
-                        let titre = titreCat.value;
-                        // submit[i].id
-                        console.log(update[i]);
-                        fetch("traitementPanel.php", {
-                                method: "POST",
-                                headers: {
-                                    'Content-type': "multipart/form-data"
-                                },
-                                body: JSON.stringify({
-                                    "titreUpdate": titre,
-                                    "imgUpdate": img,
-                                    "idUpdate": id2,
-                                    "action": "update"
-
-                                })
-                            }).then(response => response.json()).then(data => window.location.reload()) // window.location.reload(), permet de voir en direct la suppression
-                            .catch(error => console.log(error));
-                    })
-                }
-
-            })
-
-
-        }).catch(error => console.log(error));
-
-        //affichage des sous-catégories avec deletion et modification
-        fetch('./recherche.php?sousCat=1').then(response => {
-            return response.json();
-        }).then(data => {
-            let categories = document.getElementById("sousCategories");
-            // console.log(categories);
-            let sousCats = document.createElement("div");
-            sousCats.setAttribute("id", "cats");
-            categories.append(sousCats);
-
-            data.filter(function(resultats) {
-                console.log(resultats);
-                let deleteCat = document.createElement('div');
-                let updateCat = document.createElement('div');
-
-                deleteCat.innerHTML = '<span>  <img id="imgSousCat" src="' + resultats.imgSousCat + '" alt="">' + resultats.titreSousCat + '</span> <button type="button" name="deleteSousCat" data-id ="' + resultats.id + '" id="deleteSousCat' + resultats.id + '"><i class="fa-solid fa-trash-can fa-lg"></i></button>';
-                updateCat.innerHTML = '<input id="imgSousCat' + resultats.id + '"  value="' + resultats.imgSousCat + '"><input id="titreSousCat' + resultats.id + '" value="' + resultats.titreSousCat + '"><input type="button" name="editSousCat" data-id ="' + resultats.id + '"  id="editSousCat' + resultats.id + '"><i class="fa-regular fa-pen-to-square fa-lg"></i></button>';
-
-                sousCats.append(deleteCat);
-                sousCats.append(updateCat);
-
-                let submit = document.getElementsByName("deleteSousCat");
-                // console.log(submit[0]);
-                for (let i = 0; i < submit.length; i++) {
-                    submit[i].addEventListener('click', () => {
-                        let id = submit[i].getAttribute('data-id');
-                        // submit[i].id
-                        console.log(submit[i]);
-                        if (window.confirm("Voulez vous vraiment supprimer la sous-catégorie")) {
-                            fetch("traitementPanel.php", {
-                                    method: "POST",
-                                    body: JSON.stringify({
-                                        "idDelete": id,
-                                        "action": "deleteSousCat"
-                                    })
-                                }).then(response => response.json()).then(data => window.location.reload()) // window.location.reload(), permet de voir en direct la suppression
-                                .catch(error => console.log(error));
-                        }
-                    })
-                }
-                let update = document.getElementsByName("editSousCat");
-                // console.log(update[0]);
-
-                for (let i = 0; i < update.length; i++) {
-                    update[i].addEventListener('click', () => {
-                        let imgSousCat = document.getElementById("imgSousCat" + resultats.id);
-                        let titreSousCat = document.getElementById("titreSousCat" + resultats.id);
-                        let id2 = update[i].getAttribute('data-id');
-                        let img = imgSousCat.value;
-                        let titre = titreSousCat.value;
-                        console.log(id2, img, titre);
-                        console.log(JSON.stringify({
-                            "titreUpdate": titre,
-                            "imgUpdate": img,
-                            "idUpdate": id2,
+            for (let i = 0; i < update.length; i++) {
+                
+                // console.log(imgCat.src, titreCat.value)
+                // console.log(update[i].id)
+                update[i].addEventListener('click', () => {
+                    let imgCat= document.getElementById("imgCat");
+                let titreCat= document.getElementById("titreCat");
+                    let id2 = update[i].getAttribute('data-id');
+                    let img = imgCat.src;
+                    let titre = titreCat.value;
+                    console.log(id2,img,titre);
+                    console.log( JSON.stringify({
+                                "titreUpdate": titre,
+                                "imgUpdate": img,
+                                "idUpdate": id2,
 
                         }))
                         // submit[i].id
