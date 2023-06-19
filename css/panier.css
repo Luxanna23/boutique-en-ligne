@@ -1,11 +1,13 @@
 main {
+  margin-left: 3%;
+  margin-right: 3%;
   font-family: 'Inria Serif';
   font-size: large;
 }
 
 img {
-    height: 200px;
-    width: 200px;
+    height: 100px;
+    width: 100px;
     padding: 1%;
   }
 
@@ -13,19 +15,90 @@ img {
     display: flex;
 }
 
-.produitPanier {
-}
-
-hr {
-  color: black;
-}
-
-.prix {
-  display: flex;
-  justify-content: space-between;
-}
 .trait {
   width : 90%;
   height: 20px;
-  border-bottom: solid 1px black;
+  border-bottom: solid 2px black;
 }
+#panier .table {
+  margin: auto;
+  width: 90%;
+}
+table button {
+  background: transparent;
+  border: none;
+}
+
+.qttpanier {
+  display: flex;
+}
+
+.divparent {
+  display: flex;
+  flex-direction: column;
+  margin: 7%;
+}
+.prix {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ .divdebut {
+  width: 20%;
+  text-align: center;
+}
+
+.divmilieu {
+  width: 80%;
+  border-bottom: 2px solid black;
+  margin-bottom: 1px;
+  text-align: center;
+}
+.divfin {
+  width: 20%;
+  text-align: center;
+} 
+
+.lalivraison, .letelephone {
+  text-align: center;
+}
+
+.lepaiement {
+  margin-top: 2%;
+  margin-bottom: 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+
+.infopaiement {
+  display: flex;
+  justify-content: space-around;
+}
+
+@media (max-width: 768px) {
+  .divparent {
+    display: flex;
+    flex-direction: column;
+  }
+  .prix {
+    display: flex;
+    justify-content: column;
+    align-items: center;
+  }
+  .divmilieu {
+    display: none;
+  }
+  .divdebut {
+    width: auto;
+    text-align: center;
+  }
+  .divfin {
+    width: auto;
+    text-align: center;
+  } 
+}
+
+
+

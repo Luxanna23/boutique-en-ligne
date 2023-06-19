@@ -12,7 +12,7 @@ require_once('../includes/config.php');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription</title>
+    <title>Categorie</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <link rel="stylesheet" type="text/css" href="../css/header.css">
     <link rel="stylesheet" type="text/css" href="../css/categorie.css">
@@ -23,6 +23,9 @@ require_once('../includes/config.php');
     <script src="../js/affichageCateg.js" defer></script>
     <script src="../js/autocompletion.js" defer></script>
     <script src="../js/fonction.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -37,40 +40,7 @@ require_once('../includes/config.php');
         ?>
         <div id="container">
             <form action="" method="get">
-                <div id="filterDiv">
-                    <a href="categories.php" class="resultParent">Tout les articles</a>
-                    <?php
-                    foreach ($result as $categorie) {
-                        $categorieId = $categorie['idCat'];
-                        $categorieNom = $categorie['titreCat']; ?>
-                        <div class="categoryParentDiv" data-parent-id="<?= $categorieId; ?>">
-                            <ul>
-                                <li class="resultParent dropdown-toggle" id="<?= $categorieNom; ?>">
-                                    <input type="radio" class="category" name="category" id="<?= $categorieId; ?>"><?= $categorieNom; ?>
-                                </li>
-                                <ul class="categoryChildDiv" id="categoryChildDiv<?= $categorieId; ?>" data-parent-id="<?= $categorieId; ?>">
-                                    <?php
-                                            $req2 = $bdd->prepare('SELECT * FROM `souscategorie` WHERE `id_parent` = ?');
-                                            $req2->execute([$categorieId]);
-                                            $result2 = $req2->fetchAll(PDO::FETCH_ASSOC);
-                                            foreach ($result2 as $Subcategorie) {
-                                                $subCategorieId = $Subcategorie['id'];
-                                                $subCategorieNom = $Subcategorie['titreSousCat']; ?>
-                                        <li id="<?= $subCategorieNom; ?>">
-                                            <input type="radio" class="subCategory" name="subCategory" id="<?= $subCategorieId; ?>">
-                                            <?= $subCategorieNom; ?>
-                                        </li>
-                                    <?php
-                                            }
-                                    ?>
-                                </ul>
-                            </ul>
-                            </a>
-                        </div>
-                    <?php
-                    }
-                    ?>
-                </div>
+                <!-- ici y'avais le fichier testcateg.php -->
             </form>
             <div id="allItems">
             </div>

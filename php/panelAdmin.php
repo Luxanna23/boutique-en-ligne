@@ -17,6 +17,11 @@ require_once('../includes/config.php');
     <script src="https://kit.fontawesome.com/020a26a846.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="../css/header.css">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script src="../js/autocompletion.js" defer></script>
+    <script src="../js/fonction.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
     <title>Panel Admin</title>
 </head>
 

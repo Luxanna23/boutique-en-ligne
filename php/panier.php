@@ -61,6 +61,9 @@ if ($result) {
     <script src="../js/fonction.js" defer></script>
     <script src="../js/panier.js" defer></script>
     <script src="https://js.stripe.com/v3/"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
     <script>
         const cart = {
             products: <?= json_encode($products) ?>,
@@ -79,32 +82,61 @@ if ($result) {
     <?php require_once('../includes/header2.php'); ?>
     <main>
         <h1>Mon Panier</h1>
-        <hr>
+        <hr id='hr1'>
         <div id="panier">
             <?php
-            if (count($products) > 0) {
+            if (count($products) > 0) { ?>
+                <table class="table"> 
+                <thead>
+                    <tr>
+                    <th scope="col">Article</th>
+                    <th scope="col">Titre</th>
+                    <th scope="col">Quantité</th>
+                    <th scope="col">Prix</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
                 // Afficher les produits du panier
-                foreach ($products as $product) {
-                    echo "<div class='prduitImgDescri' id='prduitImgDescri".$product['idArt']."'><a href='detail.php?article_id=" . $product['idArt'] . "'><img src='" . $product['imgArt'] . " '></a><div class='produitPanier'><span>" . $product['titreArt'] . "<br><span id='quantite".$product['idArt']."'>Quantité : " . $product['quantite'] . "</span><br>Prix : " . ($product['prix'] * $product['quantite']) . "€ (soit " . $product['quantite']." × ".$product['prix'] . " €)</span>
-                    <button name='deleteArt' value=".$product['idArt']."><i class='fa-solid fa-trash fa-lg' style='color: #000000;'></i></button></br></div></div>";
-                   
-                
-                }
+                foreach ($products as $product) { ?>
+                    <tr>
+                        <td><div class='prduitImgDescri' id="prduitImgDescri<?=$product['idArt']?>"><a href='detail.php?article_id=<?=$product['idArt']?>'><img src="<?=$product['imgArt'] ?>"></a></div></td>
+                        <td><div class='produitPanier'><?=$product['titreArt']?></td>
+                        <td><div class='qttpanier' id='quantite<?=$product['idArt']?>'>
+                            <?php echo "<button name='deleteArt' value=".$product['idArt']."><i class='fa-solid fa-minus fa-sm' style='color: #000000;'></i></button>";?>
+                            <?=$product['quantite']?>
+                            <?php echo "<form method='POST'><button name='addArt".$product['idArt']."'><i class='fa-solid fa-plus fa-sm' style='color: #000000;'></i></button></form>";?>
+                            </div></td>
+                            <td><div class='produitPanier'><?=($product['prix'] * $product['quantite']) . "€"?></td>
+                        
+                        <?php
+                        if (isset($_POST["addArt".$product['idArt']])) { 
+                            $reqbtn = $bdd->prepare("UPDATE `panier` SET `quantite_art`= ? WHERE id_article = ?");
+                            $reqbtn->execute([$product['quantite'] + 1, $product['idArt']]);
+                            header('Location:panier.php');
+                        }?> 
+                    </tr>
+                    
+                <?php
+                } ?> </tbody>
+                </table> <?php 
                 // $somme c'est le prix AVEC TVA comprise
                 $tva = (20 / 100); // on met la TVA toujours a 20% ici
                 $prixTva = $somme / (1 + $tva);
                 $valeurLimiteeTva = number_format($prixTva, 2); // pour limiter le calcul a 2 chiffres apres la virgule
                 $prixTotal = $somme + $livraison;
-                echo "<div><span class='prix'><div>Sous total (hors taxes) : </div><div>" . $valeurLimiteeTva . " €</span></div></div><br>
-                <div><span class='prix'><div>TVA : </div><span class='trait'></span><div> 20% </span></div></div><br>
-                <div><span class='prix'><div>Frais de livraison : </div><div>4,99 € </span></div></div><br>
-                <div><span class='prix'><div>Total : </div><div>" . ($prixTotal) . " €</span></div></div></div>";
+                echo "<div class='divparent'><span class='prix'><div class='divdebut'>Sous total (hors taxes) : </div><div class='divmilieu'></div><div class='divfin'>" . $valeurLimiteeTva . " €</div></span><br>
+                <span class='prix'><div class='divdebut'>TVA : </div><div class='divmilieu'></div><div class='divfin'> 20% </div></span><br>
+                <span class='prix'><div class='divdebut'>Frais de livraison : </div><div class='divmilieu'></div><div class='divfin'> 4,99 € </div></span><br>
+                <span class='prix'><div class='divdebut'>Total : </div><div class='divmilieu'></div><div class='divfin'>" . ($prixTotal) . " €</div></span></div>";
             } else {
                 echo "<p>Panier vide</p>";
             }
             ?>
         </div>
-        <div><span>Adresse de livraison :</span>
+        <div class="infopaiement"> 
+            <div class="infoflex1">
+        <div class="lalivraison"><span>Adresse de livraison :</span>
             <?php
             if ($adresse->itExist($bdd)) {
                 $adresseCommande = $adresse->isExisting($bdd);
@@ -115,7 +147,7 @@ if ($result) {
             ?>
         </div>
 
-        <div><span>Numero de téléphone :</span>
+        <div class="letelephone"><span>Numero de téléphone :</span>
             <?php
             if ($user->isPhoneExist($bdd)) {
                 $phoneCommande = $user->selectPhoneNumber($bdd);
@@ -131,8 +163,10 @@ if ($result) {
                     }
                     ?>
                 </form>
-            <?php }
-
+            <?php } ?>
+        </div>
+            </div>
+        <div class="lepaiement"><?php
             if (count($products) > 0 && $user->isPhoneExist($bdd) && $adresse->itExist($bdd)) {
             ?>
                 <div><span>Proceder au paiement :</span></div>
@@ -154,6 +188,8 @@ if ($result) {
             <?php
             }
             ?>
+        </div>
+        </div>
     </main>
 </body>
 

@@ -12,93 +12,28 @@ body {
     margin-top: 20px;
   }
   #allItems {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    /* grid-template-columns: repeat(4, 1fr); */
     width: 100%;
-  }
-.categoryChildDiv {
-    display: none;
-  }
-  
-  .categoryChildDivBlock {
-    display: block;
+    justify-content: center;
+    margin-left: 3%;
+    margin-right: 3%;
+    flex-wrap: wrap;
   }
   
   #container {
     display: flex !important;
     flex-direction: row;
   }
-  
-  main li {
-    list-style: none;
-  }
-  
-  .divImg {
-    width: 15%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .itemImg {
-    width: 70%;
-    /* padding: 0.5em !important; */
-  }
-  .divGlobal {
-      border-color: black;
-      border: 1px solid;
-      border-radius: 10px;
-      margin-bottom: 1em !important;
-  }
-  
-  .divGlobal a {
-      display: flex;
-      text-decoration: none;
-      color: black;
-      width: 100%;
-      padding: 1em !important;
-  }
-  
-  .divNameDesc {
-    /* margin-left: 30px !important; */
-    width: 70%;
-  }
-  .divPrice {
-    /* margin-left: 30px !important; */
-    width: 15%;
-    margin: auto !important;
-    text-align: center;
-    font-weight: bolder;
-  }
-  .itemPrice{
-      font-size: 2em;
-      color: #e26464;
-  }
-  .itemStock{
-      font-size: 1em;
-  }
-  .itemName {
-    font-weight: bolder;
-  }
-  .divGlobal:hover .itemName {
-    color: red;
-    transition: 0.3s;
-  }
-  .divGlobal:hover .itemImg {
-    transform: scale(1.1);
-    transition: 0.5s ease-in-out;
-  }
-  .divGlobal .itemImg {
-    transform: scale(1);
-    transition: 0.5s ease-in-out;
-  }
-  
-  #filterDiv {
-    width: 200px;
-  }
 
   img {
     height: 250px;
     width: 250px;
-    padding: 1%;
+  }
+  #allItems li {
+    margin: 20px 20px 20px 20px;
+  }
+  #allItems p {
+    text-align: center;
+    margin-top: 5%;
   }

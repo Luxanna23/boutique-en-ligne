@@ -17,7 +17,7 @@ buttonsDelete.forEach(button => {
             console.log(data)
             if (data.quantite){
                 const qt = document.getElementById('quantite'+button.value);
-                qt.innerHTML = "Quantité : " + data.quantite;
+                qt.innerHTML = data.quantite;
                 window.location.reload()
             }
             else {

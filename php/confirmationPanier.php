@@ -49,8 +49,8 @@ if (isset($paymentIntentId) && !empty($paymentIntentId)) {
         // parcourir les produits du panier
         foreach ($products as $product) {
             $articleIDPanier = $product['idArt'];
-            $request3 = $bdd->prepare('INSERT INTO `commandpanier`(`id_commande`, `id_article`) VALUES (?,?)');
-            $request3->execute([$idcommande, $articleIDPanier]);
+            $request3 = $bdd->prepare('INSERT INTO `commandpanier`(`id_commande`, `id_article`, quantite_art) VALUES (?,?,?)');
+            $request3->execute([$idcommande, $articleIDPanier, 0]);
         }
 
         $request4 = $bdd->prepare('DELETE FROM `panier` WHERE `id_user` = (?)');

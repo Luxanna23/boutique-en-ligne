@@ -24,6 +24,9 @@ ob_start('ob_gzhandler'); //si il y a un pb essayer avec ob_start()
     <script src="https://kit.fontawesome.com/e1a1b68f9b.js" crossorigin="anonymous"></script>
     <script src="../js/autocompletion.js" defer></script>
     <script src="../js/fonction.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
 </head>
 
 <body>
