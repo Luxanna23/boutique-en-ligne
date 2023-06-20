@@ -1,4 +1,6 @@
+
 <?php
+if($_SESSION["user"]["firstname"]=="admin" && $_SESSION["user"]["password"]=="Admin1902"){
 require_once('../classes/Categorie.php');
 require_once('../classes/SousCategorie.php');
 require_once('../classes/Article.php');
@@ -131,7 +133,7 @@ require_once('../includes/config.php');
             data.filter(function(resultats) {
                 let select = document.getElementById("sousCategories-select");
                 let option = document.createElement('option');
-                option.setAttribute('value', resultats.idCat);
+                option.setAttribute('value', resultats.id);
                 option.innerHTML = resultats.titreSousCat;
                 select.append(option);
             });
@@ -458,3 +460,9 @@ require_once('../includes/config.php');
 </body>
 
 </html>
+<?php
+}
+else{
+    header("Location:index.php");
+}
+?>

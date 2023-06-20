@@ -134,6 +134,9 @@
 
 .nouveaute {
     position: absolute;
+    text-align: center;
+    top:2%;
+    left: 2%;
     z-index: 2;
     background-color: #fff;
 }

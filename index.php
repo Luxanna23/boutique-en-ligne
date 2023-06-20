@@ -101,8 +101,8 @@ ob_start(); // contre l'erreur d'header location
       article.setAttribute("class", "article");
       let img = document.createElement('img');
       let a = document.createElement("a");
-      let p = document.createElement("p");
-      let nouveaute = document.createElement("div");
+      
+      let nouveaute = document.createElement("p");
       nouveaute.setAttribute("class", "nouveaute");
 
       let img1 = document.getElementsByClassName("img1");
@@ -116,15 +116,14 @@ ob_start(); // contre l'erreur d'header location
         a.setAttribute("href", "php/detail.php?article_id=" + resultats.idArt);
         img.src = resultats.imgArt;
         carousel2.append(article)
-        article.append(a);
+        
         a.append(img);
         if (dateArt > date) {
-          p.textContent = "Nouveauté";
-          nouveaute.append(p);
+          nouveaute.textContent = "Nouveauté";
           article.append(nouveaute);
           console.log(nouveaute);
         }
-      
+        article.append(a);
       }
     })
   }).catch(error => console.log(error))

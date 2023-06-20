@@ -1,4 +1,6 @@
+
 <?php
+if($_SESSION["user"]["firstname"]=="admin" && $_SESSION["user"]["password"]=="Admin1902"){
 require_once('../classes/Categorie.php');
 require_once('../classes/SousCategorie.php');
 require_once('../classes/Article.php');
@@ -97,9 +99,9 @@ require_once('../includes/config.php');
             $date = date('Y/m/d');
             $categories = htmlspecialchars($_POST['categories']);
             $quantite = htmlspecialchars($_POST['quantite']);
-            $sousCatagories = htmlspecialchars($_POST['sousCategories']);
+            $sousCategories = htmlspecialchars($_POST['sousCategories']);
             $imgArt = htmlspecialchars($_POST['imgArt']);
-            $article = new Article($titreArt, $description, $prix, $date, $categories, $quantite, $imgArt, $promo);
+            $article = new Article($titreArt, $description, $prix, $date, $categories, $sousCategories, $quantite, $imgArt, $promo);
             $article->addArticle($bdd);
             header("Location: panelAdmin.php"); // Evite qu'en rechargeant la page on recrée la même cat.
         }
@@ -113,19 +115,14 @@ require_once('../includes/config.php');
             data.filter(function(resultats) {
                 let select = document.getElementById("categorie-select");
                 let select2 = document.getElementById("categories-select");
-                let selectArt = document.getElementById("categorieArt-select");
                 let option = document.createElement('option');
                 let option2 = document.createElement('option');
-                let option3 = document.createElement('option');
                 option.setAttribute('value', resultats.idCat);
                 option.innerHTML = resultats.titreCat;
                 option2.setAttribute('value', resultats.idCat);
                 option2.innerHTML = resultats.titreCat;
-                option3.setAttribute('value', resultats.idCat);
-                option3.innerHTML = resultats.titreCat;
                 select.append(option);
                 select2.append(option2);
-                selectArt.append(option3);
             });
 
         })
@@ -135,15 +132,10 @@ require_once('../includes/config.php');
         ).then((data) => {
             data.filter(function(resultats) {
                 let select = document.getElementById("sousCategories-select");
-                let selectArt = document.getElementById("sousCategorieArt-select");
                 let option = document.createElement('option');
-                let option2 = document.createElement('option');
                 option.setAttribute('value', resultats.id);
                 option.innerHTML = resultats.titreSousCat;
                 select.append(option);
-                option2.setAttribute('value', resultats.id);
-                option.innerHTML = resultats.titreSousCat;
-                selectArt.append(option2);
             });
 
         })
@@ -382,26 +374,25 @@ require_once('../includes/config.php');
                 let deleteArt = document.createElement('div');
                 let updateArt = document.createElement('div');
 
-                deleteArt.innerHTML = '<div><img id="imgArt" src="' + resultats.imgArt + '" alt="">' + resultats.titreArt + resultats.description + resultats.prix + resultats.quantite + resultats.titreCat + resultats.titreSousCat + '</div> <button class="deleteArt" name="deleteArt" data-id ="' + resultats.idArt + '" id="deleteArt' + resultats.idArt + '"><i class="fa-solid fa-trash-can"></i></button>';
-                updateArt.innerHTML = '<input id="imgArt' + resultats.idArt + '"  value="' + resultats.imgArt + '"><input id="titreArt' + resultats.idArt + '" value="' + resultats.titreArt + '"><input id="description' + resultats.idArt + '" value="' + resultats.description + '"><input id="prixArt' + resultats.idArt + '" value="' + resultats.prix + '"><input id="quantite' + resultats.idArt + '" value="' + resultats.quantite + '"> <select name="categorieArt" id="categorieArt-select" value="categorieArt"><option selected disabled>Catégorie</option></select><select name="sousCategorieArt" id="sousCategorieArt-select" value="sousCategorieArt"><option selected disabled>Sous-catégorie</option></select><button class="editArt" name="editArt" data-id ="' + resultats.idArt + '"  id="editArt' + resultats.idArt + '"><i class="fa-regular fa-pen-to-square"></i></button>';
+                deleteArt.innerHTML = '<div><img id="imgArt" src="' + resultats.imgArt + '" alt="">' + resultats.titreArt + resultats.description + resultats.prix + resultats.quantite + resultats.titreCat + resultats.titreSousCat + '</div> <button class="deleteArt" name="deleteArt" data-idArt ="' + resultats.idArt + '" id="deleteArt' + resultats.idArt + '"><i class="fa-solid fa-trash-can"></i></button>';
+                updateArt.innerHTML = '<input id="imgArt' + resultats.idArt + '"  value="' + resultats.imgArt + '"><input id="titreArt' + resultats.idArt + '" value="' + resultats.titreArt + '"><input id="description' + resultats.idArt + '" value="' + resultats.description + '"><input id="prixArt' + resultats.idArt + '" value="' + resultats.prix + '"><input id="quantite' + resultats.idArt + '" value="' + resultats.quantite + '"><input id="categorieArt' + resultats.idArt + '" value="' + resultats.titreCat + '"><input id="sousCatArt' + resultats.idArt + '" value="' + resultats.titreSousCat + '"><button class="editArt" name="editArt" data-idArt ="' + resultats.idArt + '"  id="editArt' + resultats.idArt + '"><i class="fa-regular fa-pen-to-square"></i></button>';
 
                 arts.append(deleteArt);
                 arts.append(updateArt);
 
-                let submit = document.getElementsByName("deleteArt");
+                let artDeleteBtn = document.getElementsByName("deleteArt");
                 // console.log(submit[0]);
 
-                for (let i = 0; i < submit.length; i++) {
+                for (let i = 0; i < artDeleteBtn.length; i++) {
                     console.log(i)
-                    submit[i].addEventListener('click', () => {
-                        let id = submit[i].getAttribute('data-id');
-                        // submit[i].id
-                        console.log(submit[i]);
+                    artDeleteBtn[i].addEventListener('click', () => {
+                        let id3 = artDeleteBtn[i].getAttribute('data-idArt');
+                        console.log(artDeleteBtn[i]);
                         if (window.confirm("Voulez vous vraiment supprimer l'article'")) {
                             fetch("traitementPanel.php", {
                                     method: "POST",
                                     body: JSON.stringify({
-                                        "idDelete": id,
+                                        "idDelete": id3,
                                         "action": "deleteArt"
                                     })
                                 }).then(response => response.json()).then(data => window.location.reload()) // window.location.reload(), permet de voir en direct la suppression
@@ -469,3 +460,9 @@ require_once('../includes/config.php');
 </body>
 
 </html>
+<?php
+}
+else{
+    header("Location:index.php");
+}
+?>

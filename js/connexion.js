@@ -28,6 +28,7 @@ formEl.addEventListener("submit", (event) => {
         message.innerHTML = data.succes;
         formEl.reset();
       }
+      
     })
     .catch((error) => console.log(error));
 });
