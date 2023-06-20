@@ -10,27 +10,31 @@ class Article
     public $prix;
     public $date;
     public $id_categorie;
+    public $id_sousCategorie;
     public $quantite;
     public $imgArt;
+    public $promo;
 
 
 
     // methodes
-    public function __construct($titreArt, $description, $prix, $date, $id_categorie, $quantite, $imgArt)
+    public function __construct($titreArt, $description, $prix, $date, $id_categorie, $id_sousCategorie, $quantite, $imgArt, $promo)
     {
         $this->titreArt = $titreArt;
         $this->description = $description;
         $this->prix = $prix;
         $this->date = $date;
         $this->id_categorie = $id_categorie;
+        $this->id_sousCategorie = $id_sousCategorie;
         $this->quantite = $quantite;
         $this->imgArt = $imgArt;
+        $this->promo = $promo;
         
     }
     public function addArticle($bdd)
     {
-        $addArticle = $bdd->prepare('INSERT INTO `articles`(`titreArt`, `description`, `prix`, `date`, `id_categorie`, `quantite`, `imgArt`) VALUES(?,?,?,?,?,?,?)');
-        $addArticle->execute([$this->titreArt, $this->description, $this->prix, $this->date, $this->id_categorie, $this->quantite, $this->imgArt]);
+        $addArticle = $bdd->prepare('INSERT INTO `articles`(`titreArt`, `description`, `prix`, `date`, `id_categorie`,`id_sousCategorie`, `quantite`, `imgArt`, `promotion`) VALUES(?,?,?,?,?,?,?,?,?)');
+        $addArticle->execute([$this->titreArt, $this->description, $this->prix, $this->date, $this->id_categorie, $this->id_sousCategorie, $this->quantite, $this->imgArt,  $this->promo]);
     }
 
     public function delete($bdd)

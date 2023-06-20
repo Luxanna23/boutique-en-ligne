@@ -44,6 +44,7 @@ ob_start(); // contre l'erreur d'header location
 
 
   <?php
+  var_dump($_SESSION["user"]);
   require_once('includes/footer.php'); ?>
 </body>
 <script>
@@ -64,7 +65,7 @@ ob_start(); // contre l'erreur d'header location
       carouselInner[0].append(carouselItem);
       let img = document.createElement("img");
       img.setAttribute("id", "img"+i);
-      img.setAttribute("class", "d-block w-100 ");
+      img.setAttribute("class", "d-block w-50 ");
       img.setAttribute("alt", "img"+i)
       img.src=data[i].imgCarousel;
       carouselItem.append(img);
@@ -91,10 +92,6 @@ ob_start(); // contre l'erreur d'header location
     return response.json();
   }).then(data => {
     let mainIndex = document.getElementById("mainIndex");
-    let carousel2 = document.createElement("div");
-    carousel2.setAttribute("id", "carousel2");
-    // carousel2.setAttribute("class", "scroll-up");
-    mainIndex.append(carousel2);
     let carousel2 = document.createElement("div");
     carousel2.setAttribute("id", "carousel2");
     // carousel2.setAttribute("class", "scroll-up");
@@ -132,5 +129,6 @@ ob_start(); // contre l'erreur d'header location
     })
   }).catch(error => console.log(error))
 </script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </html>
