@@ -154,11 +154,49 @@ if ($result) {
             ?>
 
             <!-- code promo -->
+            
+        </div>
+        <div class="infopaiement">
+            <div class="infoflex1">
+                <div class="lalivraison"><span class="petitTitre">Adresse de livraison :</span><br>
+                    <?php
+                    if ($adresse->itExist($bdd)) {
+                        $adresseCommande = $adresse->isExisting($bdd);
+                        echo $adresseCommande . '<br><a href="inscriptionAdresse.php"><button class="buttonAdresse">Modifier l\'adresse</button></a>';
+                    } else {
+                        echo $adresse->isExisting($bdd);
+                    }
+                    ?>
+                </div>
+
+                <div class="letelephone"><spanspan class="petitTitre">Numero de téléphone :</span><br>
+                    <?php
+                    if ($user->isPhoneExist($bdd)) {
+                        $phoneCommande = $user->selectPhoneNumber($bdd);
+                        echo $phoneCommande;
+                    } else { ?>
+                        <form method="POST">
+                            <input type="tel" id="phone" name="phone" pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" placeholder="01 23 45 67 89" required>
+                            <input type="submit" name="submitPhone" value="Ajouter">
+                            <?php if (isset($_POST['submitPhone'])) {
+                                $user->addPhone($bdd);
+                                echo "enregistré";
+                                header('Location:panier.php');
+                            }
+                            ?>
+                        </form>
+                    <?php } ?>
+                </div>
+            </div>
+            <div class="lepaiement"><?php
+            if (count($products) > 0 && $user->isPhoneExist($bdd) && $adresse->itExist($bdd)) {
+            ?>
             <div class="codepromo">
                 <form method="post">
+                    <span>Vous avez un code promo ? rentrez-le ici !</span><br>
                     <label for="code_promo">Code promo :</label>
                     <input type="text" id="code_promo" name="code_promo">
-                    <input type="submit" name="appliquerPromo" value="Appliquer">
+                    <input type="submit" name="appliquerPromo" value="Appliquer" class="buttonpromo">
                 </form>
 
                 <?php
@@ -186,45 +224,9 @@ if ($result) {
                 }
                 ?>
             </div>
-        </div>
-        <div class="infopaiement">
-            <div class="infoflex1">
-                <div class="lalivraison"><span>Adresse de livraison :</span>
-                    <?php
-                    if ($adresse->itExist($bdd)) {
-                        $adresseCommande = $adresse->isExisting($bdd);
-                        echo $adresseCommande . ' <a href="inscriptionAdresse.php"><button class="buttonAdresse">Modifier l\'adresse</button></a>';
-                    } else {
-                        echo $adresse->isExisting($bdd);
-                    }
-                    ?>
-                </div>
-
-                <div class="letelephone"><span>Numero de téléphone :</span>
-                    <?php
-                    if ($user->isPhoneExist($bdd)) {
-                        $phoneCommande = $user->selectPhoneNumber($bdd);
-                        echo $phoneCommande;
-                    } else { ?>
-                        <form method="POST">
-                            <input type="tel" id="phone" name="phone" pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" placeholder="01 23 45 67 89" required>
-                            <input type="submit" name="submitPhone" value="Ajouter">
-                            <?php if (isset($_POST['submitPhone'])) {
-                                $user->addPhone($bdd);
-                                echo "enregistré";
-                                header('Location:panier.php');
-                            }
-                            ?>
-                        </form>
-                    <?php } ?>
-                </div>
-            </div>
-            <div class="lepaiement"><?php
-                                    if (count($products) > 0 && $user->isPhoneExist($bdd) && $adresse->itExist($bdd)) {
-                                    ?>
                     <hr id='hr1'>
-                    <div><span>Proceder au paiement :</span></div>
-                    <form id="payment-form" style="margin-top: 10px; max-width: 200px;">
+                    <div><span class="petitTitre">Proceder au paiement :</span></div>
+                    <form id="payment-form" style="margin-top: 10px;">
                         <div id="link-authentication-element">
                             <!--Stripe.js injects the Link Authentication Element-->
                         </div>
