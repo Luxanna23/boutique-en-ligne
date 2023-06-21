@@ -3,7 +3,7 @@ require_once('../classes/User.php');
 require_once('../includes/config.php');
 ob_start();
 
- $msg = '';
+$msg = '';
 if (isset($_POST["Envoyer"])) {
     $email = htmlspecialchars($_POST['email']);
     $prenom = '';
@@ -34,6 +34,7 @@ if (isset($_POST["Envoyer"])) {
     <title>Inscription</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <link rel="stylesheet" type="text/css" href="../css/header.css">
+    <link rel="stylesheet" type="text/css" href="../css/connexion.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -42,56 +43,34 @@ if (isset($_POST["Envoyer"])) {
     <script src="../js/connexion.js" defer></script>
     <script src="../js/fonction.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <?php require_once('../includes/header2.php'); ?>
     <main>
-        <h1>Connexion</h1>
+        <div class="moduleco">
+            <h1>Connexion</h1>
 
-        <form method="post" id="login">
+            <form method="post">
 
-            <label for="email">Email</label><br>
-            <input type="email" id="email" name="email" /><br>
+                <label for="email">Email</label><br>
+                <input class="inputtext" type="email" id="email" name="email" /><br>
 
 
-            <label for="password">Mot de passe</label><br>
-            <input type="password" id="password" name="password" /><br>
+                <label for="password">Mot de passe</label><br>
+                <input class="inputtext" type="password" id="password" name="password" /><br>
 
-            <p id="message"><?= $msg ?></p>
+                <p id="message"><?= $msg ?></p>
 
-            <input type="submit" name="Envoyer">
+                <input class="inputsubmit" type="submit" name="Envoyer" id="login">
 
-        </form>
-        <span>Vous n'avez pas encore de compte ? <a href="inscription.php">Inscrivez-vous !</a></span>
+            </form>
+            <span>Vous n'avez pas encore de compte ? <a href="inscription.php">Inscrivez-vous !</a></span>
+        </div>
     </main>
 
 </body>
 
 </html>
-
-<!-- <script>
-    let email = document.querySelector("#email");
-    let password = document.querySelector("#password");
-    let message = document.querySelector("#message");
-    let signup = document.querySelector("#login");
-
-    function isLogin() {
-        if (email.value == "") {
-            document.getElementById("message").innerText = "Le champs email ne peut pas être vide.";
-            return false;
-        } else if (password.value == "") {
-            document.getElementById("message").innerText = "Le champs mot de passe ne peut pas être vide.";
-            return false;
-        } else {
-            return true;
-        }
-    }
-    login.addEventListener("submit", (e) => {
-        if (isLogin() == false) {
-            e.preventDefault();
-        }
-    });
-</script> -->
