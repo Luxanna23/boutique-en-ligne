@@ -1,0 +1,30 @@
+.moduleco {
+    font-family: inria sherif;
+    font-size: larger;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f4d9c8;
+    width: 80%;
+    margin: auto;
+    margin-top: 3%;
+    padding: 5% 5% 9% 5%;
+    border-radius:100px;
+}
+
+.inputtext {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    margin: 2%;
+}
+
+.inputsubmit {
+    background-color: transparent;
+    border: 2px solid white;
+    padding: 8px 50px;
+}
+
+.inputsubmit:hover {
+    filter: contrast(115%);
+}
