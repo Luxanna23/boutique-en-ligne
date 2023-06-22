@@ -49,6 +49,7 @@ $msg = '';
   <title>Inscription</title>
   <link rel="stylesheet" type="text/css" href="../css/style.css">
   <link rel="stylesheet" type="text/css" href="../css/header.css">
+  <link rel="stylesheet" type="text/css" href="../css/connexion.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -64,33 +65,35 @@ $msg = '';
 <body>
   <?php require_once('../includes/header2.php'); ?>
   <main>
-    <h1>Inscription</h1>
+    <div class="moduleco">
+      <h1 class="titre">Inscription</h1>
 
-    <form method="post" id="signup">
+      <form method="post" id="signup">
 
-      <label for="firstName">Prenom</label><br>
-      <input type="text" id="firstName" name="firstName" /><br>
+        <label for="firstName">Prenom</label><br>
+        <input class="inputtext" type="text" id="firstName" name="firstName" /><br>
 
-      <label for="lastName">Nom</label><br>
-      <input type="text" id="lastName" name="lastName" /><br>
+        <label for="lastName">Nom</label><br>
+        <input class="inputtext" type="text" id="lastName" name="lastName" /><br>
 
-      <label for="email">Email</label><br>
-      <input type="email" id="email" name="email" /><br>
-
-
-      <label for="password">Mot de passe</label><br>
-      <input type="password" id="password" name="password" /><br>
+        <label for="email">Email</label><br>
+        <input class="inputtext" type="email" id="email" name="email" /><br>
 
 
-      <label for="password2">Confirmez le mot de passe</label><br>
-      <input type="password" id="password2" name="password2" /><br>
+        <label for="password">Mot de passe</label><br>
+        <input class="inputtext" type="password" id="password" name="password" /><br>
 
-      <p id="message"><?= $msg ?></p>
 
-      <input type="submit" name="Envoyer">
-    </form>
+        <label for="password2">Confirmez le mot de passe</label><br>
+        <input class="inputtext" type="password" id="password2" name="password2" /><br>
 
-    <span>Vous avez deja un compte ? <a href="connexion.php">Connectez-vous !</a></span>
+        <p id="message"><?= $msg ?></p>
+
+        <input class="inputsubmit" type="submit" name="Envoyer">
+      </form>
+
+      <span class="msgfin">Vous avez deja un compte ? <a href="connexion.php">Connectez-vous !</a></span>
+    </div>
   </main>
 
 </body>

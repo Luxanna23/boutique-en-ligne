@@ -43,8 +43,8 @@ function includeHeader($bdd, $index, $urlPHP, $urlMaquette)
                         <a href="<?= $urlPHP ?>panier.php"><i class="fa-solid fa-cart-shopping fa-2xl" style="color: #000000;"></i></a>
                         <a href="<?= $urlPHP ?>profil.php"><i class="fa-solid fa-user fa-2xl" style="color: #000000;"></i></a>
                     <?php } else { ?>
-                        <a href="<?= $urlPHP ?>connexion.php">Connexion </a>
-                        <a href="<?= $urlPHP ?>inscription.php">Inscription </a>
+                        <a href="<?= $urlPHP ?>connexion.php"><i class="fa-solid fa-right-to-bracket fa-2xl" style="color: #000000;"></i></a>
+                        <a href="<?= $urlPHP ?>inscription.php"><i class="fa-solid fa-user-plus fa-2xl" style="color: #000000;"></i></a>
                     <?php } ?>
                 </div>
             </div>

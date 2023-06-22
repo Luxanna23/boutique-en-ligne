@@ -68,7 +68,7 @@ if (isset($paymentIntentId) && !empty($paymentIntentId)) {
         foreach ($products as $product) {
             $articleIDPanier = $product['idArt'];
             $request3 = $bdd->prepare('INSERT INTO `commandpanier`(`id_commande`, `id_article`, quantite_art) VALUES (?,?,?)');
-            $request3->execute([$idcommande, $articleIDPanier, $product['quantite_art']]);
+            $request3->execute([$idcommande, $articleIDPanier, 1]);
         }
 
         // On supprime le panier de l'utilisateur

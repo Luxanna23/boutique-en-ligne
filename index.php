@@ -44,7 +44,6 @@ ob_start(); // contre l'erreur d'header location
 
 
   <?php
-  var_dump($_SESSION["user"]);
   require_once('includes/footer.php'); ?>
 </body>
 <script>
