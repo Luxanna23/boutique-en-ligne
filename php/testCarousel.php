@@ -1,58 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/carousel.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css" />
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    
     <title>Document</title>
 </head>
+
 <body>
-<div class="top-content">
-    <div class="container-fluid">
-        <div id="carousel-example" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner row w-100 mx-auto" role="listbox">
-                <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 active">
-                    <img src="assets/img/backgrounds/1.jpg" class="img-fluid mx-auto d-block" alt="img1">
+   
+                <div class="carouselNouveautes" >
+                    <div class="artNouveaux">
+                        <img src="https://www.santevet.com/upload/admin/images/article/PMO/FICHES%20RACES/CHATS/chat_de_gouttiere_assurance_sant%C3%A9vet.jpg" class="img-fluid mx-auto d-block" alt="img1">
+                    </div>
+                    <div class="artNouveaux">
+                        <img src="https://static9.depositphotos.com/1594920/1088/i/600/depositphotos_10888323-stock-photo-british-shorthair-cat-7-months.jpg" class="img-fluid mx-auto d-block" alt="img1">
+                    </div>
+                    <div class="artNouveaux">
+                        <img src="https://static5.depositphotos.com/1000270/486/i/600/depositphotos_4869272-stock-photo-bengal-cat-in-light-brown.jpg" class="img-fluid mx-auto d-block" alt="img1">
+                    </div>
+                    <div class="artNouveaux">
+                        <img src="https://www.zooplus.fr/magazine/wp-content/uploads/2019/06/comprendre-le-langage-des-chats.jpg" class="img-fluid mx-auto d-block" alt="img1">
+                    </div>
+                    <div class="artNouveaux">
+                        <img src="https://tractive.com/blog/wp-content/uploads/2022/04/chat-tigre-patrouillant-son-territoire.jpg" class="img-fluid mx-auto d-block" alt="img1">
+                    </div>
                 </div>
-                
-            </div>
-            <a class="carousel-control-prev" href="#carousel-example" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carousel-example" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-    </div>
-</div>
-</body>
-<script>
-    let carousel= getElementById("carousel-example");
-    
-    $('#carousel-example').on('slide.bs.carousel', function (e) {
-    /*
-        CC 2.0 License Iatek LLC 2018 - Attribution required
-    */
-    var $e = $(e.relatedTarget);
-    var idx = $e.index();
-    var itemsPerSlide = 5;
-    var totalItems = $('.carousel-item').length;
- 
-    if (idx >= totalItems-(itemsPerSlide-1)) {
-        var it = itemsPerSlide - (totalItems - idx);
-        for (var i=0; i<it; i++) {
-            // append slides to end
-            if (e.direction=="left") {
-                $('.carousel-item').eq(i).appendTo('.carousel-inner');
-            }
-            else {
-                $('.carousel-item').eq(0).appendTo('.carousel-inner');
-            }
-        }
-    }
-});
+              
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="slick/slick.min.js"></script>
+   
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('.single-item').slick();
+    });
 </script>
+</body>
+
+
 </html>

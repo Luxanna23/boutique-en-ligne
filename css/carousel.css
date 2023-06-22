@@ -1,127 +1,104 @@
-@media (min-width: 768px) and (max-width: 991px) {
-  /* Show 4th slide on md if col-md-4*/
-  .carousel-inner .active.col-md-4.carousel-item + .carousel-item + .carousel-item + .carousel-item {
-      position: absolute;
-      top: 0;
-      right: -33.3333%;  /*change this with javascript in the future*/
-      z-index: -1;
-      display: block;
-      visibility: visible;
-  }
-}
-@media (min-width: 576px) and (max-width: 768px) {
-/* Show 3rd slide on sm if col-sm-6*/
-.carousel-inner .active.col-sm-6.carousel-item + .carousel-item + .carousel-item {
-position: absolute;
-top: 0;
-right: -50%;  /*change this with javascript in the future*/
-z-index: -1;
-display: block;
-visibility: visible;
-}
-}
-@media (min-width: 576px) {
+/* CAROUSEL1 INDEX */
+
 .carousel-item {
-margin-right: 0;
+    height: 70vh;
 }
-/* show 2 items */
-.carousel-inner .active + .carousel-item {
-display: block;
+.carousel-item img{
+    max-height: 100%;  /* permet de fiter l'image au conteneur */
+    max-width: 100%;
+    object-fit: cover; /* pour que l'image fit avec le conteneur */ 
+    margin: auto; /* pour centrer */
 }
-.carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
-.carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item {
-transition: none;
+/* CAROUSEL2 INDEX */
+.scroll_card{
+    position: relative;
 }
-.carousel-inner .carousel-item-next {
-position: relative;
-transform: translate3d(0, 0, 0);
+
+.nouveaute {
+    position: absolute;
+    text-align: center;
+    top:2%;
+    left: 2%;
+    z-index: 2;
+    background-color: #fff;
 }
-/* left or forward direction */
-.active.carousel-item-left + .carousel-item-next.carousel-item-left,
-.carousel-item-next.carousel-item-left + .carousel-item,
-.carousel-item-next.carousel-item-left + .carousel-item + .carousel-item {
-position: relative;
-transform: translate3d(-100%, 0, 0);
-visibility: visible;
+
+.scroll_container {
+    padding-left: 1vw;
+    padding-right: 1vw;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    gap: 10px;
+    -webkit-overflow-scrolling: touch;
 }
-/* farthest right hidden item must be also positioned for animations */
-.carousel-inner .carousel-item-prev.carousel-item-right {
-position: absolute;
-top: 0;
-left: 0;
-z-index: -1;
-display: block;
-visibility: visible;
+
+.scroll_bloc {
+    margin: 13vh 4vh;
 }
-/* right or prev direction */
-.active.carousel-item-right + .carousel-item-prev.carousel-item-right,
-.carousel-item-prev.carousel-item-right + .carousel-item,
-.carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item {
-position: relative;
-transform: translate3d(100%, 0, 0);
-visibility: visible;
-display: block;
-visibility: visible;
+
+.scroll_container::-webkit-scrollbar {
+    height: 1vh;
+    background: white;
 }
+
+.scroll_container::-webkit-scrollbar-thumb {
+    background: #f5d0b9;
+    border-radius: 2px;
+    max-width: 20px;
+    width: 100%;
 }
-/* MD */
-@media (min-width: 768px) {
-/* show 3rd of 3 item slide */
-.carousel-inner .active + .carousel-item + .carousel-item {
-display: block;
+
+.scroll_container::-webkit-scrollbar-thumb:hover {
+    background: #f5d0b9
 }
-.carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item {
-transition: none;
+
+
+
+.scroll_bloc h2 {
+    margin-left: 5vh;
+    font-size: 30px;
+    font-family: "Poppins", sans-serif;
+    opacity: 0.9;
 }
-.carousel-inner .carousel-item-next {
-position: relative;
-transform: translate3d(0, 0, 0);
+
+.imgArticles {
+    height: 95%;
+    min-width: 190px;
+    max-width: 300px;
+    margin-bottom: 0;
+    transition: transform .4s;
 }
-/* left or forward direction */
-.carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item {
-position: relative;
-transform: translate3d(-100%, 0, 0);
-visibility: visible;
+
+
+.imgArticles:hover {
+
+    cursor: pointer;
+    transform: scale(1.08);
+    border: 1px solid white;
 }
-/* right or prev direction */
-.carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item {
-position: relative;
-transform: translate3d(100%, 0, 0);
-visibility: visible;
-display: block;
-visibility: visible;
+@media (max-width: 400px){
+    .scroll_container {
+        padding-left: 2vw;
+        padding-right: 2vw;
+        height: 390px;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        flex-wrap: nowrap;
+        gap: 10px;
+        -webkit-overflow-scrolling: touch;
+    }
 }
-}
-/* LG */
-@media (min-width: 991px) {
-/* show 4th item */
-.carousel-inner .active + .carousel-item + .carousel-item + .carousel-item {
-display: block;
-}
-.carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item + .carousel-item {
-transition: none;
-}
-/* Show 5th slide on lg if col-lg-3 */
-.carousel-inner .active.col-lg-3.carousel-item + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
-position: absolute;
-top: 0;
-right: -25%;  /*change this with javascript in the future*/
-z-index: -1;
-display: block;
-visibility: visible;
-}
-/* left or forward direction */
-.carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
-position: relative;
-transform: translate3d(-100%, 0, 0);
-visibility: visible;
-}
-/* right or prev direction //t - previous slide direction last item animation fix */
-.carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
-position: relative;
-transform: translate3d(100%, 0, 0);
-visibility: visible;
-display: block;
-visibility: visible;
-}
-}
+
+
+
+
+
+

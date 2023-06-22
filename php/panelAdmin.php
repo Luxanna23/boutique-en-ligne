@@ -1,5 +1,5 @@
 <?php
-// if($_SESSION["user"]["email"]=="admin@admin" && $_SESSION["user"]["password"]=="Admin1902"){
+if($_SESSION["user"]["email"]=="admin@admin" && $_SESSION["user"]["password"]=="Admin1902"){
 require_once('../classes/Categorie.php');
 require_once('../classes/SousCategorie.php');
 require_once('../classes/Article.php');
@@ -484,8 +484,8 @@ $message = "";
 
 </html>
 <?php
-// }
-// else{
-//     header("Location:index.php");
-// }
+}
+else{
+    header("Location:../index.php");
+}
 ?>

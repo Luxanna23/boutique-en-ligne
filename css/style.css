@@ -112,31 +112,3 @@
 }
 
 /* FIN DE NAV */
-/* CAROUSEL1 INDEX */
-
-.carousel-item {
-    height: 70vh;
-}
-.carousel-inner img{
-    max-height: 100%;  /* permet de fiter l'image au conteneur */
-    object-fit: cover; /* pour que l'image,  */ 
-    margin: auto; /* pour centrer */
-}
-
-
-
-
-
-/* CAROUSEL2 INDEX */
-.article {
-    position: relative;
-}
-
-.nouveaute {
-    position: absolute;
-    text-align: center;
-    top:2%;
-    left: 2%;
-    z-index: 2;
-    background-color: #fff;
-}
