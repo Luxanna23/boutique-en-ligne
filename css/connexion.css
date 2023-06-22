@@ -4,12 +4,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f4d9c8;
-    width: 80%;
+    background-color: #e6d9d1;
+    width: 60%;
     margin: auto;
     margin-top: 3%;
-    padding: 5% 5% 9% 5%;
+    padding: 5% 5% 4% 5%;
     border-radius:100px;
+}
+
+.titre {
+    margin-bottom: 5%;
 }
 
 .inputtext {
@@ -17,14 +21,101 @@
     border: none;
     border-bottom: 1px solid black;
     margin: 2%;
+    margin-bottom: 8%;
+}
+
+.inputtext:focus {
+    border: none;
+    text-decoration: none;
 }
 
 .inputsubmit {
+    margin-left: auto;
+    margin-right: auto;
     background-color: transparent;
     border: 2px solid white;
     padding: 8px 50px;
+    margin-top: 5%;
+    text-align: center;
 }
 
 .inputsubmit:hover {
     filter: contrast(115%);
 }
+
+.msgfin {
+    padding: 5%;
+    margin-bottom: 0;
+    font-size: large;
+}
+
+.msgfin a {
+    color: rgb(255, 255, 255);
+}
+
+.msgfin a:hover {
+    color: rgb(255, 249, 243);
+}
+
+@media (max-width: 768px) {
+    .moduleco {
+        font-family: inria sherif;
+        font-size: larger;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #e6d9d1;
+        width: 80%;
+        margin: auto;
+        margin-top: 3%;
+        margin-bottom: 5%;
+        padding: 5% 5% 4% 5%;
+        border-radius:50px;
+    }
+    
+    .titre {
+        margin-bottom: 5%;
+    }
+    
+    .inputtext {
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid black;
+        margin: 2%;
+        margin-bottom: 8%;
+    }
+    
+    .inputtext:focus {
+        border: none;
+        text-decoration: none;
+    }
+    
+    .inputsubmit {
+        margin-left: auto;
+        margin-right: auto;
+        background-color: transparent;
+        border: 2px solid white;
+        padding: 8px 50px;
+        margin-top: 5%;
+        text-align: center;
+    }
+    
+    .inputsubmit:hover {
+        filter: contrast(115%);
+    }
+    
+    .msgfin {
+        padding: 5%;
+        margin-bottom: 0;
+        font-size: large;
+        text-align: center;
+    }
+    
+    .msgfin a {
+        color: rgb(255, 255, 255);
+    }
+    
+    .msgfin a:hover {
+        color: rgb(255, 249, 243);
+    }
+  }
