@@ -2,7 +2,7 @@ const formEl = document.querySelector("#login");
 const message = document.querySelector("#message");
 
 
-formEl.addEventListener("submit", (event) => {
+formEl.addEventListener("click", (event) => {
   event.preventDefault();
 
   const formData = new FormData(formEl);

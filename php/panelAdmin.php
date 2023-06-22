@@ -1,11 +1,11 @@
-
 <?php
-if($_SESSION["user"]["firstname"]=="admin" && $_SESSION["user"]["password"]=="Admin1902"){
+// if($_SESSION["user"]["email"]=="admin@admin" && $_SESSION["user"]["password"]=="Admin1902"){
 require_once('../classes/Categorie.php');
 require_once('../classes/SousCategorie.php');
 require_once('../classes/Article.php');
 require_once('../includes/config.php');
 // require_once('../includes/header2.php');
+$message = "";
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -21,8 +21,8 @@ require_once('../includes/config.php');
     <script src="../js/autocompletion.js" defer></script>
     <script src="../js/fonction.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
     <title>Panel Admin</title>
 </head>
 
@@ -67,6 +67,15 @@ require_once('../includes/config.php');
                 <input type="text" name="imgArt" id="" placeholder="URL de l'image">
                 <button type="submit" name="creerArt">Créer l'article</button>
             </form>
+            <form action="" method="post">
+                <h2>Création d'un code promo</h2>
+                <input type="text" name="code" id="" placeholder="Nom du code promo">
+                <input type="text" name="valeur" id="" placeholder="Valeur du code promo">%
+                <input type="date" name="date" id="" placeholder="Date d'expiration">
+                <button type="submit" name="créerCodePromo">Créer le Code Promo</button>
+                <?php
+                echo $message ?>
+            </form>
         </div>
 
 
@@ -93,8 +102,8 @@ require_once('../includes/config.php');
             $description = htmlspecialchars($_POST['description']);
             $promo = htmlspecialchars($_POST['promotion']);
             $prix = htmlspecialchars($_POST['prix']);
-            if($promo != 0){
-                $prix = $prix - (($promo*$prix)/100);
+            if ($promo != 0) {
+                $prix = $prix - (($promo * $prix) / 100);
             }
             $date = date('Y/m/d');
             $categories = htmlspecialchars($_POST['categories']);
@@ -104,6 +113,20 @@ require_once('../includes/config.php');
             $article = new Article($titreArt, $description, $prix, $date, $categories, $sousCategories, $quantite, $imgArt, $promo);
             $article->addArticle($bdd);
             header("Location: panelAdmin.php"); // Evite qu'en rechargeant la page on recrée la même cat.
+        }
+        if (isset($_POST["créerCodePromo"])) {
+            $dateActuelle = date("Y-m-d");
+            $code = htmlspecialchars($_POST['code']);
+            $valeur = htmlspecialchars($_POST['valeur']);
+            $date = htmlspecialchars($_POST['date']);
+            // if ($date> $dateActuelle) { // si la date n'est pas dans le passé
+            $addCode = $bdd->prepare('INSERT INTO `codepromo`(`code`, `valeur`, `date_expiration`) VALUES(?,?,?)');
+            $addCode->execute([$code, $valeur, $date]);
+            header("Location: panelAdmin.php");
+            // } else {
+            //     $message = "Vous ne pouvez pas choisir une date deja passée !";
+            // }
+
         }
         ?>
     </main>
@@ -359,11 +382,11 @@ require_once('../includes/config.php');
             })
             .catch(error => console.log(error));
 
-            // AFFICHAGE ET MODIF ARTICLES
-            fetch('./recherche.php?all=1').then(response => {
+        // AFFICHAGE ET MODIF ARTICLES
+        fetch('./recherche.php?all=1').then(response => {
             return response.json();
         }).then(data => {
-            
+
             let articles = document.getElementById("articles");
             let arts = document.createElement("div");
             arts.setAttribute("id", "arts");
@@ -461,8 +484,8 @@ require_once('../includes/config.php');
 
 </html>
 <?php
-}
-else{
-    header("Location:index.php");
-}
+// }
+// else{
+//     header("Location:index.php");
+// }
 ?>

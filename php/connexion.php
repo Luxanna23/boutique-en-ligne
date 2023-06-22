@@ -51,7 +51,7 @@ if (isset($_POST["Envoyer"])) {
     <main>
         <h1>Connexion</h1>
 
-        <form method="post" id="login">
+        <form method="post" >
 
             <label for="email">Email</label><br>
             <input type="email" id="email" name="email" /><br>
@@ -62,7 +62,7 @@ if (isset($_POST["Envoyer"])) {
 
             <p id="message"><?= $msg ?></p>
 
-            <input type="submit"  name="Envoyer">
+            <input type="submit"  name="Envoyer" id="login">
 
         </form>
         <span>Vous n'avez pas encore de compte ? <a href="inscription.php">Inscrivez-vous !</a></span>
