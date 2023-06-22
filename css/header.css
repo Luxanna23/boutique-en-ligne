@@ -83,3 +83,6 @@
         font-family: 'Indie Flower', cursive;
         font-size: larger;
     }
+nav a {
+    margin-left: 20px;
+}

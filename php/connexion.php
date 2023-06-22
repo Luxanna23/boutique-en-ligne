@@ -31,7 +31,7 @@ if (isset($_POST["Envoyer"])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription</title>
+    <title>Connexion</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <link rel="stylesheet" type="text/css" href="../css/header.css">
     <link rel="stylesheet" type="text/css" href="../css/connexion.css">
@@ -51,7 +51,7 @@ if (isset($_POST["Envoyer"])) {
     <?php require_once('../includes/header2.php'); ?>
     <main>
         <div class="moduleco">
-            <h1>Connexion</h1>
+            <h1 class="titre">Connexion</h1>
 
             <form method="post">
 
@@ -67,7 +67,7 @@ if (isset($_POST["Envoyer"])) {
                 <input class="inputsubmit" type="submit" name="Envoyer" id="login">
 
             </form>
-            <span>Vous n'avez pas encore de compte ? <a href="inscription.php">Inscrivez-vous !</a></span>
+            <span class="msgfin">Vous n'avez pas encore de compte ? <a href="inscription.php">Inscrivez-vous !</a></span>
         </div>
     </main>
 
