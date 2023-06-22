@@ -94,8 +94,9 @@ if ($result) {
             <?php
             if (count($products) > 0) { ?>
                 <table class="table">
+                <!-- on affiche les articles du panier dans une table -->
                     <thead>
-                        <tr>
+                        <tr> 
                             <th scope="col">Article</th>
                             <th scope="col">Titre</th>
                             <th scope="col">Quantité</th>
@@ -104,7 +105,7 @@ if ($result) {
                     </thead>
                     <tbody>
                         <?php
-                        // Afficher les produits du panier
+                        // parcourir les produits du panier
                         foreach ($products as $product) { ?>
                             <tr>
                                 <td>
@@ -113,7 +114,7 @@ if ($result) {
                                 <td>
                                     <div class='produitPanier'><?= $product['titreArt'] ?>
                                 </td>
-                                <td>
+                                <td> <!-- on met des boutons + et - -->
                                     <div class='qttpanier' id='quantite<?= $product['idArt'] ?>'>
                                         <?php echo "<button name='deleteArt' value=" . $product['idArt'] . "><i class='fa-solid fa-minus fa-sm' style='color: #000000;'></i></button>"; ?>
                                         <?= $product['quantite'] ?>
@@ -149,7 +150,7 @@ if ($result) {
                 <span class='prix'><div class='divdebut'>Frais de livraison : </div><div class='divmilieu'></div><div class='divfin'> 4,99 € </div></span><br>
                 <span class='prix'><div class='divdebut'>Total : </div><div class='divmilieu'></div><div class='divfin'>" . ($prixTotal) . " €</div></span></div>";
             } else {
-                echo "<p>Panier vide</p>";
+                echo "<p>Panier vide.</p>";
             }
             ?>
 

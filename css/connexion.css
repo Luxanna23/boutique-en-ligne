@@ -38,9 +38,29 @@
     margin-top: 5%;
     text-align: center;
 }
-
+.inputsubmit a {
+    color: black;
+    text-decoration: none;
+}
+.inputsubmit a:hover {
+    color: black;
+    text-decoration: none;
+}
 .inputsubmit:hover {
     filter: contrast(115%);
+}
+.submitavatar {
+    margin : 2%;
+    margin-bottom: 10%;
+    background-color: transparent;
+    border: 2px solid white;
+    padding: 5px 50px;
+    margin-top: 5%;
+    text-align: center;
+}
+
+input[type="file"] {
+    margin-top: 15%;
 }
 
 .msgfin {
@@ -55,6 +75,10 @@
 
 .msgfin a:hover {
     color: rgb(255, 249, 243);
+}
+
+#message {
+    color: rgb(255, 67, 67);
 }
 
 @media (max-width: 768px) {
