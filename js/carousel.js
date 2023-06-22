@@ -15,13 +15,13 @@
       carouselInner[0].append(carouselItem);
       let img = document.createElement("img");
       img.setAttribute("id", "img" + i);
-      img.setAttribute("class", "d-block d-md-w-75 d-w-100 ");
+      img.setAttribute("class", "d-block w-75 imgCarousel");
       img.setAttribute("alt", "img" + i)
       img.src = data[i].imgCarousel;
-      carouselItem.append(img);
+     
 
       let carouselCaption = document.createElement("div");
-      carouselCaption.setAttribute("class", "carousel-caption d-none d-md-block")
+      carouselCaption.setAttribute("class", "carousel-caption ")
       carouselItem.append(carouselCaption);
 
       let h5 = document.createElement("h5");
@@ -33,7 +33,7 @@
       p.setAttribute("id", "texte" + i);
       p.textContent = data[i].texteCarousel;
       carouselCaption.append(p);
-
+      carouselItem.append(img);
     }
   }).catch(error => console.log(error));
 
