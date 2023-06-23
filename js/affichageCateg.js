@@ -14,6 +14,7 @@ category.forEach((element) => {
   });
 });
 
+// fonction pour afficher tout les articles de toutes les categories confondues 
 function allArticles() {
   fetch(`traitementArt.php`)
     .then((response) => {
@@ -44,7 +45,8 @@ function allArticles() {
       });
     });
 }
-
+// fonction pour faire un add envent listener avec la boucle for (sans ça, le code ne lisait pas ce qu'il 
+//    y'avais dans l'url vu que le for venait apres le addeventlistener du "click");
 function listenEvents() {
   for (let i = 0; i < categoryChild.length; i++) {
     categoryChild[i].addEventListener("click", () => {
@@ -71,7 +73,7 @@ function listenEvents() {
   }
 }
 
-// * générer les SOUS CATEGORIES dans le parent correspondant
+// fonction pour afficher tout les articles de la sous categorie choisi
 
 function thisSubCategorie(id) {
   allItems.innerHTML = "";
@@ -105,7 +107,7 @@ function thisSubCategorie(id) {
     });
 }
 
-// * générer les CATEGORIES
+// fonction pour afficher tout les articles de la categorie choisi
 
 function thisCategorie(id) {
   allItems.innerHTML = "";
@@ -139,6 +141,7 @@ function thisCategorie(id) {
     });
 }
 
+// fonction qui fait tourner toutes les fonctions d'avant en fonction de ce qu'il y'a dans l'url
 function affichageCateg() {
   const params = new URLSearchParams(window.location.search);
   const cat = params.get("category");

@@ -70,7 +70,7 @@ if (isset($_POST['submitInfo'])) {
   <link rel="stylesheet" type="text/css" href="../css/style.css">
   <link rel="stylesheet" type="text/css" href="../css/header.css">
   <link rel="stylesheet" type="text/css" href="../css/connexion.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://kit.fontawesome.com/e1a1b68f9b.js" crossorigin="anonymous"></script>
@@ -85,13 +85,19 @@ if (isset($_POST['submitInfo'])) {
   <?php require_once('../includes/header2.php'); ?>
   <main>
     <div class="moduleco">
-    <h1 class="titre">Profil</h1>
-      <?php $user = new User($_SESSION['user']['id'], '', '', '', '', '', ''); ?>
-      <img id="imageProfil" src="avatars/<?= $_SESSION['user']['id'] . "." . $user->selectAvatar($bdd) ?>">
+      <h1 class="titre">Profil</h1>
+      <?php $user = new User($_SESSION['user']['id'], '', '', '', '', '', '');
+      if ($user->selectAvatar($bdd) == "default.png") { ?>
+        <img id="imageProfil" src="avatars/default.png">
+      <?php } 
+      else { ?>
+        <img id="imageProfil" src="avatars/<?= $_SESSION['user']['id'] . "." . $user->selectAvatar($bdd) ?>">
+      <?php }
+      ?>
       <?= $msg ?>
       <form method="post" enctype="multipart/form-data">
         <input type="file" name="photo">
-        <input class="submitavatar" type="submit" name="submitAvatar">
+        <input class="submitavatar" type="submit" name="submitAvatar" value="Enregistrer l'image">
       </form>
 
       <form class='form1' method="POST">
