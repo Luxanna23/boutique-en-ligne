@@ -20,6 +20,7 @@ ob_start(); // contre l'erreur d'header location
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
   <link rel="stylesheet" type="text/css" href="./css/style.css">
   <link rel="stylesheet" type="text/css" href="./css/header.css">
+  <link rel="stylesheet" type="text/css" href="./css/footer.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
   <link rel="stylesheet" href="./css/carousel.css">
 
@@ -28,6 +29,7 @@ ob_start(); // contre l'erreur d'header location
   <script src="https://kit.fontawesome.com/020a26a846.js" crossorigin="anonymous"></script>
   <script src="./js/fonction.js" defer></script>
   <script src="./js/autocompletion.js" defer></script>
+  <script src="./js/carousel.js"></script>
 </head>
 
 <body>
@@ -54,11 +56,9 @@ ob_start(); // contre l'erreur d'header location
 
 
   <?php
+ var_dump($_SESSION["user"]);
   require_once('includes/footer.php'); ?>
-  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-  <script src="https://code.jquery.com/jquery-migrate-3.4.1.js"></script>
-  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-  <script src="./js/carousel.js"></script>
+
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>

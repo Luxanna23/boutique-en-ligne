@@ -2,7 +2,7 @@ const formEl = document.querySelector("#login");
 const message = document.querySelector("#message");
 
 
-formEl.addEventListener("click", (event) => {
+formEl.addEventListener("submit", (event) => {
   event.preventDefault();
 
   const formData = new FormData(formEl);
@@ -29,7 +29,6 @@ formEl.addEventListener("click", (event) => {
         message.innerHTML = data.succes;
         formEl.reset();
       }
-      
     })
     .catch((error) => console.log(error));
 });

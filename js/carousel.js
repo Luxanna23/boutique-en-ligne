@@ -44,11 +44,10 @@
     let nouveautes= document.querySelector('.nouveautes')
     data.filter(function(resultats) {
       let articles = document.createElement("div");
-      articles.setAttribute("class", "articles");
+      articles.setAttribute("class", "scroll_card");
       let img = document.createElement('img');
       img.className="imgArticles";
       let a = document.createElement("a");
-
       let nouveaute = document.createElement("p");
       nouveaute.setAttribute("class", "nouveaute");
       let date = new Date();
@@ -57,21 +56,19 @@
       date.setMonth(month - 2);
       console.log(dateArt);
       console.log(resultats.date)
-      for (let i = 0; i < 20; i++) {if (dateArt > date) {
-        articles.className = "scroll_card";
+      for (let i = 0; i < 10; i++) {if (dateArt > date) {
         a.setAttribute("href", "php/detail.php?article_id=" + resultats.idArt);
         img.src = resultats.imgArt;
         a.append(img);
         
           nouveaute.textContent = "Nouveauté";
           articles.append(nouveaute);
-          console.log(nouveaute);
           articles.append(a);
+          nouveautes.append(articles);
         
-        articles.append(a);
       }
       }
-      nouveautes.append(articles);
+      
     })
   }).catch(error => console.log(error))
 

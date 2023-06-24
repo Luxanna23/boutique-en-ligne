@@ -1,8 +1,43 @@
-.deleteCat, .editCat{
+.deleteCat, .editCat, .editCar{
 background-color: transparent;
-border:transparent;
+border:#e6d9d1 solid;
 }
 
-#imgCat, #imgSousCat, .imgCarousel{
+#imgCat, #imgSousCat{
     width:100px;
+}
+.imgCarousel{
+    width:10vw;
+}
+.sticky{
+    position: sticky;
+    top: 0;
+    background-color: white;
+    
+}
+#panelAdmin{
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+h2{
+text-align: center;
+font-size:xx-large;
+}
+#modifCarouselIndex{
+    width:100%;
+}
+.slide{
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 2vh;
+}
+.displaySlide{
+    display: flex;
+    justify-content: space-between;
+}
+textarea{
+    border:#e6d9d1 solid; 
+    border-radius: 3%;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    
 }

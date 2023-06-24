@@ -44,8 +44,8 @@ if (($_POST["action"] == "deleteArt")) {
     echo json_encode($message);
 }
 if ($_POST["action"] === "updateArt") {
-    $requete = $bdd->prepare('UPDATE `articles` SET `titreArt`=?,`imgArt`=?, `description`=?, `prix`=?, `id_categorie`=?, `id_souscategorie`=?, `quantite`=?, `promotion`=?,  WHERE id=?');
-    $requete->execute(array($_POST["titreUpdate"], $_POST["imgUpdate"], $_POST["idUpdate"]));
+    $requete = $bdd->prepare('UPDATE `articles` SET `titreArt`=?, `description`=?, `prix`=?,`date`=?, `id_categorie`=?, `id_souscategorie`=?, `quantite`=?,`imgArt`=?, `promotion`=? WHERE idArt=?');
+    $requete->execute(array($_POST["titreUpdate"], $_POST["descriptionUpdate"],$_POST["prixUpdate"],$_POST["date"],$_POST["catUpdate"], $_POST["sousCatUpdate"],$_POST["quantite"], $_POST["imgUpdate"], $_POST["promoArt"], $_POST["idUpdate"]));
     $message["statut"] = "OK";
     echo json_encode($message);
 }
