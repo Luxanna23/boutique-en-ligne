@@ -1,3 +1,9 @@
+<?php
+$urlPHP="http://localhost/boutique-en-ligne/php/";
+
+
+?>
+
 <footer>
     <hr>
     <div class="footerP1">
@@ -23,7 +29,7 @@
     <hr>
     <div class="footerP2">
         <div>
-            <img src="../maquette/logo-removebg.png" alt="">
+            <img class="logoFooter" src="../maquette/logo-removebg.png" alt="">
             <p>Retrouvez nous sur nos réseaux</p><br>
             <div class="reseaux">
                 <a href="https://www.facebook.com/groups/Software.Engineering.learning" target="_blank"><i class="fa-brands fa-facebook fa-xl"></i></a>
@@ -51,11 +57,18 @@
         <div>
             <h2>CATALOGUE</h2>
             <div id="catFooter">
-                <p>Boucles d’oreilles</p>
-                <p>Colliers</p>
-                <p>Bagues</p>
-                <p>Bracelet</p>
-                <p>Montres</p>
+            <?php
+                    $displayCat = $bdd->prepare('SELECT * FROM categorie');
+                    $displayCat->execute();
+                    $result = $displayCat->fetchAll(PDO::FETCH_ASSOC); 
+                    ?>
+          
+                    <p><a href="<?= $urlPHP ?>categories.php">Toutes les Categories </a></p>
+                    <?php foreach ($result as $categorie) {
+                        $categorieId = $categorie['idCat'];
+                        $categorieNom = $categorie['titreCat']; ?>
+                        <p>
+                            <a href="<?= $urlPHP ?>categories.php?category=<?= $categorieId ?>"><?= $categorieNom;?></a><?php } ?> 
             </div>
         </div>
     </div>
@@ -71,4 +84,5 @@
             // }
 
             ?> -->
+
 </footer>

@@ -29,7 +29,7 @@ ob_start(); // contre l'erreur d'header location
   <script src="https://kit.fontawesome.com/020a26a846.js" crossorigin="anonymous"></script>
   <script src="./js/fonction.js" defer></script>
   <script src="./js/autocompletion.js" defer></script>
-  <script src="./js/carousel.js"></script>
+  <script src="./js/index.js"></script>
 </head>
 
 <body>
@@ -56,7 +56,6 @@ ob_start(); // contre l'erreur d'header location
 
 
   <?php
- var_dump($_SESSION["user"]);
   require_once('includes/footer.php'); ?>
 
 </body>

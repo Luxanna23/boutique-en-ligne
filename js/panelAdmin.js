@@ -159,7 +159,6 @@ fetch('./recherche.php?sousCat=1').then(response => {
 }).catch(error => console.log(error));
 
 // MODIFICATION DU CAROUSEL EN HAUT DE L'INDEX
-// MODIFIE QUE LE DERNIER ET CHANGE LES AUTRES AC LES INFOS DU DERNIER
 fetch('./recherche.php?carousel=1')
     .then(response => {
         return response.json();
@@ -172,15 +171,17 @@ fetch('./recherche.php?carousel=1')
 
         data.filter(function (resultats) {
             let slides = document.createElement('div');
-            slides.className = "slides"+resultats.id;
+            slides.className = "slides";
             let displaySlide = document.createElement('div');
             displaySlide.className = "displaySlide";
             let updateSlide = document.createElement('div');
             updateSlide.className = "updateSlide";
+            let h3= document.createElement("h3");
+            h3.innerText="Slide"+resultats.id
 
-            displaySlide.innerHTML = '<img class="imgCarousel" id="imgCarousel' + resultats.id + '" src="' + resultats.imgCarousel + '" alt=""><div class=infosSlide><h3>' + resultats.titreCarousel + '</h3> <textarea rows="10" cols="40">' + resultats.texteCarousel + '</textarea></div>';
-            updateSlide.innerHTML = '<input id="inputCarousel' + resultats.id + '"  value="' + resultats.imgCarousel + '"><input id="titreCarousel' + resultats.id + '" value="' + resultats.titreCarousel + '"><input id="texteCarousel' + resultats.id + '" value="' + resultats.texteCarousel + '"><button class="editCar" name="editCarousel" data-idCar ="' + resultats.id + '"  id="editCarousel' + resultats.id + '"><i class="fa-regular fa-pen-to-square fa-lg"></i></button></br>';
-
+            displaySlide.innerHTML = '<img class="imgCarousel" id="imgCarousel' + resultats.id + '" src="' + resultats.imgCarousel + '" alt=""><div class=infosSlide><h4>' + resultats.titreCarousel + '</h4> <p>' + resultats.texteCarousel + '<p></div>';
+            updateSlide.innerHTML = '<form><input id="inputCarousel' + resultats.id + '"  value="' + resultats.imgCarousel + '"><input id="titreCarousel' + resultats.id + '" value="' + resultats.titreCarousel + '"><input id="texteCarousel' + resultats.id + '" value="' + resultats.texteCarousel + '"><button class="editCar" name="editCarousel" data-idCar ="' + resultats.id + '"  id="editCarousel' + resultats.id + '"><i class="fa-regular fa-pen-to-square fa-lg"></i></button></form></br>';
+slides.append(h3);
             slides.append(displaySlide);
             slides.append(updateSlide);
             slide.append(slides);

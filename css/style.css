@@ -6,26 +6,7 @@
 
 
 
-/* PAGE PRODUIT */
 
-#detail {
-    display: flex;
-}
-
-#titrePrix {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-#titrePrix p {
-    font-size: large;
-}
-
-#buttons {
-    display: flex;
-    justify-content: space-between;
-}
 
 /* NAVVV */
 #logo {

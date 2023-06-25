@@ -148,6 +148,8 @@ if ($_SESSION["user"]["email"] == "admin@admin.fr") {
                 ?>
             </main>
             <script src="../js/panelAdmin.js"></script>
+            <?php
+  require_once('../includes/footer.php'); ?>
         </body>
         <?php
     }

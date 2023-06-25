@@ -2,9 +2,7 @@ footer{
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     background-color: #E6D9D1;
 }
-.footerP3{
-    background-color: white;
-}
+
 .footerP1 {
     width: 100%;
     display: flex;
@@ -34,6 +32,7 @@ footer{
 }
 #catFooter {
     text-align: left;
+    /* column-count: 2; */
 }
 
 #inputNews,
@@ -45,23 +44,26 @@ footer{
 .newsletter {
     text-align: center;
     border-bottom: solid;
-   
-
 }
-
+.footerP2 a{
+    text-decoration: none;
+    color:black;
+}
+.reseaux {
+    display: flex;
+    justify-content: space-between;
+}
+/* Partie 3 du FOOTER */
 .footerP3 {
     text-align: center;
     padding-left: 2vh;
     padding-right: 2vh;
 
 }
-
-.reseaux {
-    display: flex;
-    justify-content: space-between;
+.footerP3{
+    background-color: white;
 }
 .footerP3 a{
-    /* text-decoration: none; */
     color: #dbc6b9;
 }
 @media screen and (max-width: 932px){
@@ -70,6 +72,10 @@ footer{
     }
     footer h2{
         font-size: large;
+    }
+    .logoFooter{
+        height: 15vh;
+        width: auto;
     }
 }
 @media screen and (max-width: 750px){
@@ -85,5 +91,15 @@ footer{
         display: flex;
         justify-content: space-between;
         gap: 2vh;
+    }
+    .logoFooter{
+        height: 10vh;
+        width: auto;
+    }
+}
+@media screen and (max-width: 530px){
+    .logoFooter{
+        height: 5vh;
+        width: auto;
     }
 }
