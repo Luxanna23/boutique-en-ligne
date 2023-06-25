@@ -1,10 +1,14 @@
 footer{
+width:100%;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     background-color: #E6D9D1;
 }
+.footers{
+    width:100%;
+}
 
 .footerP1 {
-    width: 100%;
+    max-width: 100%;
     display: flex;
     justify-content: space-between;
     padding-left: 2vh;
@@ -15,13 +19,11 @@ footer{
 .footerP1 div {
     text-align: center;
 }
-
+/* Partie 2 du FOOTER */
 .footerP2 {
-    width: 100%;
+    max-width: 100%;
     display: flex;
     justify-content: space-between;
-    padding-left: 2vh;
-    padding-right: 2vh;
 }
 
 .footerP2 div {
@@ -42,6 +44,8 @@ footer{
 }
 
 .newsletter {
+    width:80%;
+    margin: auto;
     text-align: center;
     border-bottom: solid;
 }
@@ -55,12 +59,10 @@ footer{
 }
 /* Partie 3 du FOOTER */
 .footerP3 {
-    text-align: center;
+    max-width: 100%;
+    text-align: center ;
     padding-left: 2vh;
     padding-right: 2vh;
-
-}
-.footerP3{
     background-color: white;
 }
 .footerP3 a{
@@ -102,4 +104,19 @@ footer{
         height: 5vh;
         width: auto;
     }
+}
+@media screen and (max-width: 465px){
+    .footerP2 p{
+        max-width: fit-content;
+    }
+    .reseaux i {
+        font-size: small;
+    }
+    .footerP2 {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: 1vh;
+    }
+
 }

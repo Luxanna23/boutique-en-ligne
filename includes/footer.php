@@ -1,10 +1,11 @@
 <?php
-$urlPHP="http://localhost/boutique-en-ligne/php/";
+$urlPHP = "http://localhost/boutique-en-ligne/php/";
 
 
 ?>
 
 <footer>
+    <div class="footers">
     <hr>
     <div class="footerP1">
         <div>
@@ -28,7 +29,7 @@ $urlPHP="http://localhost/boutique-en-ligne/php/";
     </div>
     <hr>
     <div class="footerP2">
-        <div>
+        <div class="reseaulogo">
             <img class="logoFooter" src="../maquette/logo-removebg.png" alt="">
             <p>Retrouvez nous sur nos réseaux</p><br>
             <div class="reseaux">
@@ -57,23 +58,24 @@ $urlPHP="http://localhost/boutique-en-ligne/php/";
         <div>
             <h2>CATALOGUE</h2>
             <div id="catFooter">
-            <?php
-                    $displayCat = $bdd->prepare('SELECT * FROM categorie');
-                    $displayCat->execute();
-                    $result = $displayCat->fetchAll(PDO::FETCH_ASSOC); 
-                    ?>
-          
-                    <p><a href="<?= $urlPHP ?>categories.php">Toutes les Categories </a></p>
-                    <?php foreach ($result as $categorie) {
-                        $categorieId = $categorie['idCat'];
-                        $categorieNom = $categorie['titreCat']; ?>
-                        <p>
-                            <a href="<?= $urlPHP ?>categories.php?category=<?= $categorieId ?>"><?= $categorieNom;?></a><?php } ?> 
+                <?php
+                $displayCat = $bdd->prepare('SELECT * FROM categorie');
+                $displayCat->execute();
+                $result = $displayCat->fetchAll(PDO::FETCH_ASSOC);
+                ?>
+
+                <p><a href="<?= $urlPHP ?>categories.php">Toutes les Categories </a></p>
+                <?php foreach ($result as $categorie) {
+                    $categorieId = $categorie['idCat'];
+                    $categorieNom = $categorie['titreCat']; ?>
+                    <p>
+                        <a href="<?= $urlPHP ?>categories.php?category=<?= $categorieId ?>"><?= $categorieNom; ?></a><?php } ?>
             </div>
         </div>
     </div>
     <div class="footerP3">
         <p><a href="">Conditions générales de vente </a> / <a href=""> Confidentialité/Cookie </a> / <a href=""> Mentions légales</a></p>
+    </div>
     </div>
     <!-- <?php
             //     function sendNews($bdd)

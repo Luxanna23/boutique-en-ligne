@@ -21,21 +21,23 @@ if ($_SESSION["user"]["email"] == "admin@admin.fr") {
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" type="text/css" href="../css/panelAdmin.css">
+            <title>Panel Admin</title>
+
             <link rel="stylesheet" type="text/css" href="../css/header.css">
+            <link rel="stylesheet" type="text/css" href="../css/style.css">
+            <link rel="stylesheet" type="text/css" href="../css/footer.css">
+            <link rel="stylesheet" type="text/css" href="../css/panelAdmin.css">
             <script src="https://kit.fontawesome.com/020a26a846.js" crossorigin="anonymous"></script>
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
             <script src="../js/autocompletion.js" defer></script>
             <script src="../js/fonction.js" defer></script>
-            <title>Panel Admin</title>
-            <link rel="stylesheet" type="text/css" href="../css/header.css">
         </head>
 
         <body>
-        <?php require_once('../includes/header2.php');
-     ?>
+            <?php require_once('../includes/header2.php');
+            ?>
             <main id="panelAdmin">
                 <div class="sticky">
                     <a href="http://localhost/boutique-en-ligne/php/panelAdmin#modifCar">Gestion du Carousel</a>
@@ -43,57 +45,72 @@ if ($_SESSION["user"]["email"] == "admin@admin.fr") {
                     <a href="http://localhost/boutique-en-ligne/php/panelAdmin#souscreaCat">Gestion des sous-catégories</a>
                     <a href="http://localhost/boutique-en-ligne/php/panelAdmin#creaArt">Gestion des articles</a>
                 </div>
+                <br>
                 <span id="modifCar"></span>
                 <div id="modifCarouselIndex">
                     <h2>Modification du Carousel de l'index</h2>
+                    <br>
                 </div>
                 <span id="creaCat"></span>
+                <h2>Gestion des catégories</h2><br>
                 <div id="categories">
-                    <form action="" method="POST">
-                        <h2>Création de catégorie</h2>
-                        <input type="text" name="titreCat" id="" placeholder="Nom de la catégorie">
-                        <input type="text" name="imgCat" id="" placeholder="URL de l'image">
-                        <button type="submit" name="creerCat">Créer la catégorie</button>
-                    </form>
+                    <div id="formCat">
+                        <form action="" method="POST">
+                            <input type="text" name="titreCat" id="" placeholder="Nom de la catégorie"><br>
+                            <input type="text" name="imgCat" id="" placeholder="URL de l'image"><br>
+                            <button id="creerCat" type="submit" name="creerCat">Créer la catégorie</button><br>
+                        </form>
+                    </div><br>
                 </div>
                 <span id="souscreaCat"></span>
+                <h2>Gestion des sous-catégories</h2> <br>
                 <div id="sousCategories">
-                    <form action="" method="POST">
-                        <h2>Création de sous-catégorie</h2>
-                        <input type="text" name="titreSousCat" id="" placeholder="Nom de la sous-catégorie">
-                        <input type="text" name="imgSousCat" id="" placeholder="URL de l'image">
-                        <select name="categorie" id="categorie-select" value="categorie">
-                            <option selected disabled>Catégorie</option>
-                        </select>
-                        <button type="submit" name="creerSousCat">Créer la sous-catégorie</button>
-                    </form>
+                    <div id="formSousCat">
+                        <form action="" method="POST">
+                            <input type="text" name="titreSousCat" id="" placeholder="Nom de la sous-catégorie">
+                            <input type="text" name="imgSousCat" id="" placeholder="URL de l'image">
+                            <select name="categorie" id="categorie-select" value="categorie">
+                                <option selected disabled>Catégorie</option>
+                            </select>
+                            <button id="creerSousCat" ype="submit" name="creerSousCat">Créer la sous-catégorie</button>
+                        </form>
+                    </div><br>
                 </div>
                 <span id="creaArt"></span>
+                <h2>Gestions des articles</h2><br>
                 <div id="articles">
-                    <form action="" method="POST">
-                        <h2>Création d'un article</h2>
-                        <input type="text" name="titreArt" id="" placeholder="Nom de l'article">
-                        <textarea name="description" id="" placeholder="Description"></textarea>
-                        <input type="text" name="prix" id="" placeholder="Prix de l'article">€
-                        <input type="text" name="promotion" id="" placeholder="Promotion">%
-                        <select name="categories" id="categories-select" value="categorie">
-                            <option selected disabled>Catégorie</option>
-                        </select>
-                        <select name="sousCategories" id="sousCategories-select" value="sousCategorie">
-                            <option selected disabled>Sous-catégorie</option>
-                        </select>
-                        <input type="text" name="quantite" id="" placeholder="Quantité">
-                        <input type="text" name="imgArt" id="" placeholder="URL de l'image">
-                        <button type="submit" name="creerArt">Créer l'article</button>
-                    </form>
-                    <form action="" method="post">
-                        <h2>Création d'un code promo</h2>
-                        <input type="text" name="code" id="" placeholder="Nom du code promo">
-                        <input type="text" name="valeur" id="" placeholder="Valeur du code promo">%
-                        <input type="date" name="date" id="" placeholder="Date d'expiration">
-                        <button type="submit" name="créerCodePromo">Créer le Code Promo</button>
-                    </form>
-                </div>
+                    <div id="formArtPromo">
+                        <div id="formArt">
+                            <form action="" method="POST">
+                                <input type="text" name="titreArt" id="" placeholder="Nom de l'article">
+                                <textarea name="description" id="" placeholder="Description"></textarea>
+                                <input type="text" name="prix" id="" placeholder="Prix de l'article">€
+                                <input type="text" name="promotion" id="" placeholder="Promotion">%
+                                <select name="categories" id="categories-select" value="categorie">
+                                    <option selected disabled>Catégorie</option>
+                                </select>
+                                <select name="sousCategories" id="sousCategories-select" value="sousCategorie">
+                                    <option selected disabled>Sous-catégorie</option>
+                                </select>
+                                <input type="text" name="quantite" id="" placeholder="Quantité">
+                                <input type="text" name="imgArt" id="" placeholder="URL de l'image">
+                                <button id="creerArt" type="submit" name="creerArt">Créer l'article</button>
+                            </form>
+                        </div><br>
+
+                        <div id="formPromo">
+                           
+                            <form action="" method="post">
+                            <h4>Création de code promo:</h4>
+                            <br>
+                                <input type="text" name="code" id="" placeholder="Nom du code promo">
+                                <input type="text" name="valeur" id="" placeholder="Valeur du code promo">%
+                                <input type="date" name="date" id="date">
+                                <button id="creerPromo" type="submit" name="créerCodePromo">Créer le Code Promo</button>
+                            </form>
+                        </div><br>
+                    </div>
+                </div><br>
                 <?php
                 // CREATION DE CATEGORIES
                 if (isset($_POST["creerCat"])) {
@@ -149,12 +166,13 @@ if ($_SESSION["user"]["email"] == "admin@admin.fr") {
             </main>
             <script src="../js/panelAdmin.js"></script>
             <?php
-  require_once('../includes/footer.php'); ?>
+            require_once('../includes/footer.php'); ?>
         </body>
-        <?php
+<?php
     }
 } else {
     header("Location:../index.php");
 }
 ?>
+
         </html>
