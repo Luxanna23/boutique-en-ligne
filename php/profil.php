@@ -18,23 +18,29 @@ ob_start('ob_gzhandler'); //si il y a un pb essayer avec ob_start()
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <link rel="stylesheet" type="text/css" href="../css/header.css">
     <script src="../js/favoris.js" defer></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/e1a1b68f9b.js" crossorigin="anonymous"></script>
     <script src="../js/autocompletion.js" defer></script>
     <script src="../js/fonction.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <?php require_once('../includes/header2.php'); ?>
     <main>
         <h1>Profil</h1>
-        <?php $user = new User($_SESSION['user']['id'], $_SESSION['user']['email'], $_SESSION['user']['password'], $_SESSION['user']['firstname'], $_SESSION['user']['lastname'], '', ''); ?>
-        <img id="imageProfil" src="avatars/<?= $_SESSION['user']['id'] . "." . $user->selectAvatar($bdd) ?>">
+        <?php $user = new User($_SESSION['user']['id'], $_SESSION['user']['email'], $_SESSION['user']['password'], $_SESSION['user']['firstname'], $_SESSION['user']['lastname'], '', '');
+
+        if ($user->selectAvatar($bdd) == "default.png") { ?>
+            <img id="imageProfil" src="avatars/default.png">
+        <?php } else { ?>
+            <img id="imageProfil" src="avatars/<?= $_SESSION['user']['id'] . "." . $user->selectAvatar($bdd) ?>">
+        <?php }
+        ?>
 
         <h3><?= $user->getFirstname() . " " . $user->getLastname() ?></h3>
         <p><?= $user->getEmail() ?></p>
@@ -48,19 +54,19 @@ ob_start('ob_gzhandler'); //si il y a un pb essayer avec ob_start()
             <h3>Adresse de livraison : </h3>
             <?php $adresse = new Adresse($_SESSION['user']['id'], '', '', '', '', '', '');
             echo $adresse->isExisting($bdd);
-            if( $adresse->itExist($bdd)){ 
+            if ($adresse->itExist($bdd)) {
                 echo ' <a href="inscriptionAdresse.php"><button class="buttonAdresse">Modifier l\'adresse</button></a>';
-                ?>
+            ?>
                 <form method="POST">
                     <input type="submit" name="delete" value="Supprimer l'adresse">
                 </form>
-                
+
             <?php
-            if (isset($_POST['delete'])){
-                $adresse->deleteAdresse($bdd);
-                header('Location:profil.php');
-            }
-         } ?>
+                if (isset($_POST['delete'])) {
+                    $adresse->deleteAdresse($bdd);
+                    header('Location:profil.php');
+                }
+            } ?>
         </div>
 
         <div>
@@ -74,18 +80,19 @@ ob_start('ob_gzhandler'); //si il y a un pb essayer avec ob_start()
                 } else {
                     foreach ($result as $commande) {
                         $dateCommande = explode("-", $commande['date']);
-                        $date= $dateCommande[2] . " / " . $dateCommande[1] . " / " . $dateCommande[0];
+                        $date = $dateCommande[2] . " / " . $dateCommande[1] . " / " . $dateCommande[0];
                         $idCommande = $commande['id'];
                         // Récupérer les informations de l'article depuis la base de données
                         $request2 = $bdd->prepare('SELECT * FROM commande INNER JOIN commandpanier ON commande.id = commandpanier.id_commande INNER JOIN articles ON commandpanier.id_article = articles.idArt WHERE id_user = ? AND commande.id = ?');
-                        $request2->execute([$_SESSION['user']['id'], $idCommande ]);
+                        $request2->execute([$_SESSION['user']['id'], $idCommande]);
                         $result2 = $request2->fetchAll(PDO::FETCH_ASSOC);
                         echo "</br>Commande passée le : " . $date . " - Total : " . $commande['prixTotal'] . "€</br>
-                        Livré à : " . $commande['adresse'] . "<br>Numero de Tel : ". $commande['phone']."</span></br>";
-                        foreach ($result2 as $key){
-                            echo "<a href='detail.php?article_id=" . $key['idArt'] ."'><span><img src='" . $key['imgArt'] . " '><span></a>";
+                        Livré à : " . $commande['adresse'] . "<br>Numero de Tel : " . $commande['phone'] . "</span></br>";
+                        echo "<div class='commande'>";
+                        foreach ($result2 as $key) {
+                            echo "<a class='produit' href='detail.php?article_id=" . $key['idArt'] . "'><span class='badgeqtt'>" . $key['quantite_art'] . "</span><span><img src='" . $key['imgArt'] . " '></span></a>";
                         }
-                        
+                        echo "</div>";
                     }
                 }
                 ?>

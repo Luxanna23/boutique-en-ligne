@@ -19,7 +19,7 @@ if (isset($data)) {
     $password = $data['password'];
     $confirm_password = $data['password2'];
 
-    $user = new User('', $email, $password, $firstname, $lastname, 'avatars/default.png' ,'');
+    $user = new User('', $email, $password, $firstname, $lastname, 'default.png' ,'');
 
     if (empty($email)) {
         $message['erreur'] = '<i class="fa-solid fa-circle-exclamation"></i>&nbspLe champ Email est vide.';

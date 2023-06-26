@@ -59,7 +59,7 @@ if ($result) {
     <link rel="stylesheet" type="text/css" href="../css/header.css">
     <link rel="stylesheet" type="text/css" href="../css/checkout.css">
     <link rel="stylesheet" type="text/css" href="../css/panier.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/e1a1b68f9b.js" crossorigin="anonymous"></script>
@@ -94,8 +94,9 @@ if ($result) {
             <?php
             if (count($products) > 0) { ?>
                 <table class="table">
+                <!-- on affiche les articles du panier dans une table -->
                     <thead>
-                        <tr>
+                        <tr> 
                             <th scope="col">Article</th>
                             <th scope="col">Titre</th>
                             <th scope="col">Quantité</th>
@@ -104,7 +105,7 @@ if ($result) {
                     </thead>
                     <tbody>
                         <?php
-                        // Afficher les produits du panier
+                        // parcourir les produits du panier
                         foreach ($products as $product) { ?>
                             <tr>
                                 <td>
@@ -113,7 +114,7 @@ if ($result) {
                                 <td>
                                     <div class='produitPanier'><?= $product['titreArt'] ?>
                                 </td>
-                                <td>
+                                <td> <!-- on met des boutons + et - -->
                                     <div class='qttpanier' id='quantite<?= $product['idArt'] ?>'>
                                         <?php echo "<button name='deleteArt' value=" . $product['idArt'] . "><i class='fa-solid fa-minus fa-sm' style='color: #000000;'></i></button>"; ?>
                                         <?= $product['quantite'] ?>
@@ -149,7 +150,7 @@ if ($result) {
                 <span class='prix'><div class='divdebut'>Frais de livraison : </div><div class='divmilieu'></div><div class='divfin'> 4,99 € </div></span><br>
                 <span class='prix'><div class='divdebut'>Total : </div><div class='divmilieu'></div><div class='divfin'>" . ($prixTotal) . " €</div></span></div>";
             } else {
-                echo "<p>Panier vide</p>";
+                echo "<p>Panier vide.</p>";
             }
             ?>
 

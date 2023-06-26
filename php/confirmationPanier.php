@@ -48,6 +48,7 @@ if (isset($paymentIntentId) && !empty($paymentIntentId)) {
                 $productRequest = $bdd->prepare('SELECT * FROM `articles` WHERE `idArt` = ?');
                 $productRequest->execute([$product_id]);
                 $product = $productRequest->fetch(PDO::FETCH_ASSOC);
+                $product['quantite_art'] = $product_quantity;
 
                 // On ajoute le produit au tableau des produits de la commande
                 $products[] = $product;
@@ -67,8 +68,8 @@ if (isset($paymentIntentId) && !empty($paymentIntentId)) {
         // Parcourir les produits de la commande et les enregistrer dans la table commandpanier
         foreach ($products as $product) {
             $articleIDPanier = $product['idArt'];
-            $request3 = $bdd->prepare('INSERT INTO `commandpanier`(`id_commande`, `id_article`, quantite_art) VALUES (?,?,?)');
-            $request3->execute([$idcommande, $articleIDPanier, 1]);
+            $request3 = $bdd->prepare('INSERT INTO `commandpanier`(`id_commande`, `id_article`, `quantite_art`) VALUES (?,?,?)');
+            $request3->execute([$idcommande, $articleIDPanier, $product['quantite_art']]);
         }
 
         // On supprime le panier de l'utilisateur
@@ -92,7 +93,7 @@ if (isset($paymentIntentId) && !empty($paymentIntentId)) {
     <link rel="stylesheet" type="text/css" href="../css/header.css">
     <link rel="stylesheet" type="text/css" href="../css/checkout.css">
     <link rel="stylesheet" type="text/css" href="../css/panier.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/e1a1b68f9b.js" crossorigin="anonymous"></script>

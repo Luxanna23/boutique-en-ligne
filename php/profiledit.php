@@ -69,7 +69,8 @@ if (isset($_POST['submitInfo'])) {
   <title>Profil</title>
   <link rel="stylesheet" type="text/css" href="../css/style.css">
   <link rel="stylesheet" type="text/css" href="../css/header.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/connexion.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://kit.fontawesome.com/e1a1b68f9b.js" crossorigin="anonymous"></script>
@@ -83,49 +84,57 @@ if (isset($_POST['submitInfo'])) {
 <body>
   <?php require_once('../includes/header2.php'); ?>
   <main>
-    <h1>Profil</h1>
-    <?php $user = new User($_SESSION['user']['id'], '', '', '', '', '', ''); ?>
-    <img id="imageProfil" src="avatars/<?= $_SESSION['user']['id'] . "." . $user->selectAvatar($bdd) ?>">
-    <?= $msg ?>
-    <form method="post" enctype="multipart/form-data">
-      <input type="file" name="photo">
-      <input type="submit" name="submitAvatar">
-    </form>
+    <div class="moduleco">
+      <h1 class="titre">Profil</h1>
+      <?php $user = new User($_SESSION['user']['id'], '', '', '', '', '', '');
+      if ($user->selectAvatar($bdd) == "default.png") { ?>
+        <img id="imageProfil" src="avatars/default.png">
+      <?php } 
+      else { ?>
+        <img id="imageProfil" src="avatars/<?= $_SESSION['user']['id'] . "." . $user->selectAvatar($bdd) ?>">
+      <?php }
+      ?>
+      <?= $msg ?>
+      <form method="post" enctype="multipart/form-data">
+        <input type="file" name="photo">
+        <input class="submitavatar" type="submit" name="submitAvatar" value="Enregistrer l'image">
+      </form>
 
-    <form class='form1' method="POST">
-      <div class="field">
-        <label>Email </label>
-        <input type="text" name="email" placeholder="<?php echo $_SESSION['user']['email']; ?>">
-      </div>
+      <form class='form1' method="POST">
+        <div class="field">
+          <label>Email </label>
+          <input class="inputtext" type="text" name="email" placeholder="<?php echo $_SESSION['user']['email']; ?>">
+        </div>
 
-      <div class="field">
-        <label>Prenom</label>
-        <input type="text" name="firstname" placeholder="<?php echo $_SESSION['user']['firstname']; ?>">
-      </div>
+        <div class="field">
+          <label>Prenom</label>
+          <input class="inputtext" type="text" name="firstname" placeholder="<?php echo $_SESSION['user']['firstname']; ?>">
+        </div>
 
-      <div class="field">
-        <label>Nom </label>
-        <input type="text" name="lastname" placeholder="<?php echo $_SESSION['user']['lastname']; ?>">
-      </div>
+        <div class="field">
+          <label>Nom </label>
+          <input class="inputtext" type="text" name="lastname" placeholder="<?php echo $_SESSION['user']['lastname']; ?>">
+        </div>
 
-      <div class="field">
-        <label>Mot de passe</label>
-        <input type="password" name="password1" placeholder='********'>
-      </div>
+        <div class="field">
+          <label>Mot de passe</label>
+          <input class="inputtext" type="password" name="password1" placeholder='********'>
+        </div>
 
-      <div class="field">
-        <label>Confirmez le mot de passe</label>
-        <input type="password" name="password2" placeholder='********'>
-      </div>
+        <div class="field">
+          <label>Confirmez le mot de passe</label>
+          <input class="inputtext" type="password" name="password2" placeholder='********'>
+        </div>
 
-      <input type="submit" name="submitInfo" value="Enregistrer">
+        <input class="inputsubmit" type="submit" name="submitInfo" value="Enregistrer">
 
-      <div>
-        <button class="button"><a href="profil.php">Retour au profil</a></button>
-      </div>
+        <div>
+          <button class="inputsubmit" class="button"><a href="profil.php">Retour au profil</a></button>
+        </div>
 
-      <p id="message"></p>
-    </form>
+        <p id="message"></p>
+      </form>
+    </div>
   </main>
 
 </body>

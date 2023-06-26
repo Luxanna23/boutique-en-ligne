@@ -104,6 +104,24 @@ input[type="submit"]:focus {
   outline: none;
 }
 img {
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 150px;
+}
+
+.commande {
+  display: flex;
+  gap: 10px;
+}
+
+.produit {
+  position: relative;
+}
+
+.badgeqtt {
+  position: absolute !important;
+  background-color: white !important;
+  border: 1px solid black !important;
+  border-radius: 9999px !important;
+  color: black !important;
+  padding: 0 5px !important;
 }

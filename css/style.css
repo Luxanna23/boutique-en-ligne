@@ -25,10 +25,9 @@
 #result a,
 #result2 a {
     text-decoration: none;
-    color: #fff;
-}
-
-@media screen and (max-width: 991px) {
+    color: #000000;
+  }
+  @media screen and (max-width: 991px) {
     #result {
         top: 330px;
     }
