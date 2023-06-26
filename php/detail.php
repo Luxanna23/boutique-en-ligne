@@ -38,18 +38,18 @@ require_once('../includes/footer.php');
     </body>
     <?php
     if (isset($_SESSION["user"])) {
-        if (isset($_POST["AjouterPanier"])) {
+        if (isset($_POST["ajouterPanier"])) {
             $req2 = $bdd->prepare("SELECT `quantite_art` FROM `panier` WHERE id_article = ?");
-            $req2->execute([$_POST["AjouterPanier"]]);
+            $req2->execute([$_POST["ajouterPanier"]]);
             $res2 = $req2->fetch(PDO::FETCH_ASSOC);
             if ($req2->rowCount() > 0) {
                 $req3 = $bdd->prepare("UPDATE `panier` SET `quantite_art`= ? WHERE id_article = ?");
-                $req3->execute([$res2["quantite_art"] + 1, $_POST["AjouterPanier"]]);
+                $req3->execute([$res2["quantite_art"] + 1, $_POST["ajouterPanier"]]);
                 echo '<i class="fa-solid fa-circle-check" style="color: #0cad00;"></i> Article ajouté au panier.';
             } else {
                 $req = $bdd->prepare("INSERT INTO `panier`(`id_user`, `id_article`, `quantite_art`) VALUES (?,?,?)");
-                $req->execute([$_SESSION['user']['id'], $_POST["AjouterPanier"], 1]);
-                // $_POST["AjouterPanier"] == id de l'article (jsp ce qu'il fout la)
+                $req->execute([$_SESSION['user']['id'], $_POST["ajouterPanier"], 1]);
+                // $_POST["ajouterPanier"] == id de l'article (jsp ce qu'il fout la)
                 echo '<i class="fa-solid fa-circle-check" style="color: #0cad00;"></i> Article ajouté au panier.';
             }
         }
