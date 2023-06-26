@@ -97,8 +97,7 @@ if (isset($paymentIntentId) && !empty($paymentIntentId)) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/e1a1b68f9b.js" crossorigin="anonymous"></script>
-    <script src="../js/autocompletion.js" defer></script>
-    <script src="../js/fonction.js" defer></script>
+   
     <title>Confirmation de commande</title>
 </head>
 
@@ -107,6 +106,8 @@ if (isset($paymentIntentId) && !empty($paymentIntentId)) {
     <h1>Confirmation de commande</h1>
     <p>Merci pour votre commande !</p>
     <p>Numéro de commande : <?= $idcommande ?></p>
+    <script src="../js/autocompletion.js" defer></script>
+    <script src="../js/fonction.js" defer></script>
 </body>
 
 </html>

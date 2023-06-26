@@ -5,6 +5,7 @@ require_once('../classes/Categorie.php');
 require_once('../classes/SousCategorie.php');
 require_once('../classes/Article.php');
 require_once('../includes/config.php');
+require_once('../includes/header2.php');
 
 
 
@@ -36,8 +37,6 @@ if ($_SESSION["user"]["email"] == "admin@admin.fr") {
         </head>
 
         <body>
-            <?php require_once('../includes/header2.php');
-            ?>
             <main id="panelAdmin">
                 <div class="sticky">
                     <a href="http://localhost/boutique-en-ligne/php/panelAdmin#modifCar">Gestion du Carousel</a>
@@ -166,7 +165,7 @@ if ($_SESSION["user"]["email"] == "admin@admin.fr") {
             </main>
             <script src="../js/panelAdmin.js"></script>
             <?php
-            require_once('../includes/footer.php'); ?>
+            require_once('../includes/footer.php');?>
         </body>
 <?php
     }

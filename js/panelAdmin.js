@@ -61,8 +61,6 @@ fetch('./recherche.php?carousel=1')
         let updateCar = document.getElementsByName("editCarousel");
         for (let i = 0; i < updateCar.length; i++) {
             let id2 = updateCar[i].getAttribute('data-idCar');
-
-            let imgCarousel = document.getElementById("inputCarousel" + id2);
             updateCar[i].addEventListener('click', () => {
                 let id2 = updateCar[i].getAttribute('data-idCar');
                 let imgCarousel = document.getElementById("inputCarousel" + id2);

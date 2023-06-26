@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $req->execute([$_POST["deleteArt"]]);
         $res = $req->fetch(PDO::FETCH_ASSOC);
 
-        if ($res["quantite_art"] != 1) {
+        if ($res["quantite_art"] != 1) { //si il y en a plus qu'un.
             $req2 = $bdd->prepare("UPDATE `panier` SET `quantite_art`= ? WHERE id_user = ? AND id_article = ?");
             $req2->execute([$res["quantite_art"] - 1, $_SESSION['user']['id'], $_POST["deleteArt"]]);
             $msg[] = '<i class="fa-solid fa-circle-minus fa-lg" style="color: #ff0000;"></i> Article supprimé du panier.';

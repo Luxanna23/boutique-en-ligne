@@ -39,9 +39,6 @@ if (isset($_POST["Envoyer"])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/e1a1b68f9b.js" crossorigin="anonymous"></script>
-    <script src="../js/autocompletion.js" defer></script>
-    <script src="../js/connexion.js" defer></script>
-    <script src="../js/fonction.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
@@ -70,7 +67,9 @@ if (isset($_POST["Envoyer"])) {
             <span class="msgfin">Vous n'avez pas encore de compte ? <a href="inscription.php">Inscrivez-vous !</a></span>
         </div>
     </main>
-
+    <script src="../js/autocompletion.js" defer></script>
+    <script src="../js/connexion.js" defer></script>
+    <script src="../js/fonction.js" defer></script>
 </body>
 
 </html>

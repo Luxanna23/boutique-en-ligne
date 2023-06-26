@@ -36,7 +36,7 @@ if (isset($data)) {
     } elseif (!isCompatible($password, $confirm_password)) {
         $message['erreur'] = '<i class="fa-solid fa-circle-exclamation"></i>&nbspLes champs password sont différents.';
     } elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/', $password)){
-        $message['erreur'] = '<i class="fa-solid fa-circle-exclamation"></i>&nbspLe mot de passe ne doit pas être court et doit contenir au moins un chiffre, une lettre en majuscule et une en minuscule. ' . $password;
+        $message['erreur'] = '<i class="fa-solid fa-circle-exclamation"></i>&nbspLe mot de passe doit faire plus de 6 caractères et doit contenir au moins un chiffre, une lettre en majuscule et une en minuscule. ' . $password;
     } else {
         if ($user->loginUnique($bdd)) {
             $message['erreur'] = '<i class="fa-solid fa-circle-exclamation"></i>&nbspCette email est déjà utilisé';

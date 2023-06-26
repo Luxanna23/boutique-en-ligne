@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 26 juin 2023 à 05:49
+-- Généré le : lun. 26 juin 2023 à 07:47
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `carousel` (
   `titreCarousel` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `texteCarousel` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `carousel`
@@ -204,7 +204,7 @@ CREATE TABLE IF NOT EXISTS `codepromo` (
   `valeur` int NOT NULL,
   `date_expiration` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `codepromo`
@@ -294,7 +294,14 @@ CREATE TABLE IF NOT EXISTS `panier` (
   `id_article` int NOT NULL,
   `quantite_art` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `panier`
+--
+
+INSERT INTO `panier` (`id`, `id_user`, `id_article`, `quantite_art`) VALUES
+(26, 4, 13, 1);
 
 -- --------------------------------------------------------
 
@@ -309,7 +316,7 @@ CREATE TABLE IF NOT EXISTS `souscategorie` (
   `imgSousCat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `id_parent` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `souscategorie`
@@ -341,7 +348,7 @@ CREATE TABLE IF NOT EXISTS `usernewsletter` (
   `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `date_subbed` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
