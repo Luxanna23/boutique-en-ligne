@@ -27,15 +27,13 @@ if ($_SESSION["user"]["email"] == "admin@admin.fr") {
             <script src="https://kit.fontawesome.com/020a26a846.js" crossorigin="anonymous"></script>
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
             <script src="../js/autocompletion.js" defer></script>
             <script src="../js/fonction.js" defer></script>
-            <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
         </head>
 
-
         <body>
-            <?php
-            require_once('../includes/header2.php');
+            <?php require_once('../includes/header2.php');
             ?>
             <main id="panelAdmin">
                 <div class="sticky">
@@ -98,10 +96,10 @@ if ($_SESSION["user"]["email"] == "admin@admin.fr") {
                         </div><br>
 
                         <div id="formPromo">
-
+                           
                             <form action="" method="post">
-                                <h4>Création de code promo:</h4>
-                                <br>
+                            <h4>Création de code promo:</h4>
+                            <br>
                                 <input type="text" name="code" id="" placeholder="Nom du code promo">
                                 <input type="text" name="valeur" id="" placeholder="Valeur du code promo">%
                                 <input type="date" name="date" id="date">
@@ -163,7 +161,7 @@ if ($_SESSION["user"]["email"] == "admin@admin.fr") {
                 }
                 ?>
             </main>
-<script src="../js/panelAdmin.js"></script>
+            <script src="../js/panelAdmin.js"></script>
             <?php
             require_once('../includes/footer.php'); ?>
         </body>
