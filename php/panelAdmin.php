@@ -5,7 +5,7 @@ require_once('../classes/Categorie.php');
 require_once('../classes/SousCategorie.php');
 require_once('../classes/Article.php');
 require_once('../includes/config.php');
-require_once('../includes/header2.php');
+
 
 
 
@@ -23,19 +23,18 @@ if ($_SESSION["user"]["email"] == "admin@admin.fr") {
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Panel Admin</title>
-
             <link rel="stylesheet" type="text/css" href="../css/header.css">
             <link rel="stylesheet" type="text/css" href="../css/style.css">
-            <link rel="stylesheet" type="text/css" href="../css/footer.css">
-            <link rel="stylesheet" type="text/css" href="../css/panelAdmin.css">
-            <script src="https://kit.fontawesome.com/020a26a846.js" crossorigin="anonymous"></script>
+            <!-- <link rel="stylesheet" type="text/css" href="../css/footer.css"> -->
+            <!-- <link rel="stylesheet" type="text/css" href="../css/panelAdmin.css"> -->
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
-            <script src="../js/autocompletion.js" defer></script>
-            <script src="../js/fonction.js" defer></script>
+            <script src="https://kit.fontawesome.com/020a26a846.js" crossorigin="anonymous"></script>
         </head>
-
+<?php 
+require_once('../includes/header2.php');
+?>
         <body>
             <main id="panelAdmin">
                 <div class="sticky">
@@ -163,9 +162,13 @@ if ($_SESSION["user"]["email"] == "admin@admin.fr") {
                 }
                 ?>
             </main>
-            <script src="../js/panelAdmin.js"></script>
+           
             <?php
             require_once('../includes/footer.php');?>
+             <script src="../js/panelAdmin.js"></script>
+             <script src="../js/autocompletion.js"></script>
+            <script src="../js/fonction.js"></script>
+            
         </body>
 <?php
     }
