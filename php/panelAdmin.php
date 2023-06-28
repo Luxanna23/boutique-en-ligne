@@ -7,9 +7,6 @@ require_once('../classes/Article.php');
 require_once('../includes/config.php');
 
 
-
-
-
 if ($_SESSION["user"]["email"] == "admin@admin.fr") {
     if (password_verify("Admin1902", $_SESSION["user"]["password"])) {
         ob_start();
