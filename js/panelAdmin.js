@@ -137,9 +137,9 @@ fetch('./recherche.php?panelAdmin=1').then(response => {
     let update = document.getElementsByName("editCat");
     for (let i = 0; i < update.length; i++) {
         update[i].addEventListener('click', () => {
+            let imgCat = document.getElementById("imgCat" + resultats.idCat);
+            let titreCat = document.getElementById("titreCat" + resultats.idCat);
             let id2 = update[i].getAttribute('data-id');
-            let imgCat = document.getElementById("imgCat" + id2);
-            let titreCat = document.getElementById("titreCat" + id2);
             let img = imgCat.value;
             let titre = titreCat.value;
             fetch("traitementPanel.php", {
@@ -204,9 +204,9 @@ fetch('./recherche.php?sousCat=1').then(response => {
     let update = document.getElementsByName("editSousCat");
     for (let i = 0; i < update.length; i++) {
         update[i].addEventListener('click', () => {
+            let imgSousCat = document.getElementById("imgSousCat" + resultats.id);
+            let titreSousCat = document.getElementById("titreSousCat" + resultats.id);
             let id2 = update[i].getAttribute('data-id');
-            let imgSousCat = document.getElementById("imgSousCat" + id2);
-            let titreSousCat = document.getElementById("titreSousCat" + id2);
             let img = imgSousCat.value;
             let titre = titreSousCat.value;
             fetch("traitementPanel.php", {
