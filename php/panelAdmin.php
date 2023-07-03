@@ -1,6 +1,4 @@
 <?php
-
-
 require_once('../classes/Categorie.php');
 require_once('../classes/SousCategorie.php');
 require_once('../classes/Article.php');
