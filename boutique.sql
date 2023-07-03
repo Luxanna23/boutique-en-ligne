@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 26 juin 2023 à 07:47
+-- Généré le : lun. 03 juil. 2023 à 10:26
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `articles` (
 INSERT INTO `articles` (`idArt`, `titreArt`, `description`, `prix`, `date`, `id_categorie`, `id_sousCategorie`, `quantite`, `imgArt`, `promotion`) VALUES
 (9, 'Boucles d\'oreilles Jasmin', 'Boucles d\'oreilles longues doré à l\'or fin, formées de différents motifs en nacre.\r\nRavissantes boucles à l\'aspect sobre et efficace qui saura faire son effet.\r\n\r\nLongueur : 65mm\r\nPoids d\'une boucle : 4,16g', '55.00', '2023-05-25', 3, 1, 9, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SEC18315-01SEL-P_380x443_crop_center.jpg?v=1667234371', 0),
 (10, 'Boucles d\'oreilles Sunrise', 'Boucles d\'oreilles en acier doré à l\'or fin présentant un cercle à demi coloré.\r\nNous conseillons de les porter en accumulation afin de rehausser le style.\r\nDéclinées en bracelet, collier et bague\r\nDiamètre : 12mm\r\nPoids de la boucle : 0,77g', '30.00', '2023-05-16', 3, 3, 20, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SEM19703-01TQB-P1_380x443_crop_center.jpg?v=1678878425', 0),
-(11, 'Boucles d\'oreilles Lilith', 'Boucles d\'oreilles en acier doré à l\'or fin représentant un cercle martelé à l\'image d\'un soleil.\r\nL\'effet martelé de ce bijou amène un air ethnique à votre tenue. Idéal si vous souhaitez élever votre tenue sans effort.\r\nDiamètre : 28mm\r\nPoids: 2,06g', '35.00', '2023-05-09', 3, 4, 2, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SEM19976-01UNI-NM_380x443_crop_center.jpg?v=1677841640', 0),
+(11, 'Boucles d\'oreilles Lilith', 'Boucles d\'oreilles en acier doré à l\'or fin représentant un cercle martelé à l\'image d\'un soleil.L\'effet martelé de ce bijou amène un air ethnique à votre tenue. Idéal si vous souhaitez élever votre tenue sans effort.Diamètre : 28mmPoids: 2,06g', '35.00', '2023-07-03', 3, 4, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SEM19976-01UNI-NM_380x443_crop_center.jpg?v=1677841640', 0),
 (12, 'Earcuff Chanty', 'Un earcuff ajustable en acier uni ou doré à l’or fin qu’il suffit simplement d’enfiler sur le l’oreille.\r\nMinimaliste et tellement stylé, cet accessoire se porte aussi bien seul qu’en accumulation avec d’autres boucles.\r\nÀ l’unité, pour les mixer à votre guise !\r\nLargeur : 10mm', '20.00', '2023-02-08', 3, 2, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/earcuff-chanty-acier-dore-portees_380x443_crop_center.jpg?v=1654079288', 0),
 (13, 'Bracelet Ma bonne étoile', 'Bracelet chaînette en acier uni ou doré à l\'or fin sur laquelle une médaille est gravée du message \"Ma bonne étoile\".\r\nUn ravissant petit bracelet nous rappelant qu\'il faut croire en sa bonne étoile !\r\nDécliné en collier, bague et charm\r\nLongueur : 15cm e', '25.00', '2023-03-08', 2, 5, 15, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/bracelet-ma-bonne-etoile-acier-dore_380x443_crop_center.jpg?v=1653051499', 0),
 (14, 'Bracelet Sienna', 'Bracelet chaînette en acier uni ou doré à l’or fin sur lequel deux petits cœurs de métal sont attachés ainsi qu’un petit zirconium en pampille.\r\nC’est un très joli bijou d’amour qui se porte comme une seconde peau et ne s’enlève jamais.\r\nDécliné en collie', '30.00', '2023-03-08', 2, 5, 17, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/Bracelet-Sienna_2c36a2e7-c42e-49fc-aa22-67cba65e5d86_380x443_crop_center.jpg?v=1653314091', 0),
@@ -95,8 +95,7 @@ INSERT INTO `articles` (`idArt`, `titreArt`, `description`, `prix`, `date`, `id_
 (28, 'Bague Cameleo', 'Bague ajustable en acier doré à l\'or fin martelée.\r\nCette pièce élégante habille tout de suite votre main. Elle se porte seule ou bien accumulée avec d\'autres bagues de nos collections.\r\nDéclinée en jonc \r\nDiamètre : ajustable\r\nLargeur : 18mm', '30.00', '2022-10-10', 5, 12, 0, 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SRL19908-01MAT-P2_380x443_crop_center.jpg?v=1677832809', 0),
 (29, 'Orion rose', 'L\'or rose glamour rencontre le titane audacieux, un duo cosmique. L\'Orion Rose de 38 mm transmet une crainte pour le céleste avec une sensibilité de conception tournée vers l\'avenir et une fonctionnalité de double fuseau horaire.', '199.00', '2023-05-11', 6, 11, 4, 'https://www.mvmt.com/dw/image/v2/BDKZ_PRD/on/demandware.static/-/Sites-mgi-master/default/dw588e350b/images/products/FC01-TIRG_l_4.jpg?sw=453&sh=453', 0),
 (30, 'Santa Monica Black', 'Inspiré des rues emblématiques de Los Angeles, la Santa Monica Black est l\'essence d\'une pièce minimaliste. Ce modèle de 38 mm présente un coloris noir et or rose brossé saisissant.', '129.00', '2023-05-11', 6, 12, 1, 'https://www.mvmt.com/dw/image/v2/BDKZ_PRD/on/demandware.static/-/Sites-mgi-master/default/dw1170c2fe/images/products/MB01-RGBL_l_2.jpg?sw=800&sh=800', 0),
-(31, 'Reina gold', 'Une montre-bijoux. Marqueurs cardinaux en forme de boucle. Un look classique qui survit aux tendances. La Reina s\'inspire des éléments de design de mode de longue date que nous admirons le plus. Doté d\'un bracelet double tour, un clin d\'œil au look deux m', '149.00', '2023-06-24', 6, 12, 0, 'https://www.mvmt.com/dw/image/v2/BDKZ_PRD/on/demandware.static/-/Sites-mgi-master/default/dwc5b02f96/images/products/28000303_l_3.jpg?sw=800&sh=800', 0),
-(131, 'wdgdvxf', 'wdvwdvwd', '1.00', '2023-06-24', 2, 2, 2, 'dgfcbfcb', 0);
+(31, 'Reina gold', 'Une montre-bijoux. Marqueurs cardinaux en forme de boucle. Un look classique qui survit aux tendances. La Reina s\'inspire des éléments de design de mode de longue date que nous admirons le plus. Doté d\'un bracelet double tour, un clin d\'œil au look deux m', '149.00', '2023-06-24', 6, 12, 0, 'https://www.mvmt.com/dw/image/v2/BDKZ_PRD/on/demandware.static/-/Sites-mgi-master/default/dwc5b02f96/images/products/28000303_l_3.jpg?sw=800&sh=800', 0);
 
 -- --------------------------------------------------------
 
@@ -177,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `categorie` (
   `titreCat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `imgCat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`idCat`)
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `categorie`
@@ -294,14 +293,15 @@ CREATE TABLE IF NOT EXISTS `panier` (
   `id_article` int NOT NULL,
   `quantite_art` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `panier`
 --
 
 INSERT INTO `panier` (`id`, `id_user`, `id_article`, `quantite_art`) VALUES
-(26, 4, 13, 1);
+(26, 4, 13, 1),
+(28, 6, 18, 2);
 
 -- --------------------------------------------------------
 
@@ -316,7 +316,7 @@ CREATE TABLE IF NOT EXISTS `souscategorie` (
   `imgSousCat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `id_parent` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `souscategorie`
