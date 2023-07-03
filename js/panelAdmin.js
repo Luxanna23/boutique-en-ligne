@@ -139,9 +139,9 @@ fetch('./recherche.php?panelAdmin=1').then(response => {
     let update = document.getElementsByName("editCat");
     for (let i = 0; i < update.length; i++) {
         update[i].addEventListener('click', () => {
-            let imgCat = document.getElementById("imgCat" + resultats.idCat);
-            let titreCat = document.getElementById("titreCat" + resultats.idCat);
             let id2 = update[i].getAttribute('data-id');
+            let imgCat = document.getElementById("imgCat" + id2);
+            let titreCat = document.getElementById("titreCat" + id2);
             let img = imgCat.value;
             let titre = titreCat.value;
             fetch("traitementPanel.php", {
