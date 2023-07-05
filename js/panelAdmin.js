@@ -51,11 +51,11 @@ fetch('./recherche.php?carousel=1')
             h3.innerText = "Slide" + resultats.id
 
             displaySlide.innerHTML = '<img class="imgCarousel" id="imgCarousel' + resultats.id + '" src="' + resultats.imgCarousel + '" alt=""><div class=infosSlide><h4>' + resultats.titreCarousel + '</h4><p>' + resultats.texteCarousel + '<p></div>';
-            updateSlide.innerHTML = '<form><input id="inputCarousel' + resultats.id + '"  value="' + resultats.imgCarousel + '"><input id="titreCarousel' + resultats.id + '" value="' + resultats.titreCarousel + '"><input id="texteCarousel' + resultats.id + '" value="' + resultats.texteCarousel + '"><button class="editCar" name="editCarousel" data-idCar ="' + resultats.id + '"  id="editCarousel' + resultats.id + '"><i class="fa-regular fa-pen-to-square fa-lg"></i></button></form></br>';
+            updateSlide.innerHTML = '<form><input id="inputCarousel' + resultats.id + '"  value="' + resultats.imgCarousel + '"><br><input id="titreCarousel' + resultats.id + '" value="' + resultats.titreCarousel + '"><br><input id="texteCarousel' + resultats.id + '" value="' + resultats.texteCarousel + '"><br><button class="editCar" name="editCarousel" data-idCar ="' + resultats.id + '"  id="editCarousel' + resultats.id + '"><i class="fa-regular fa-pen-to-square fa-lg"></i></button></form></br>';
             
             slides.append(displaySlide);
             slides.append(updateSlide);
-            slide.append(h3);
+            displaySlide.prepend(h3);
             slide.append(slides);
         });
 
