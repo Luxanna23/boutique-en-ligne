@@ -52,9 +52,10 @@ fetch('./recherche.php?carousel=1')
 
             displaySlide.innerHTML = '<img class="imgCarousel" id="imgCarousel' + resultats.id + '" src="' + resultats.imgCarousel + '" alt=""><div class=infosSlide><h4>' + resultats.titreCarousel + '</h4><p>' + resultats.texteCarousel + '<p></div>';
             updateSlide.innerHTML = '<form><input id="inputCarousel' + resultats.id + '"  value="' + resultats.imgCarousel + '"><input id="titreCarousel' + resultats.id + '" value="' + resultats.titreCarousel + '"><input id="texteCarousel' + resultats.id + '" value="' + resultats.texteCarousel + '"><button class="editCar" name="editCarousel" data-idCar ="' + resultats.id + '"  id="editCarousel' + resultats.id + '"><i class="fa-regular fa-pen-to-square fa-lg"></i></button></form></br>';
-            slides.append(h3);
+            
             slides.append(displaySlide);
             slides.append(updateSlide);
+            slide.append(h3);
             slide.append(slides);
         });
 
@@ -137,9 +138,9 @@ fetch('./recherche.php?panelAdmin=1').then(response => {
     let update = document.getElementsByName("editCat");
     for (let i = 0; i < update.length; i++) {
         update[i].addEventListener('click', () => {
-            let imgCat = document.getElementById("imgCat" + resultats.idCat);
-            let titreCat = document.getElementById("titreCat" + resultats.idCat);
             let id2 = update[i].getAttribute('data-id');
+            let imgCat = document.getElementById("imgCat" + id2);
+            let titreCat = document.getElementById("titreCat" + id2);
             let img = imgCat.value;
             let titre = titreCat.value;
             fetch("traitementPanel.php", {
@@ -204,9 +205,9 @@ fetch('./recherche.php?sousCat=1').then(response => {
     let update = document.getElementsByName("editSousCat");
     for (let i = 0; i < update.length; i++) {
         update[i].addEventListener('click', () => {
-            let imgSousCat = document.getElementById("imgSousCat" + resultats.id);
-            let titreSousCat = document.getElementById("titreSousCat" + resultats.id);
             let id2 = update[i].getAttribute('data-id');
+            let imgSousCat = document.getElementById("imgSousCat" + id2);
+            let titreSousCat = document.getElementById("titreSousCat" + id2);
             let img = imgSousCat.value;
             let titre = titreSousCat.value;
             fetch("traitementPanel.php", {

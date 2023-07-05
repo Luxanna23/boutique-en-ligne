@@ -27,7 +27,6 @@ if ($_SESSION["user"]["email"] == "admin@admin.fr") {
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
             <script src="../js/autocompletion.js" defer></script>
             <script src="../js/fonction.js" defer></script>
         </head>
@@ -59,8 +58,8 @@ if ($_SESSION["user"]["email"] == "admin@admin.fr") {
                         </form>
                     </div><br>
                 </div>
-                <span id="souscreaCat"></span>
-                <h2>Gestion des sous-catégories</h2> <br>
+                <span id="souscreaCat"></span><br>
+                <h2>Gestion des sous-catégories</h2><br>
                 <div id="sousCategories">
                     <div id="formSousCat">
                         <form action="" method="POST">
@@ -73,16 +72,18 @@ if ($_SESSION["user"]["email"] == "admin@admin.fr") {
                         </form>
                     </div><br>
                 </div>
-                <span id="creaArt"></span>
+                <span id="creaArt"></span><br>
                 <h2>Gestions des articles</h2><br>
                 <div id="articles">
                     <div id="formArtPromo">
                         <div id="formArt">
                             <form action="" method="POST">
+                            <h4>Création d'article:</h4>
+                            <br>
                                 <input type="text" name="titreArt" id="" placeholder="Nom de l'article">
                                 <textarea name="description" id="" placeholder="Description"></textarea>
-                                <input type="text" name="prix" id="" placeholder="Prix de l'article">€
-                                <input type="text" name="promotion" id="" placeholder="Promotion">%
+                                <input type="text" name="prix" id="" placeholder="Prix de l'article €">
+                                <input type="text" name="promotion" id="" placeholder="Promotion %">
                                 <select name="categories" id="categories-select" value="categorie">
                                     <option selected disabled>Catégorie</option>
                                 </select>
@@ -101,7 +102,7 @@ if ($_SESSION["user"]["email"] == "admin@admin.fr") {
                             <h4>Création de code promo:</h4>
                             <br>
                                 <input type="text" name="code" id="" placeholder="Nom du code promo">
-                                <input type="text" name="valeur" id="" placeholder="Valeur du code promo">%
+                                <input type="text" name="valeur" id="" placeholder="Valeur du code promo %">
                                 <input type="date" name="date" id="date">
                                 <button id="creerPromo" type="submit" name="créerCodePromo">Créer le Code Promo</button>
                             </form>

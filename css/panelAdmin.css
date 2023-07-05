@@ -59,40 +59,38 @@ h3 {
     max-width: 10vw;
     border-radius: 20px 0 0 0;
 }
+.slide {
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 
+}
 .slides {
-    width: 30%;
+    display: flex;
+    max-width: 100%;
     background-color: #e6d9d1;
     border-radius: 50px;
     gap: 5px;
 
 }
-
+.updateSlide{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10%;
+}
 .updateSlide input {
     background-color: transparent;
     border: none;
     border-bottom: 1px solid black;
     margin: 2%;
 }
-
-.infosSlide p {
-    max-width: fit-content;
-}
-
-.slide {
-    max-width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 2vh;
-    padding-left: 2VW;
-    padding-right: 2VW;
-
-}
-
 .displaySlide {
     display: flex;
-    justify-content: space-between;
-    gap: 15px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10%;
 }
 
 .infosSlide {
@@ -125,13 +123,13 @@ h3 {
 
 /* Gestion de CATEGORIE */
 #formCat {
-    font-family:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: larger;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #e6d9d1;
-    width: 20%;
+    width: 40%;
     margin: auto;
     padding: 3% 3% 3% 3%;
     border-radius: 50px;
@@ -166,8 +164,10 @@ h3 {
 
 .divCat {
     display: flex;
+    max-width: 100%;
     margin: 2px;
     padding: 30px;
+    display: flex;
     border: solid #e6d9d1 2px;
     border-radius: 50px;
 }
@@ -178,10 +178,14 @@ h3 {
     border-bottom: 1px solid #e6d9d1;
 }
 
-/* .divCat input:focus {
-    border: none;
-    text-decoration: none;
-} */
+.deleteCat {
+    width: 100%;
+}
+
+#imgCat {
+    max-width: 100%;
+}
+
 .updateCat {
     display: flex;
     flex-direction: column;
@@ -191,25 +195,36 @@ h3 {
 
 @media screen and (max-width: 768px) {
     #formCat {
-        width: 40%;
+        font-size: smaller;
+    }
+}
+
+@media screen and (max-width: 485px) {
+    .divCat {
+        max-width: 90%;
+    }
+
+    #imgCat {
+        width: 80%;
     }
 }
 
 @media screen and (max-width: 425px) {
     #formCat {
-        width: 50%;
+        width: 55%;
     }
+
 }
 
 /* Gestion de SOUS-CATEGORIE */
 #formSousCat {
-    font-family:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: larger;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #e6d9d1;
-    width: 10%;
+    width: 40%;
     margin: auto;
     padding: 3% 3% 3% 3%;
     border-radius: 50px;
@@ -249,6 +264,7 @@ h3 {
 
 .divSousCat {
     display: flex;
+    max-width: 100%;
     margin: 2px;
     padding: 30px;
     border: solid #e6d9d1 2px;
@@ -261,10 +277,14 @@ h3 {
     border-bottom: 1px solid #e6d9d1;
 }
 
-/* .divCat input:focus {
-    border: none;
-    text-decoration: none;
-} */
+.deleteSousCat {
+    width: 100%;
+}
+
+#imgSousCat {
+    max-width: 100%;
+}
+
 .updateSousCat {
     display: flex;
     flex-direction: column;
@@ -272,26 +292,22 @@ h3 {
     gap: 10%;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 768px) {
     #formSousCat {
-       
-            font-family:  "Helvetica Neue", Helvetica, Arial, sans-serif;
-            font-size: larger;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #e6d9d1;
-            width: 40%;
-            margin: auto;
-            padding: 3% 3% 3% 3%;
-            border-radius: 50px;
-        }
-    
+        font-size: smaller;
+    }
+
+}
+
+@media screen and (max-width: 485px) {
+    .divSousCat {
+        max-width: 90%;
+    }
 }
 
 @media screen and (max-width: 425px) {
     #formSousCat {
-        width: 50%;
+        width: 55%;
     }
 }
 
@@ -309,7 +325,8 @@ h3 {
     flex-direction: column;
     align-items: center;
     background-color: #e6d9d1;
-    width: 10%;
+    height: 30%;
+    width: 40%;
     margin: 5%;
     padding: 3% 3% 3% 3%;
     border-radius: 50px;
@@ -319,9 +336,11 @@ h3 {
 #formPromo form {
     text-align: center;
 }
-#formArt textarea{
+
+#formArt textarea {
     background-color: transparent;
 }
+
 #formArt option,
 #formPromo option {
     background-color: #e6d9d1;
@@ -340,7 +359,8 @@ h3 {
     margin-bottom: 8%;
 }
 
-#creerArt, #creerPromo {
+#creerArt,
+#creerPromo {
     border: solid white 1px;
     background-color: transparent;
     padding: 4px;
@@ -350,38 +370,35 @@ h3 {
     width: 100%;
     display: flex;
     justify-content: center;
-    /* justify-content: space-between; */
     flex-wrap: wrap;
 }
 
 .divArt {
-    width:100%;
+    max-width: 100%;
     display: flex;
     justify-content: space-between;
     margin: 2px;
     padding: 30px;
     border: solid #e6d9d1 2px;
     border-radius: 50px;
-   gap:2vw;
+    gap: 2vw;
 }
 
-.divArt input, .divArt select {
+.divArt input,
+.divArt select {
     background-color: transparent;
     border: none;
     border-bottom: 1px solid #e6d9d1;
 }
 
-/* .divCat input:focus {
-    border: none;
-    text-decoration: none;
-} */
-.deleteArt{
+.deleteArt {
     max-width: 100%;
     display: flex;
-gap:2vw;
+    gap: 2vw;
 }
-.deleteArt img{
-width: 40%;
+
+.deleteArt img {
+    width: 40%;
 }
 
 .updateArt {
@@ -391,42 +408,87 @@ width: 40%;
     justify-content: center;
     gap: 5%;
 }
+
 @media screen and (max-width: 1024px) {
-  
-    #formArt, #formPromo {
-        width: 40%;
-    }  #imgArt {
+    #imgArt {
         max-width: 30vw;
         height: 80%;
     }
 }
+
 @media screen and (max-width: 768px) {
-    #formArt, #formPromo {
+    #formArt,
+    #formPromo {
         width: 40%;
     }
+
     #imgArt {
         width: 30vw;
         /* max-height: 30%; */
     }
 }
-@media screen and (max-width: 600px) {
-    #formArt, #formPromo {
-        width: 50%;
-    }
+
+@media screen and (max-width: 680px) {
     #imgArt {
         width: 30vw;
         max-height: 30%;
     }
+    #formArt,
+    #formPromo {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+    #formArt,
+    #formPromo {
+        width: 50%;
+    }
+
+    #imgArt {
+        width: 30vw;
+        max-height: 30%;
+    }
+
     #formArtPromo {
         display: flex;
         flex-direction: column;
         align-items: center;
-        
+
     }
-}@media screen and (max-width: 550px) {
+}
+
+@media screen and (max-width: 550px) {
     #imgArt {
         width: 20vw;
         max-height: 10%;
     }
+    .divArt p, .divArt input, .divArt select{
+        font-size: smaller;
+    }
+    .divArt h4{
+        font-size: large;
+    }
+
+    #formArt,
+    #formPromo {
+        width: 80%;
+    }
+}
+@media screen and (max-width: 485px) {
+ .divArt{
+    max-width: 90%;
+ }
+ #imgArt {
+    width: 40%;
+    max-height: 20%;
+}
+ .deleteArt {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
 }
 
+}
