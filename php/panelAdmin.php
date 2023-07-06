@@ -47,7 +47,7 @@ if ($_SESSION["user"]["email"] == "admin@admin.fr") {
                     <h2>Modification du Carousel de l'index</h2>
                     <br>
                 </div>
-                <span id="creaCat"></span>
+                <span id="creaCat"></span><br>
                 <h2>Gestion des catégories</h2><br>
                 <div id="categories">
                     <div id="formCat">

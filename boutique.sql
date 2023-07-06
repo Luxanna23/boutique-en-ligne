@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 03 juil. 2023 à 10:26
+-- Généré le : jeu. 06 juil. 2023 à 08:47
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `articles` (
   `imgArt` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `promotion` int NOT NULL,
   PRIMARY KEY (`idArt`)
-) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `articles`
@@ -124,49 +124,6 @@ INSERT INTO `carousel` (`id`, `imgCarousel`, `titreCarousel`, `texteCarousel`) V
 -- --------------------------------------------------------
 
 --
--- Structure de la table `categart`
---
-
-DROP TABLE IF EXISTS `categart`;
-CREATE TABLE IF NOT EXISTS `categart` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_article` int NOT NULL,
-  `id_souscat` int NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `categart`
---
-
-INSERT INTO `categart` (`id`, `id_article`, `id_souscat`) VALUES
-(1, 9, 1),
-(2, 10, 3),
-(3, 11, 4),
-(4, 12, 2),
-(5, 13, 5),
-(6, 14, 5),
-(7, 15, 5),
-(8, 16, 6),
-(9, 17, 6),
-(10, 18, 7),
-(11, 19, 7),
-(12, 20, 8),
-(13, 21, 9),
-(14, 22, 9),
-(15, 23, 9),
-(16, 24, 10),
-(17, 25, 10),
-(18, 26, 11),
-(19, 27, 11),
-(20, 29, 12),
-(21, 28, 11),
-(22, 30, 12),
-(23, 31, 12);
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `categorie`
 --
 
@@ -176,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `categorie` (
   `titreCat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `imgCat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`idCat`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `categorie`
@@ -270,19 +227,6 @@ INSERT INTO `commandpanier` (`id`, `id_commande`, `id_article`, `quantite_art`) 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `comment`
---
-
-DROP TABLE IF EXISTS `comment`;
-CREATE TABLE IF NOT EXISTS `comment` (
-  `id` int NOT NULL,
-  `comment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `id_user` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `panier`
 --
 
@@ -316,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `souscategorie` (
   `imgSousCat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `id_parent` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `souscategorie`
@@ -335,20 +279,6 @@ INSERT INTO `souscategorie` (`id`, `titreSousCat`, `imgSousCat`, `id_parent`) VA
 (10, 'Bagues fines', 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/bague-atomium-acier-dore-portee_380x443_crop_center.jpg?v=1668674256', 5),
 (11, 'Bagues larges', 'https://cdn.shopify.com/s/files/1/0602/7975/0845/products/SRL19927-01MAT-P1_380x443_crop_center.jpg?v=1678458485', 5),
 (12, 'Montres femme', 'https://www.rienasemettre.fr/wp-content/uploads/2019/12/montre-femme-tendance-guide-achat.jpg', 6);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `usernewsletter`
---
-
-DROP TABLE IF EXISTS `usernewsletter`;
-CREATE TABLE IF NOT EXISTS `usernewsletter` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `date_subbed` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
