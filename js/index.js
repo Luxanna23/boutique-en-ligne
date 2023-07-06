@@ -3,7 +3,7 @@
    fetch('./php/recherche.php?carousel=1').then(response => {
     return response.json();
   }).then(data => {
-    console.log(data);
+    console.log("data");
     let carouselInner = document.getElementsByClassName("carousel-inner");
     for (let i = 0; i < data.length; i++) {
       let carouselItem = document.createElement("div");
